@@ -1,46 +1,44 @@
-
-
 @font-face {
-  font-family: 'Inter';
-  src: url('https://cdn.shopify.com/s/files/1/0812/5323/6954/files/Inter-Regular.woff2?v=1773336037') format('woff2'),
-       url('https://cdn.shopify.com/s/files/1/0812/5323/6954/files/Inter-Regular.woff?v=1773336037') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'Inter';
+    src: url('https://cdn.shopify.com/s/files/1/0812/5323/6954/files/Inter-Regular.woff2?v=1773336037') format('woff2'), url('https://cdn.shopify.com/s/files/1/0812/5323/6954/files/Inter-Regular.woff?v=1773336037') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
 }
 
 body {
-  font-family: "Inter", sans-serif;
+    font-family: "Inter", sans-serif;
 }
- h1, h2, h3, h4, h5, h6, p, span, div  {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div {
     font-family: "Inter", sans-serif !important;
-    color:#fff !important;
+    color: #fff !important;
 }
 
 .gradient {
-background: 
-  radial-gradient(circle at center, #302D3A 0%, #191720 100%),
-  url("https://cdn.shopify.com/s/files/1/0812/5323/6954/files/bg.webp?v=1773264135");
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-background-blend-mode: soft-light;
+    background: radial-gradient(circle at center, #302D3A 0%, #191720 100%), url("https://cdn.shopify.com/s/files/1/0812/5323/6954/files/bg.webp?v=1773264135");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: soft-light;
 }
-
-
 
 
 /* Header Css */
 
-details-modal.header__search, .header__icons {
+details-modal.header__search,
+.header__icons {
     display: none !important;
 }
 
 /* Header Css */
-
-
-
-
 
 
 /* Footer Css */
@@ -51,19 +49,17 @@ details-modal.header__search, .header__icons {
 .footer__content-top.page-width {
     padding: 0;
 }
-.footer__content-bottom{
+.footer__content-bottom {
     border: 0 !important;
     padding: 0 !important;
 }
 .footer-block__image-wrapper {
     margin-bottom: 0 !important;
 }
-.footer__content-bottom{
-    display:none;
+.footer__content-bottom {
+    display: none;
 }
 /* Footer Css */
-
-
 
 
 /* Product Page CSS */
@@ -72,15 +68,15 @@ details-modal.header__search, .header__icons {
 .productFaqs .collapsible-content-wrapper-narrow {
     max-width: 1100px;
 }
-.productFaqs .accordion__title{
-    font-size:20px;
+.productFaqs .accordion__title {
+    font-size: 20px;
 }
 
 .productFaqs .accordion details[open] .accordion__content p {
     max-width: 90%;
 }
 
-.productFaqs .accordion details[open]>summary .icon-caret {
+.productFaqs .accordion details[open] > summary .icon-caret {
     stroke: #000;
 }
 
@@ -96,7 +92,7 @@ details-modal.header__search, .header__icons {
 .productFaqs .accordion details {
     padding: 15px 20px;
     border-bottom: 1px solid #DAD9D94D;
-        margin-bottom:10px;
+    margin-bottom: 10px;
 }
 
 .productFaqs .accordion details[open] {
@@ -105,11 +101,12 @@ details-modal.header__search, .header__icons {
 }
 
 .productFaqs .accordion details[open] {
-  background: #AAC9FF;
+    background: #AAC9FF;
 }
 
-.productFaqs .accordion details[open] .accordion__title, .productFaqs .accordion details[open] .accordion__content p{
-    color:#000 !important;
+.productFaqs .accordion details[open] .accordion__title,
+.productFaqs .accordion details[open] .accordion__content p {
+    color: #000 !important;
     line-height: 1.3em;
 }
 
@@ -117,8 +114,8 @@ details-modal.header__search, .header__icons {
     padding: 0;
 }
 
-.riskFree .rich-text__text{
-    margin:5px 0 0;
+.riskFree .rich-text__text {
+    margin: 5px 0 0;
 }
 
 .template-product .form__label {
@@ -135,8 +132,9 @@ details-modal.header__search, .header__icons {
     max-width: 100%;
 }
 
-.template-product #product-option-1 .bundle-price, .template-product #product-option-1 .per-stick{
-    display:none;
+.template-product #product-option-1 .bundle-price,
+.template-product #product-option-1 .per-stick {
+    display: none;
 }
 
 .template-product #product-option-2 {
@@ -158,30 +156,30 @@ details-modal.header__search, .header__icons {
     align-items: center;
     text-transform: uppercase;
     font-size: 20px;
-    position:relative;
+    position: relative;
     width: 80%;
 }
 
 #product-option-2 .form__label::before,
 #product-option-2 .form__label::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 25%;
-  height: 1px;
-  background: #fff;
-  opacity: 0.7;
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 25%;
+    height: 1px;
+    background: #fff;
+    opacity: 0.7;
 }
 
-#product-option-2 .form__label::before{
-left:0;
+#product-option-2 .form__label::before {
+    left: 0;
 }
 
 #product-option-2 .form__label::after {
-right:0;
+    right: 0;
 }
 
-.template-product #product-option-2  label{
+.template-product #product-option-2 label {
     background: transparent;
     border-radius: 10px;
     border-width: 0.8px 0.8px 1.6px 0.8px;
@@ -199,18 +197,18 @@ right:0;
     content: "Founder Pricing";
     background: #AAC9FF;
     color: #1A1A1A;
-    border-width: .8px .8px 1.6px .8px;
+    border-width: 0.8px 0.8px 1.6px 0.8px;
     border-style: solid;
     border-color: #AAC9FF;
     font-size: 10px;
-    border-radius: 0px 10px 0px 10px;
+    border-radius: 0 10px 0 10px;
     padding: 3px 10px;
     position: absolute;
     top: 0;
     right: 0;
 }
 
-.template-product #product-option-2  .bundle-price {
+.template-product #product-option-2 .bundle-price {
     font-size: 20px;
 }
 
@@ -223,31 +221,94 @@ right:0;
 }
 
 .template-product #product-option-1.product-form__input--pill label {
-  background-color: #333333 !important;
-  color:#fff !important;
-  pointer-events:none;
-  border-radius: 15px;
-  padding: 15px;
+    background-color: #333333 !important;
+    color: #fff !important;
+    pointer-events: none;
+    border-radius: 15px;
+    padding: 15px;
 }
 
 .template-product #product-option-1.product-form__input--pill input:first-of-type + label {
-  background-color: #AAC9FF !important;
-  font-weight:bold;
-  pointer-events:all;
+    background-color: #AAC9FF !important;
+    font-weight: bold;
+    pointer-events: all;
 }
-.template-product #product-option-1.product-form__input--pill input:first-of-type + label span{
-  color:#1A1A1A !important;
+.template-product #product-option-1.product-form__input--pill input:first-of-type + label span {
+    color: #1A1A1A !important;
 }
 
-.productTitle-top{
-    margin-top:0;
+.productTitle-top {
+    margin-top: 0;
 }
+
+@media only screen and (min-width: 769px) {
+    .template-product .productTitle-top {
+        font-size: 54px;
+        padding: 30px 0;
+    }
+    .template-product .product__description strong {
+        font-size: 20px;
+    }
+    .riskFree .rich-text__heading  {
+        font-size: 32px;
+        font-weight: 700;
+     }
+}
+
+/* Product Page CSS */
+.template-product .productTitle-top {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1.1;
+}
+.template-product .product__description {
+    margin: 0 !important;
+}
+.template-product .liquidLabs-productbenefits {
+    margin: 24px 0;
+}
+.template-product .product-form__input {
+    margin: 12px 0 !important;
+}
+.template-product .form__label {
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+}
+.template-product .liquidLabs-productbenefits span {
+    font-weight: 400;
+    font-size: 14px;
+}
+.template-product #product-option-1 label {
+    padding: 10px 0 !important;
+}
+.template-product #product-option-2 label:after {
+    font-weight: 700 !important;
+}
+.template-product #product-option-2 label>span:first-of-type {
+    font-weight: 600 !important;
+}
+.template-product .product__info-container .product-form {
+    margin-top: 0px!important;
+    margin-bottom: 0px!important;
+}
+
+/* Richtext section */
+.riskFree .rich-text__text {
+    margin-top: 17px;
+ }
+ .riskFree .rich-text__heading {
+    line-height: 1;
+ }
+/* Product Page CSS */
+
+
 
 #product-option-2 input:checked + label {
-box-shadow: 0 0 15px #3d8bffb3;
-border-color: #6CB2FF;
-border-width: .8px .8px 1.6px .8px;
-background: linear-gradient(to right, #0e2a5a 5%, #1f5fff);
+    box-shadow: 0 0 15px #3d8bffb3;
+    border-color: #6CB2FF;
+    border-width: 0.8px 0.8px 1.6px 0.8px;
+    background: linear-gradient(to right, #0e2a5a 5%, #1f5fff);
 }
 
 
@@ -270,15 +331,18 @@ background: linear-gradient(to right, #0e2a5a 5%, #1f5fff);
     font-weight: bold;
 }
 
-.template-product .product-form__submit:before, .template-product .product-form__submit:after{
-box-shadow:none;
+.template-product .product-form__submit:before,
+.template-product .product-form__submit:after {
+    box-shadow: none;
 }
 
-.template-product .product-form__submit:hover:before, .template-product .product-form__submit:hover:after{
-box-shadow:none;
+.template-product .product-form__submit:hover:before,
+.template-product .product-form__submit:hover:after {
+    box-shadow: none;
 }
 
-.product__media img, .thumbnail-slider img {
+.product__media img,
+.thumbnail-slider img {
     border-radius: 20px !important;
     border: 1px solid #494949;
 }
@@ -308,9 +372,9 @@ box-shadow:none;
     object-fit: contain;
 }
 
-.liquidLabs-productbenefits span{
-    text-align:center;
-    line-height:1.4em;
+.liquidLabs-productbenefits span {
+    text-align: center;
+    line-height: 1.4em;
 }
 
 .product__info-wrapper {
@@ -320,71 +384,70 @@ box-shadow:none;
 /* Product Page CSS */
 
 
-
-
-@media only screen and (min-width : 750px) and (max-width : 1100px) {
-   .template-product #product-option-2 .form__label {
-    width: 100%;
-}
+@media only screen and(min-width : 750px) and(max-width : 1100px) {
+    .template-product #product-option-2 .form__label {
+        width: 100%;
+    }
 }
 
-@media only screen and (min-width : 769px) and (max-width : 1024px) {
-.template-product #product-option-2 .bundle-price {
-    font-size: 18px;
-}
-.template-product #product-option-2 .per-stick {
-    font-size: 8px;
-}
-.template-product #product-option-2 label:after {
-    font-size: 8px;
-    padding: 3px 5px;
-}
-
-}
-
-
-
-
-  @media only screen and (max-width : 768px) {
-
-    .template-product variant-selects #product-option-1.product-form__input {
-    margin: 15px 0;
-}
-
+@media only screen and(min-width : 769px) and(max-width : 1024px) {
+    .template-product #product-option-2 .bundle-price {
+        font-size: 18px;
+    }
+    .template-product #product-option-2 .per-stick {
+        font-size: 8px;
+    }
     .template-product #product-option-2 label:after {
-    font-size: 6px;
-     padding: 3px 5px;
-}
-
-.template-product #product-option-2 .per-stick {    
-    font-size: 8px;
-}
-
-.template-product #product-option-2 label {
-        padding: 25px 10px 10px;
-}
-.template-product #product-option-2 .bundle-price {
-    font-size: 16px;
-}
-
-.productpage-imageDisclaimer {
-    width: 100%;
-}
-.product__info-wrapper {
-    padding-left: 0 !important;
-}
+        font-size: 8px;
+        padding: 3px 5px;
     }
 
+}
 
-@media only screen and (max-width : 430px) {
+
+@media only screen and (max-width : 768px) {
+
+    .template-product variant-selects #product-option-1.product-form__input {
+        margin: 15px 0;
+    }
+
+    .template-product #product-option-2 label:after {
+        font-size: 6px;
+        padding: 3px 5px;
+    }
+
+    .template-product #product-option-2 .per-stick {
+        font-size: 8px;
+    }
+
+    .template-product #product-option-2 label {
+        padding: 25px 10px 10px;
+    }
+    .template-product #product-option-2 .bundle-price {
+        font-size: 16px;
+    }
+    .productpage-imageDisclaimer {
+        width: 100% !important;
+        text-align: center;
+        margin-top: 0;
+        font-weight: 400;
+    }
+    .product__info-wrapper {
+        padding-left: 0 !important;
+    }
+    /* Product Page CSS */
+    /* Product Page CSS */
+}
+
+
+@media only screen and(max-width : 430px) {
     .template-product #product-option-2 .form__label {
-    width: 100%;
+        width: 100%;
+    }
+    .liquidLabs-productbenefits span {
+        font-size: 10px;
+    }
+    .liquidLabs-productbenefits {
+        gap: 5px;
+    }
 }
-.liquidLabs-productbenefits span {
-    font-size: 10px;
-}
-.liquidLabs-productbenefits {
-    gap: 5px;
-}
-  }
-

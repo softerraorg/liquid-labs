@@ -5,6 +5,47 @@
   "class": "section",
   "settings": [
     { "type": "text", "id": "title", "label": "Title", "default": "Behind the scenes" },
+    { "type": "header", "content": "Section Padding" },
+{
+  "type": "range",
+  "id": "padding_top",
+  "min": 0,
+  "max": 100,
+  "step": 4,
+  "unit": "px",
+  "label": "Padding Top (Desktop)",
+  "default": 36
+},
+{
+  "type": "range",
+  "id": "padding_bottom",
+  "min": 0,
+  "max": 100,
+  "step": 4,
+  "unit": "px",
+  "label": "Padding Bottom (Desktop)",
+  "default": 36
+},
+{
+  "type": "range",
+  "id": "padding_top_mobile",
+  "min": 0,
+  "max": 100,
+  "step": 4,
+  "unit": "px",
+  "label": "Padding Top (Mobile)",
+  "default": 20
+},
+{
+  "type": "range",
+  "id": "padding_bottom_mobile",
+  "min": 0,
+  "max": 100,
+  "step": 4,
+  "unit": "px",
+  "label": "Padding Bottom (Mobile)",
+  "default": 20
+},
     {
       "type": "select",
       "id": "layout",
@@ -71,6 +112,10 @@
 {% endschema %}
 
 <style>
+  #ll-section-{{ section.id }} {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+}
 .ll-section {
   padding: 0;
   text-align: center;
@@ -99,7 +144,7 @@
   position: relative;
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0 70px;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -153,15 +198,12 @@
 }
 
 .ll-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   z-index: 10;
   width: 48px;
   height: 48px;
   border-radius: 50%;
   border: 2px solid rgba(255,255,255,0.6);
-  background: rgba(0,0,0,0.5);
+  background: #fff;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -171,12 +213,15 @@
 }
 
 .ll-arrow:hover {
-  background: rgba(0,0,0,0.85);
-  border-color: #fff;
+  background: #fff;
 }
-
-.ll-arrow-prev { left: 10px; }
-.ll-arrow-next { right: 10px; }
+.ll-arrows-wrapper {
+  display: flex; 
+  justify-content: center;
+  gap: 10px;
+  column-gap: 30px;
+  margin-top: 40px;
+}
 
 .ll-arrow svg {
   width: 20px;
@@ -213,70 +258,79 @@
   background: #fff;
   transform: scale(1.3);
 }
+@media screen and (max-width: 749px) {
+  #ll-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+}
 </style>
 
 <div class="ll-section" id="ll-section-{{ section.id }}">
-  <div class="page-width">
-    <h2 class="ll-title">{{ section.settings.title }}</h2>
-
-    {% if section.settings.layout == 'grid' %}
-
-      <div class="ll-grid">
-        {% for block in section.blocks %}
-          <div class="ll-item" style="width:{{ section.settings.video_width }}px;" {{ block.shopify_attributes }}>
-            <div class="ll-video-wrapper">
-              {% if block.settings.video %}
-                {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll-video' }}
-              {% endif %}
-              {% if block.settings.cover_image %}
-                <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 800 }}" loading="lazy" alt="">
-              {% endif %}
+  <div class="">
+    <div class="page-width">
+      <h2 class="ll-title">{{ section.settings.title }}</h2>
+      {% if section.settings.layout == 'grid' %}
+        <div class="ll-grid">
+          {% for block in section.blocks %}
+            <div class="ll-item" style="width:{{ section.settings.video_width }}px;" {{ block.shopify_attributes }}>
+              <div class="ll-video-wrapper">
+                {% if block.settings.video %}
+                  {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll-video' }}
+                {% endif %}
+                {% if block.settings.cover_image %}
+                  <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 800 }}" loading="lazy" alt="">
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div> 
+      {% else %}
+        <div class="ll-slider-outer">
+  
+         
+  
+          <div class="ll-slider-viewport">
+            <div class="ll-slider-track" id="ll-track-{{ section.id }}">
+              {% for block in section.blocks %}
+                <div class="ll-item" {{ block.shopify_attributes }}>
+                  <div class="ll-video-wrapper">
+                    {% if block.settings.video %}
+                      {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll-video' }}
+                    {% endif %}
+                    {% if block.settings.cover_image %}
+                      <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 800 }}" loading="lazy" alt="">
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
             </div>
           </div>
-        {% endfor %}
-      </div>
-
-    {% else %}
-
-      <div class="ll-slider-outer">
-
-        {% if section.settings.show_arrows %}
-          <button type="button" class="ll-arrow ll-arrow-prev" id="ll-prev-{{ section.id }}" aria-label="Previous">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button type="button" class="ll-arrow ll-arrow-next" id="ll-next-{{ section.id }}" aria-label="Next">
-            <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
-          </button>
-        {% endif %}
-
-        <div class="ll-slider-viewport">
-          <div class="ll-slider-track" id="ll-track-{{ section.id }}">
-            {% for block in section.blocks %}
-              <div class="ll-item" {{ block.shopify_attributes }}>
-                <div class="ll-video-wrapper">
-                  {% if block.settings.video %}
-                    {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll-video' }}
-                  {% endif %}
-                  {% if block.settings.cover_image %}
-                    <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 800 }}" loading="lazy" alt="">
-                  {% endif %}
-                </div>
-              </div>
-            {% endfor %}
-          </div>
+  
+          {% if section.settings.show_dots %}
+            <ul class="ll-dots" id="ll-dots-{{ section.id }}">
+              {% for block in section.blocks %}
+                <li><button type="button" class="ll-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}"></button></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          {% if section.settings.show_arrows %}
+            <div class="ll-arrows-wrapper">
+              <button type="button" class="ll-arrow ll-arrow-prev" id="ll-prev-{{ section.id }}" aria-label="Previous">
+                <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.848 13.1275H2.41211M2.41211 13.1275L13.1284 23.8438M2.41211 13.1275L13.1284 2.41113" stroke="#5D5D5D" stroke-width="4.82283" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>              
+            </button>
+            <button type="button" class="ll-arrow ll-arrow-next" id="ll-next-{{ section.id }}" aria-label="Next">
+              <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.41211 13.1275H23.848M23.848 13.1275L13.1317 23.8438M23.848 13.1275L13.1317 2.41113" stroke="#5D5D5D" stroke-width="4.82283" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>            
+            </button>
+            </div>
+          {% endif %}
         </div>
-
-        {% if section.settings.show_dots %}
-          <ul class="ll-dots" id="ll-dots-{{ section.id }}">
-            {% for block in section.blocks %}
-              <li><button type="button" class="ll-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}"></button></li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-
-      </div>
-
-    {% endif %}
+      {% endif %}
+  </div>
   </div>
 </div>
 
