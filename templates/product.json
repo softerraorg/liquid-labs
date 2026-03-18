@@ -208,7 +208,7 @@
           "settings": {
             "position": "right",
             "flex_direction": "column",
-            "text": "$5 off yoursecond purchase",
+            "text": "$5 off your second purchase",
             "text_wrap": false,
             "line_image": "shopify://shop_images/Group_19.png",
             "pos_top_desktop": 60,
