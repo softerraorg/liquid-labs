@@ -146,6 +146,103 @@
         "padding_bottom": 60
       }
     },
+    "ll_founding_member_QkENPf": {
+      "type": "ll-founding-member",
+      "blocks": {
+        "feature_cn4Ykd": {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "flex_direction": "column",
+            "text": "20% off entire purchase",
+            "text_wrap": false,
+            "line_image": "shopify://shop_images/Group_17_1.png",
+            "pos_top_desktop": 5,
+            "pos_left_desktop": 0,
+            "pos_top_mobile": 5,
+            "pos_left_mobile": -5,
+            "line_width_desktop": 140,
+            "line_width_mobile": 60,
+            "text_max_width_desktop": 160,
+            "text_max_width_mobile": 100
+          }
+        },
+        "feature_9UKkeD": {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "flex_direction": "column-reverse",
+            "text": "Risk free\ncancellation at\nany time",
+            "text_wrap": true,
+            "line_image": "shopify://shop_images/Group_18.png",
+            "pos_top_desktop": 65,
+            "pos_left_desktop": 0,
+            "pos_top_mobile": 65,
+            "pos_left_mobile": -5,
+            "line_width_desktop": 140,
+            "line_width_mobile": 60,
+            "text_max_width_desktop": 160,
+            "text_max_width_mobile": 100
+          }
+        },
+        "feature_TBwDrD": {
+          "type": "feature",
+          "settings": {
+            "position": "right",
+            "flex_direction": "column-reverse",
+            "text": "Priority shipping",
+            "text_wrap": false,
+            "line_image": "shopify://shop_images/Group_20.png",
+            "pos_top_desktop": 5,
+            "pos_left_desktop": 60,
+            "pos_top_mobile": 5,
+            "pos_left_mobile": 55,
+            "line_width_desktop": 140,
+            "line_width_mobile": 60,
+            "text_max_width_desktop": 160,
+            "text_max_width_mobile": 100
+          }
+        },
+        "feature_igmMwK": {
+          "type": "feature",
+          "settings": {
+            "position": "right",
+            "flex_direction": "column",
+            "text": "$5 off your second\npurchase",
+            "text_wrap": true,
+            "pos_top_desktop": 65,
+            "pos_left_desktop": 60,
+            "pos_top_mobile": 65,
+            "pos_left_mobile": 55,
+            "line_width_desktop": 140,
+            "line_width_mobile": 60,
+            "text_max_width_desktop": 160,
+            "text_max_width_mobile": 100
+          }
+        }
+      },
+      "block_order": [
+        "feature_cn4Ykd",
+        "feature_9UKkeD",
+        "feature_TBwDrD",
+        "feature_igmMwK"
+      ],
+      "name": "LL Founding Member",
+      "settings": {
+        "heading": "Become a founding member",
+        "main_image": "shopify://shop_images/ChatGPT_Image_Mar_7_2026_10_32_00_PM_1.png",
+        "image_max_width_desktop": 350,
+        "image_max_width_mobile": 200,
+        "button_text": "Pre-Order Now!",
+        "button_link": "",
+        "bg_color": "#111115",
+        "text_color": "#FFFFFF",
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50
+      }
+    },
     "custom_video_showcase_KRwkdH": {
       "type": "custom-video-showcase",
       "blocks": {
@@ -392,6 +489,7 @@
     "main",
     "related-products",
     "rich_text_QK3WKB",
+    "ll_founding_member_QkENPf",
     "custom_video_showcase_KRwkdH",
     "collapsible_content_ATRQY4",
     "ll_ingredient_information_JwjbJX",
