@@ -173,7 +173,7 @@
             "position": "left",
             "flex_direction": "column-reverse",
             "text": "Risk free\ncancellation at\nany time",
-            "text_wrap": true,
+            "text_wrap": false,
             "line_image": "shopify://shop_images/Group_18.png",
             "pos_top_desktop": 45,
             "pos_left_desktop": 10,
