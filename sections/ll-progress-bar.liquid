@@ -5,7 +5,7 @@
       assign show_bar = false
     endif
   endif
-  assign current = shop.metafields.custom.founder_count.value | plus: 0
+  assign current = section.settings.current_count | plus: 0
   assign total = section.settings.total_count | plus: 0
   if total > 0
     assign progress_pct = current | times: 100.0 | divided_by: total
