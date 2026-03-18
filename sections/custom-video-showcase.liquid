@@ -77,6 +77,15 @@
       "label": "Slides to Show",
       "default": 3
     },
+    {
+      "type": "range",
+      "id": "slides_to_show_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Slides to Show (Mobile)",
+      "default": 2
+    },
     { "type": "checkbox", "id": "show_arrows", "label": "Show Navigation Arrows", "default": true },
     { "type": "checkbox", "id": "show_dots", "label": "Show Navigation Dots", "default": true },
     { "type": "checkbox", "id": "autoplay", "label": "Autoplay Slider", "default": false },
@@ -350,7 +359,9 @@
     var originalSlides = Array.from(track.children);
     var totalOriginal = originalSlides.length;
 
-    var show = {{ section.settings.slides_to_show | json }};
+    var desktopShow = {{ section.settings.slides_to_show | json }};
+    var mobileShow = {{ section.settings.slides_to_show_mobile | json }};
+    var show = window.innerWidth > 749 ? desktopShow : mobileShow;
     var gap = 20;
 
     // --- Clone slides for infinite loop ---
@@ -452,8 +463,8 @@
     var autoplaySpeed = {{ section.settings.autoplay_speed | json }};
     setInterval(function(){ moveTo(index + 1); }, autoplaySpeed);
     {% endif %}
-
     window.addEventListener("resize", function(){
+      show = window.innerWidth > 749 ? desktopShow : mobileShow;
       resize();
       jumpTo(index);
     });

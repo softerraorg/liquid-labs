@@ -39,6 +39,16 @@
     }
   {%- endstyle -%}
 
+  {% if section.settings.hide_slider_buttons_mobile %}
+    <style>
+      @media screen and (max-width: 749px) {
+        #shopify-section-{{ section.id }} slider-component .slider-button {
+          display: none!important;
+        }
+      }
+    </style>
+  {% endif %}
+
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
   {%- if product.quantity_price_breaks_configured? -%}
@@ -2096,6 +2106,12 @@
       "id": "enable_sticky_info",
       "default": true,
       "label": "t:sections.main-product.settings.enable_sticky_info.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_slider_buttons_mobile",
+      "label": "Hide Slider Buttons on Mobile",
+      "default": false
     },
     {
       "type": "color_scheme",
