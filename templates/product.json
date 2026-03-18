@@ -235,7 +235,7 @@
         "image_max_width_desktop": 560,
         "image_max_width_mobile": 290,
         "button_text": "Pre-Order Now!",
-        "button_link": "",
+        "button_link": "#",
         "bg_color": "rgba(0,0,0,0)",
         "text_color": "#ffffff",
         "padding_top_desktop": 80,
