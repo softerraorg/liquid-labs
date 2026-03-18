@@ -222,7 +222,7 @@
         "main_image": "shopify://shop_images/ChatGPT_Image_Mar_7_2026_10_32_00_PM_1.png",
         "button_text": "Pre-Order Now!",
         "button_link": "",
-        "bg_color": "#111115",
+        "bg_color": "rgba(0,0,0,0)",
         "text_color": "#FFFFFF",
         "padding_top_desktop": 80,
         "padding_bottom_desktop": 80,
