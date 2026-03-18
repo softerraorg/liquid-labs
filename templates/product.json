@@ -7,7 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
- {
+{
   "sections": {
     "main": {
       "type": "main-product",
@@ -146,6 +146,72 @@
         "padding_bottom": 60
       }
     },
+    "ll_no_list_8eJTib": {
+      "type": "ll-no-list",
+      "blocks": {
+        "list_item_VJLpFD": {
+          "type": "list_item",
+          "settings": {
+            "angle_image": "shopify://shop_images/Group_17.png",
+            "text": "sdfd"
+          }
+        },
+        "list_item_nXhRcY": {
+          "type": "list_item",
+          "settings": {
+            "angle_image": "shopify://shop_images/Group_17.png",
+            "text": "NO ARTIFICIAL DYES"
+          }
+        },
+        "list_item_YFJhMJ": {
+          "type": "list_item",
+          "settings": {
+            "angle_image": "shopify://shop_images/Group_17.png",
+            "text": "NO ARTIFICIAL FLAVORS"
+          }
+        },
+        "list_item_LTeEeV": {
+          "type": "list_item",
+          "settings": {
+            "angle_image": "shopify://shop_images/Group_17.png",
+            "text": "NO ADDED SUGAR"
+          }
+        },
+        "list_item_YpQKd6": {
+          "type": "list_item",
+          "settings": {
+            "angle_image": "shopify://shop_images/Group_17.png",
+            "text": "NO BANNED SUBSTANCES"
+          }
+        },
+        "list_item_PtQzGr": {
+          "type": "list_item",
+          "settings": {
+            "text": "NO PROPRIETARY BLENDS"
+          }
+        }
+      },
+      "block_order": [
+        "list_item_VJLpFD",
+        "list_item_nXhRcY",
+        "list_item_YFJhMJ",
+        "list_item_LTeEeV",
+        "list_item_YpQKd6",
+        "list_item_PtQzGr"
+      ],
+      "name": "LL The NO List",
+      "settings": {
+        "heading": "The \"NO\" List",
+        "subheading": "No nasties in sight.",
+        "main_image": "shopify://shop_images/ChatGPT_Image_Mar_9_2026_08_54_21_PM_1_1.png",
+        "background_color": "transparent",
+        "text_color": "#000000",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
     "custom_video_showcase_KRwkdH": {
       "type": "custom-video-showcase",
       "blocks": {
@@ -277,7 +343,7 @@
     },
     "ll_ingredient_information_JwjbJX": {
       "type": "ll-ingredient-information",
-     "blocks": {
+      "blocks": {
         "nutrition_row_KPnLFj": {
           "type": "nutrition_row",
           "settings": {
@@ -377,7 +443,7 @@
         "block_3zYdfE",
         "block_WYRBU8",
         "block_bVGxjC"
-      ], 
+      ],
       "name": "LL Follow Updates",
       "settings": {
         "heading": "Follow our updates!",
@@ -392,6 +458,7 @@
     "main",
     "related-products",
     "rich_text_QK3WKB",
+    "ll_no_list_8eJTib",
     "custom_video_showcase_KRwkdH",
     "collapsible_content_ATRQY4",
     "ll_ingredient_information_JwjbJX",
