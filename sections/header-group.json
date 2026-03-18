@@ -46,10 +46,10 @@
         "total_count": "300",
         "bar_height": 36,
         "padding_vertical": 10,
-        "bg_color": "#1a1a2e",
+        "bg_color": "rgba(0,0,0,0)",
         "track_color": "#caddff",
         "fill_color": "#aac9ff",
-        "text_color": "#1a1a2e",
+        "text_color": "#000000",
         "font_size_desktop": 18,
         "font_size_mobile": 12,
         "font_weight": 400
