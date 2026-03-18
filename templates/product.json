@@ -422,6 +422,66 @@
         "padding_bottom_mobile": 30
       }
     },
+    "ll_founding_member_GjJNji": {
+      "type": "ll-founding-member",
+      "blocks": {
+        "feature_DqRUHJ": {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "flex_direction": "column",
+            "text": "5g Creatine Power<br>Supports strength and <br>muscle output",
+            "text_wrap": false,
+            "line_image": "shopify://shop_images/Group_17_1.png",
+            "pos_top_desktop": -5,
+            "pos_left_desktop": 5,
+            "pos_top_mobile": 0,
+            "pos_left_mobile": 5,
+            "line_width_desktop": 180,
+            "line_width_mobile": 94,
+            "text_max_width_desktop": 180,
+            "text_max_width_mobile": 100
+          }
+        },
+        "feature_yy9PLw": {
+          "type": "feature",
+          "settings": {
+            "position": "right",
+            "flex_direction": "column",
+            "text": "Electrolytes Included\nHydration that keeps you going",
+            "text_wrap": false,
+            "line_image": "shopify://shop_images/Group_19.png",
+            "pos_top_desktop": 60,
+            "pos_left_desktop": 70,
+            "pos_top_mobile": 65,
+            "pos_left_mobile": 55,
+            "line_width_desktop": 180,
+            "line_width_mobile": 94,
+            "text_max_width_desktop": 180,
+            "text_max_width_mobile": 100
+          }
+        }
+      },
+      "block_order": [
+        "feature_DqRUHJ",
+        "feature_yy9PLw"
+      ],
+      "name": "LL Founding Member",
+      "settings": {
+        "heading": "Unlock Your Peak Performance",
+        "main_image": "shopify://shop_images/ChatGPT_Image_Mar_7_2026_10_32_00_PM_1.png",
+        "image_max_width_desktop": 560,
+        "image_max_width_mobile": 290,
+        "button_text": "Pre-Order Now!",
+        "button_link": "#",
+        "bg_color": "rgba(0,0,0,0)",
+        "text_color": "#ffffff",
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50
+      }
+    },
     "collapsible_content_ATRQY4": {
       "type": "collapsible-content",
       "blocks": {
@@ -484,66 +544,6 @@
         "padding_top": 60,
         "padding_bottom": 60
       }
-    },
-    "ll_founding_member_GjJNji": {
-      "type": "ll-founding-member",
-      "blocks": {
-        "feature_DqRUHJ": {
-          "type": "feature",
-          "settings": {
-            "position": "left",
-            "flex_direction": "column",
-            "text": "5g Creatine Power<br>Supports strength and <br>muscle output",
-            "text_wrap": false,
-            "line_image": "shopify://shop_images/Group_17_1.png",
-            "pos_top_desktop": -5,
-            "pos_left_desktop": 5,
-            "pos_top_mobile": 0,
-            "pos_left_mobile": 5,
-            "line_width_desktop": 180,
-            "line_width_mobile": 94,
-            "text_max_width_desktop": 180,
-            "text_max_width_mobile": 100
-          }
-        },
-        "feature_yy9PLw": {
-          "type": "feature",
-          "settings": {
-            "position": "right",
-            "flex_direction": "column",
-            "text": "Electrolytes Included\nHydration that keeps you going",
-            "text_wrap": false,
-            "line_image": "shopify://shop_images/Group_19.png",
-            "pos_top_desktop": 60,
-            "pos_left_desktop": 70,
-            "pos_top_mobile": 65,
-            "pos_left_mobile": 55,
-            "line_width_desktop": 180,
-            "line_width_mobile": 94,
-            "text_max_width_desktop": 180,
-            "text_max_width_mobile": 100
-          }
-        }
-      },
-      "block_order": [
-        "feature_DqRUHJ",
-        "feature_yy9PLw"
-      ],
-      "name": "LL Founding Member",
-      "settings": {
-        "heading": "Unlock Your Peak Performance",
-        "main_image": "shopify://shop_images/ChatGPT_Image_Mar_7_2026_10_32_00_PM_1.png",
-        "image_max_width_desktop": 560,
-        "image_max_width_mobile": 290,
-        "button_text": "Pre-Order Now!",
-        "button_link": "#",
-        "bg_color": "rgba(0,0,0,0)",
-        "text_color": "#ffffff",
-        "padding_top_desktop": 80,
-        "padding_bottom_desktop": 80,
-        "padding_top_mobile": 50,
-        "padding_bottom_mobile": 50
-      }
     }
   },
   "order": [
@@ -554,7 +554,7 @@
     "custom_video_showcase_KRwkdH",
     "ll_updates_slider_G7DH4f",
     "ll_ingredient_information_JwjbJX",
-    "collapsible_content_ATRQY4",
-    "ll_founding_member_GjJNji"
+    "ll_founding_member_GjJNji",
+    "collapsible_content_ATRQY4"
   ]
 }
