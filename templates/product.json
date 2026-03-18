@@ -464,30 +464,12 @@
             "text_max_width_mobile": 100
           }
         },
-        "feature_wDMBrr": {
-          "type": "feature",
-          "settings": {
-            "position": "right",
-            "flex_direction": "column-reverse",
-            "text": "Priority shipping",
-            "text_wrap": false,
-            "line_image": "shopify://shop_images/Group_20.png",
-            "pos_top_desktop": 15,
-            "pos_left_desktop": 70,
-            "pos_top_mobile": 20,
-            "pos_left_mobile": 70,
-            "line_width_desktop": 180,
-            "line_width_mobile": 94,
-            "text_max_width_desktop": 180,
-            "text_max_width_mobile": 100
-          }
-        },
         "feature_yy9PLw": {
           "type": "feature",
           "settings": {
             "position": "right",
             "flex_direction": "column",
-            "text": "$5 off your second\npurchase",
+            "text": "Electrolytes Included\nHydration that keeps you going",
             "text_wrap": false,
             "line_image": "shopify://shop_images/Group_19.png",
             "pos_top_desktop": 60,
@@ -503,7 +485,6 @@
       },
       "block_order": [
         "feature_DqRUHJ",
-        "feature_wDMBrr",
         "feature_yy9PLw"
       ],
       "name": "LL Founding Member",
