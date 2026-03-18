@@ -256,7 +256,7 @@ border-radius: 65.2154px;
     {%- comment -%} ── BUTTON ── {%- endcomment -%}
     {%- if section.settings.button_text != blank and section.settings.button_link != blank -%}
       <div class="ll-fm-btn-wrapper">
-        <a href="{{ section.settings.button_link }}" class="ll-fm-btn">
+        <a href="{{ section.settings.button_link }}" class="ll-fm-btn scroll-to-main">
           {{ section.settings.button_text }}
         </a>
       </div>
@@ -264,7 +264,19 @@ border-radius: 65.2154px;
 
   </div>
 </div>
-
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.scroll-to-main').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.querySelector('.product-form__buttons');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  });
+});
+</script>
 {% schema %}
 {
   "name": "LL Founding Member",
