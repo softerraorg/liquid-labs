@@ -161,9 +161,9 @@
             "pos_left_desktop": 0,
             "pos_top_mobile": 5,
             "pos_left_mobile": -5,
-            "line_width_desktop": 140,
-            "line_width_mobile": 60,
-            "text_max_width_desktop": 160,
+            "line_width_desktop": 180,
+            "line_width_mobile": 94,
+            "text_max_width_desktop": 180,
             "text_max_width_mobile": 100
           }
         },
@@ -179,9 +179,9 @@
             "pos_left_desktop": 0,
             "pos_top_mobile": 65,
             "pos_left_mobile": -5,
-            "line_width_desktop": 140,
-            "line_width_mobile": 60,
-            "text_max_width_desktop": 160,
+            "line_width_desktop": 180,
+            "line_width_mobile": 94,
+            "text_max_width_desktop": 180,
             "text_max_width_mobile": 100
           }
         },
@@ -197,9 +197,9 @@
             "pos_left_desktop": 60,
             "pos_top_mobile": 5,
             "pos_left_mobile": 55,
-            "line_width_desktop": 140,
-            "line_width_mobile": 60,
-            "text_max_width_desktop": 160,
+            "line_width_desktop": 180,
+            "line_width_mobile": 94,
+            "text_max_width_desktop": 180,
             "text_max_width_mobile": 100
           }
         },
@@ -215,9 +215,9 @@
             "pos_left_desktop": 60,
             "pos_top_mobile": 65,
             "pos_left_mobile": 55,
-            "line_width_desktop": 140,
-            "line_width_mobile": 60,
-            "text_max_width_desktop": 160,
+            "line_width_desktop": 180,
+            "line_width_mobile": 94,
+            "text_max_width_desktop": 180,
             "text_max_width_mobile": 100
           }
         }
