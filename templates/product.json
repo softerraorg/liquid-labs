@@ -7,7 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-{
+ {
   "sections": {
     "main": {
       "type": "main-product",
@@ -86,7 +86,7 @@
         "constrain_to_viewport": true,
         "media_fit": "cover",
         "gallery_layout": "thumbnail",
-        "mobile_thumbnails": "hide",
+        "mobile_thumbnails": "show",
         "media_position": "left",
         "image_zoom": "lightbox",
         "hide_variants": true,
@@ -197,10 +197,15 @@
       "name": "Custom Video Section",
       "settings": {
         "title": "Behind the scenes",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
         "layout": "slider",
         "video_width": 360,
         "background_color": "",
         "slides_to_show": 4,
+        "slides_to_show_mobile": 2,
         "show_arrows": true,
         "show_dots": false,
         "autoplay": false,
@@ -269,6 +274,118 @@
         "padding_top": 60,
         "padding_bottom": 60
       }
+    },
+    "ll_ingredient_information_JwjbJX": {
+      "type": "ll-ingredient-information",
+     "blocks": {
+        "nutrition_row_KPnLFj": {
+          "type": "nutrition_row",
+          "settings": {
+            "ingredient_name": "Creatine Monohydrate",
+            "ingredient_amount": "5g"
+          }
+        },
+        "accordion_VBJ9AL": {
+          "type": "accordion",
+          "settings": {
+            "accordion_title": "Details",
+            "accordion_content": "<p>Creatine is an amino acid found mostly in your muscles and in the brain. It’s naturally produced in the body from other amino acids. Creatine is also found in foods like meats, eggs, and fish. It plays a vital role in the body’s production of cellular energy by helping to make ATP, a molecule needed for intense exercise, as well as for supplying the energy to pump your heart and power your brain.*</p>",
+            "open_by_default": true
+          }
+        },
+        "accordion_RxyLK6": {
+          "type": "accordion",
+          "settings": {
+            "accordion_title": "Ingredients",
+            "accordion_content": "",
+            "open_by_default": false
+          }
+        },
+        "accordion_QyfrKn": {
+          "type": "accordion",
+          "settings": {
+            "accordion_title": "The \"NO\" List",
+            "accordion_content": "",
+            "open_by_default": false
+          }
+        },
+        "accordion_xq8TjK": {
+          "type": "accordion",
+          "settings": {
+            "accordion_title": "Certifications and Testing",
+            "accordion_content": "",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "nutrition_row_KPnLFj",
+        "accordion_VBJ9AL",
+        "accordion_RxyLK6",
+        "accordion_QyfrKn",
+        "accordion_xq8TjK"
+      ],
+      "name": "LL Ingredient Information",
+      "settings": {
+        "heading": "Ingredient Information",
+        "serving_size_label": "Serving Size:",
+        "serving_size": "1 Stick",
+        "servings_per_label": "Servings Per Container:",
+        "servings_per_container": "15",
+        "table_col1_label": "Name",
+        "table_col2_label": "Amount",
+        "other_ingredients_label": "Other Ingredients:",
+        "other_ingredients": "Creatine Monohydrate, Potassium Citrate, Magnesium Glycinate, Citric Acid Monohydrate, Malic Acid, Acesulfame Potassium, Sucralose, Silicon Dioxide, Natural & Artificial Flavors, Spirulina Extract (color).",
+        "product_title": "Creatine + Electrolyte Sticks",
+        "product_image": "shopify://shop_images/ChatGPT_Image_Mar_9_2026_08_54_21_PM_1_1.png",
+        "disclaimer": "Disclaimer: Images shown are generated mockups of the expected final product. Actual packaging and product appearance may vary slightly from what is displayed.",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 30
+      }
+    },
+    "ll_updates_slider_G7DH4f": {
+      "type": "ll-updates-slider",
+      "blocks": {
+        "block_3zYdfE": {
+          "type": "block",
+          "settings": {
+            "update_heading": "Revisions Are On The Way!",
+            "update_description": "We’re excited to announce our revision round of samples is on the way! If the flavor is as good as we hope we will be placing a complete first batch order within 30 days!",
+            "update_date": "March 7, 2026"
+          }
+        },
+        "block_WYRBU8": {
+          "type": "block",
+          "settings": {
+            "update_heading": "Revisions Are On The Way! 2",
+            "update_description": "We’re excited to announce our revision round of samples is on the way! If the flavor is as good as we hope we will be placing a complete first batch order within 30 days!",
+            "update_date": "March 7, 2026"
+          }
+        },
+        "block_bVGxjC": {
+          "type": "block",
+          "settings": {
+            "update_heading": "Revisions Are On The Way!",
+            "update_description": "We’re excited to announce our revision round of samples is on the way! If the flavor is as good as we hope we will be placing a complete first batch order within 30 days!",
+            "update_date": "March 7, 2026"
+          }
+        }
+      },
+      "block_order": [
+        "block_3zYdfE",
+        "block_WYRBU8",
+        "block_bVGxjC"
+      ], 
+      "name": "LL Follow Updates",
+      "settings": {
+        "heading": "Follow our updates!",
+        "padding-top-desktop": 60,
+        "padding-bottom-desktop": 60,
+        "padding-top-mobile": 30,
+        "padding-bottom-mobile": 30
+      }
     }
   },
   "order": [
@@ -276,6 +393,8 @@
     "related-products",
     "rich_text_QK3WKB",
     "custom_video_showcase_KRwkdH",
-    "collapsible_content_ATRQY4"
+    "collapsible_content_ATRQY4",
+    "ll_ingredient_information_JwjbJX",
+    "ll_updates_slider_G7DH4f"
   ]
 }
