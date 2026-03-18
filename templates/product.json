@@ -210,6 +210,7 @@
             "flex_direction": "column",
             "text": "$5 off your second\npurchase",
             "text_wrap": true,
+            "line_image": "shopify://shop_images/Group_19.png",
             "pos_top_desktop": 65,
             "pos_left_desktop": 60,
             "pos_top_mobile": 65,
