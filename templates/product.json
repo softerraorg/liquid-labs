@@ -310,6 +310,48 @@
         "autoplay_speed": 3000
       }
     },
+    "ll_updates_slider_G7DH4f": {
+      "type": "ll-updates-slider",
+      "blocks": {
+        "block_3zYdfE": {
+          "type": "block",
+          "settings": {
+            "update_heading": "Revisions Are On The Way!",
+            "update_description": "We’re excited to announce our revision round of samples is on the way! If the flavor is as good as we hope we will be placing a complete first batch order within 30 days!",
+            "update_date": "March 7, 2026"
+          }
+        },
+        "block_WYRBU8": {
+          "type": "block",
+          "settings": {
+            "update_heading": "Revisions Are On The Way! 2",
+            "update_description": "We’re excited to announce our revision round of samples is on the way! If the flavor is as good as we hope we will be placing a complete first batch order within 30 days!",
+            "update_date": "March 7, 2026"
+          }
+        },
+        "block_bVGxjC": {
+          "type": "block",
+          "settings": {
+            "update_heading": "Revisions Are On The Way!",
+            "update_description": "We’re excited to announce our revision round of samples is on the way! If the flavor is as good as we hope we will be placing a complete first batch order within 30 days!",
+            "update_date": "March 7, 2026"
+          }
+        }
+      },
+      "block_order": [
+        "block_3zYdfE",
+        "block_WYRBU8",
+        "block_bVGxjC"
+      ],
+      "name": "LL Follow Updates",
+      "settings": {
+        "heading": "Follow our updates!",
+        "padding-top-desktop": 60,
+        "padding-bottom-desktop": 60,
+        "padding-top-mobile": 30,
+        "padding-bottom-mobile": 30
+      }
+    },
     "collapsible_content_ATRQY4": {
       "type": "collapsible-content",
       "blocks": {
@@ -502,48 +544,6 @@
         "padding_top_mobile": 50,
         "padding_bottom_mobile": 50
       }
-    },
-    "ll_updates_slider_G7DH4f": {
-      "type": "ll-updates-slider",
-      "blocks": {
-        "block_3zYdfE": {
-          "type": "block",
-          "settings": {
-            "update_heading": "Revisions Are On The Way!",
-            "update_description": "We’re excited to announce our revision round of samples is on the way! If the flavor is as good as we hope we will be placing a complete first batch order within 30 days!",
-            "update_date": "March 7, 2026"
-          }
-        },
-        "block_WYRBU8": {
-          "type": "block",
-          "settings": {
-            "update_heading": "Revisions Are On The Way! 2",
-            "update_description": "We’re excited to announce our revision round of samples is on the way! If the flavor is as good as we hope we will be placing a complete first batch order within 30 days!",
-            "update_date": "March 7, 2026"
-          }
-        },
-        "block_bVGxjC": {
-          "type": "block",
-          "settings": {
-            "update_heading": "Revisions Are On The Way!",
-            "update_description": "We’re excited to announce our revision round of samples is on the way! If the flavor is as good as we hope we will be placing a complete first batch order within 30 days!",
-            "update_date": "March 7, 2026"
-          }
-        }
-      },
-      "block_order": [
-        "block_3zYdfE",
-        "block_WYRBU8",
-        "block_bVGxjC"
-      ],
-      "name": "LL Follow Updates",
-      "settings": {
-        "heading": "Follow our updates!",
-        "padding-top-desktop": 60,
-        "padding-bottom-desktop": 60,
-        "padding-top-mobile": 30,
-        "padding-bottom-mobile": 30
-      }
     }
   },
   "order": [
@@ -552,9 +552,9 @@
     "rich_text_QK3WKB",
     "ll_founding_member_QkENPf",
     "custom_video_showcase_KRwkdH",
+    "ll_updates_slider_G7DH4f",
     "collapsible_content_ATRQY4",
     "ll_ingredient_information_JwjbJX",
-    "ll_founding_member_GjJNji",
-    "ll_updates_slider_G7DH4f"
+    "ll_founding_member_GjJNji"
   ]
 }
