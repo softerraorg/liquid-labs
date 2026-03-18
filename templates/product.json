@@ -157,7 +157,7 @@
             "text": "20% off entire purchase",
             "text_wrap": false,
             "line_image": "shopify://shop_images/Group_17_1.png",
-            "pos_top_desktop": -5,
+            "pos_top_desktop": 5,
             "pos_left_desktop": 5,
             "pos_top_mobile": 0,
             "pos_left_mobile": 5,
@@ -466,7 +466,6 @@
         "feature_DqRUHJ",
         "feature_yy9PLw"
       ],
-      "disabled": true,
       "name": "LL Founding Member",
       "settings": {
         "heading": "Unlock Your Peak Performance",
