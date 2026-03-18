@@ -3,9 +3,9 @@
 {% comment %} hello world {% endcomment %}
 <html class="js template-{{ template.name }}" lang="{{ request.locale.iso_code }}">
   <head>
-    {% if template.name == 'index' %}
+    {% comment %} {% if template.name == 'index' %}
   <script>window.location.replace('/products/creatine-electrolytes');</script>
-{% endif %}
+{% endif %} {% endcomment %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
