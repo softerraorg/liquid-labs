@@ -146,6 +146,87 @@
         "padding_bottom": 60
       }
     },
+    "ll_founding_member_GKVFW9": {
+      "type": "ll-founding-member",
+      "blocks": {
+        "feature_3UVfV6": {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "text": "20% off entire purchase",
+            "line_image": "shopify://shop_images/Group_17_84862e32-452a-46fd-b3d3-9b2c195c4f9f.png",
+            "vertical_alignment": "flex-start",
+            "line_width_desktop": 150,
+            "line_width_mobile": 40,
+            "margin_top_desktop": 0,
+            "margin_bottom_desktop": 60,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 30
+          }
+        },
+        "feature_nVbdhn": {
+          "type": "feature",
+          "settings": {
+            "position": "left",
+            "text": "Risk free\ncancellation at\nany time",
+            "vertical_alignment": "flex-start",
+            "line_width_desktop": 100,
+            "line_width_mobile": 40,
+            "margin_top_desktop": 0,
+            "margin_bottom_desktop": 60,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 30
+          }
+        },
+        "feature_VFqWAV": {
+          "type": "feature",
+          "settings": {
+            "position": "right",
+            "text": "Priority shipping",
+            "vertical_alignment": "flex-end",
+            "line_width_desktop": 100,
+            "line_width_mobile": 40,
+            "margin_top_desktop": 0,
+            "margin_bottom_desktop": 60,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 30
+          }
+        },
+        "feature_t3gqPp": {
+          "type": "feature",
+          "settings": {
+            "position": "right",
+            "text": "$5 off your second\npurchase",
+            "vertical_alignment": "flex-start",
+            "line_width_desktop": 100,
+            "line_width_mobile": 40,
+            "margin_top_desktop": 0,
+            "margin_bottom_desktop": 60,
+            "margin_top_mobile": 0,
+            "margin_bottom_mobile": 30
+          }
+        }
+      },
+      "block_order": [
+        "feature_3UVfV6",
+        "feature_nVbdhn",
+        "feature_VFqWAV",
+        "feature_t3gqPp"
+      ],
+      "name": "LL Founding Member",
+      "settings": {
+        "heading": "Become a founding member",
+        "main_image": "shopify://shop_images/ChatGPT_Image_Mar_7_2026_10_32_00_PM_1.png",
+        "button_text": "Pre-Order Now!",
+        "button_link": "",
+        "bg_color": "#111115",
+        "text_color": "#FFFFFF",
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 50,
+        "padding_bottom_mobile": 50
+      }
+    },
     "ll_no_list_8eJTib": {
       "type": "ll-no-list",
       "blocks": {
@@ -458,6 +539,7 @@
     "main",
     "related-products",
     "rich_text_QK3WKB",
+    "ll_founding_member_GKVFW9",
     "ll_no_list_8eJTib",
     "custom_video_showcase_KRwkdH",
     "collapsible_content_ATRQY4",
