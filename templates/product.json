@@ -146,154 +146,63 @@
         "padding_bottom": 60
       }
     },
-    "ll_founding_member_GKVFW9": {
+    "ll_founding_member_V6ec6c": {
       "type": "ll-founding-member",
       "blocks": {
-        "feature_3UVfV6": {
+        "feature_UrhcLU": {
           "type": "feature",
           "settings": {
             "position": "left",
             "text": "20% off entire purchase",
-            "line_image": "shopify://shop_images/Group_17_84862e32-452a-46fd-b3d3-9b2c195c4f9f.png",
-            "vertical_alignment": "flex-start",
-            "line_width_desktop": 150,
-            "line_width_mobile": 40,
-            "margin_top_desktop": 0,
-            "margin_bottom_desktop": 60,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 30
+            "line_width_desktop": 100,
+            "line_width_mobile": 40
           }
         },
-        "feature_nVbdhn": {
+        "feature_Vy8LxE": {
           "type": "feature",
           "settings": {
             "position": "left",
             "text": "Risk free\ncancellation at\nany time",
-            "line_image": "shopify://shop_images/Group_18.png",
-            "vertical_alignment": "flex-end",
-            "line_width_desktop": 150,
-            "line_width_mobile": 40,
-            "margin_top_desktop": 0,
-            "margin_bottom_desktop": 60,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 30
+            "line_width_desktop": 100,
+            "line_width_mobile": 40
           }
         },
-        "feature_VFqWAV": {
+        "feature_PmYCTJ": {
           "type": "feature",
           "settings": {
             "position": "right",
             "text": "Priority shipping",
-            "line_image": "shopify://shop_images/Group_20.png",
-            "vertical_alignment": "flex-start",
-            "line_width_desktop": 150,
-            "line_width_mobile": 40,
-            "margin_top_desktop": 0,
-            "margin_bottom_desktop": 60,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 30
+            "line_width_desktop": 100,
+            "line_width_mobile": 40
           }
         },
-        "feature_t3gqPp": {
+        "feature_AXieeR": {
           "type": "feature",
           "settings": {
             "position": "right",
             "text": "$5 off your second\npurchase",
-            "line_image": "shopify://shop_images/Group_19.png",
-            "vertical_alignment": "flex-end",
-            "line_width_desktop": 150,
-            "line_width_mobile": 40,
-            "margin_top_desktop": 0,
-            "margin_bottom_desktop": 60,
-            "margin_top_mobile": 0,
-            "margin_bottom_mobile": 30
+            "line_width_desktop": 100,
+            "line_width_mobile": 40
           }
         }
       },
       "block_order": [
-        "feature_3UVfV6",
-        "feature_nVbdhn",
-        "feature_VFqWAV",
-        "feature_t3gqPp"
+        "feature_UrhcLU",
+        "feature_Vy8LxE",
+        "feature_PmYCTJ",
+        "feature_AXieeR"
       ],
       "name": "LL Founding Member",
       "settings": {
         "heading": "Become a founding member",
-        "main_image": "shopify://shop_images/ChatGPT_Image_Mar_7_2026_10_32_00_PM_1.png",
         "button_text": "Pre-Order Now!",
-        "button_link": "shopify://products/creatine-electrolytes",
-        "bg_color": "rgba(0,0,0,0)",
-        "text_color": "#ffffff",
+        "button_link": "",
+        "bg_color": "#111115",
+        "text_color": "#FFFFFF",
         "padding_top_desktop": 80,
         "padding_bottom_desktop": 80,
         "padding_top_mobile": 50,
         "padding_bottom_mobile": 50
-      }
-    },
-    "ll_no_list_8eJTib": {
-      "type": "ll-no-list",
-      "blocks": {
-        "list_item_VJLpFD": {
-          "type": "list_item",
-          "settings": {
-            "angle_image": "shopify://shop_images/Group_17.png",
-            "text": "sdfd"
-          }
-        },
-        "list_item_nXhRcY": {
-          "type": "list_item",
-          "settings": {
-            "angle_image": "shopify://shop_images/Group_17.png",
-            "text": "NO ARTIFICIAL DYES"
-          }
-        },
-        "list_item_YFJhMJ": {
-          "type": "list_item",
-          "settings": {
-            "angle_image": "shopify://shop_images/Group_18.png",
-            "text": "NO ARTIFICIAL FLAVORS"
-          }
-        },
-        "list_item_LTeEeV": {
-          "type": "list_item",
-          "settings": {
-            "angle_image": "shopify://shop_images/Group_17.png",
-            "text": "NO ADDED SUGAR"
-          }
-        },
-        "list_item_YpQKd6": {
-          "type": "list_item",
-          "settings": {
-            "angle_image": "shopify://shop_images/Group_17.png",
-            "text": "NO BANNED SUBSTANCES"
-          }
-        },
-        "list_item_PtQzGr": {
-          "type": "list_item",
-          "settings": {
-            "text": "NO PROPRIETARY BLENDS"
-          }
-        }
-      },
-      "block_order": [
-        "list_item_VJLpFD",
-        "list_item_nXhRcY",
-        "list_item_YFJhMJ",
-        "list_item_LTeEeV",
-        "list_item_YpQKd6",
-        "list_item_PtQzGr"
-      ],
-      "name": "LL The NO List",
-      "settings": {
-        "heading": "Become a founding member",
-        "subheading": "",
-        "main_image": "shopify://shop_images/ChatGPT_Image_Mar_7_2026_10_32_00_PM_1.png",
-        "background_color": "rgba(0,0,0,0)",
-        "text_color": "#000000",
-        "padding_top_desktop": 55,
-        "padding_bottom_desktop": 60,
-        "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40
       }
     },
     "custom_video_showcase_KRwkdH": {
@@ -542,8 +451,7 @@
     "main",
     "related-products",
     "rich_text_QK3WKB",
-    "ll_founding_member_GKVFW9",
-    "ll_no_list_8eJTib",
+    "ll_founding_member_V6ec6c",
     "custom_video_showcase_KRwkdH",
     "collapsible_content_ATRQY4",
     "ll_ingredient_information_JwjbJX",
