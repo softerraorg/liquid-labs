@@ -458,6 +458,26 @@
       });
     });
 
+    // Touch/Swipe support
+var touchStartX = 0;
+var touchEndX = 0;
+
+viewport.addEventListener("touchstart", function(e){
+  touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+viewport.addEventListener("touchend", function(e){
+  touchEndX = e.changedTouches[0].screenX;
+  var diff = touchStartX - touchEndX;
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) {
+      moveTo(index + 1); // swipe left → next
+    } else {
+      moveTo(index - 1); // swipe right → prev
+    }
+  }
+}, { passive: true });
+
     // Autoplay
     {% if section.settings.autoplay %}
     var autoplaySpeed = {{ section.settings.autoplay_speed | json }};
