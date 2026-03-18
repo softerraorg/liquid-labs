@@ -416,6 +416,7 @@
         "product_title": "Creatine + Electrolyte Sticks",
         "product_image": "shopify://shop_images/ChatGPT_Image_Mar_9_2026_08_54_21_PM_1_1.png",
         "disclaimer": "Disclaimer: Images shown are generated mockups of the expected final product. Actual packaging and product appearance may vary slightly from what is displayed.",
+        "show_right_section": false,
         "padding_top_desktop": 60,
         "padding_bottom_desktop": 60,
         "padding_top_mobile": 30,
