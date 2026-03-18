@@ -352,69 +352,6 @@
         "padding-bottom-mobile": 30
       }
     },
-    "collapsible_content_ATRQY4": {
-      "type": "collapsible-content",
-      "blocks": {
-        "collapsible_row_zniKVQ": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "What is creatine?",
-            "icon": "none",
-            "row_content": "<p>Creatine is an amino acid found in your body’s muscles and brain. The body naturally produces creatine and it can be consumed through meat. It is the most studied fitness supplement on the market, and research showsit can increase strength, improve recovery, and boost mental acuity.</p>",
-            "page": ""
-          }
-        },
-        "collapsible_row_t4wtV7": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "What are the main benefits of creatine supplementation?",
-            "icon": "none",
-            "row_content": "",
-            "page": ""
-          }
-        },
-        "collapsible_row_x3ine6": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Does creatine have any negative side effects?",
-            "icon": "none",
-            "row_content": "",
-            "page": ""
-          }
-        },
-        "collapsible_row_qhmahd": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Are your creatine gummies NSF for Sport Certified?",
-            "icon": "none",
-            "row_content": "",
-            "page": ""
-          }
-        }
-      },
-      "block_order": [
-        "collapsible_row_zniKVQ",
-        "collapsible_row_t4wtV7",
-        "collapsible_row_x3ine6",
-        "collapsible_row_qhmahd"
-      ],
-      "name": "t:sections.collapsible_content.presets.name",
-      "settings": {
-        "custom-class": "productFaqs",
-        "caption": "",
-        "heading": "Frequently Asked Questions",
-        "heading_size": "h1",
-        "heading_alignment": "center",
-        "layout": "none",
-        "container_color_scheme": "",
-        "color_scheme": "",
-        "open_first_collapsible_row": true,
-        "image_ratio": "adapt",
-        "desktop_layout": "image_second",
-        "padding_top": 60,
-        "padding_bottom": 60
-      }
-    },
     "ll_ingredient_information_JwjbJX": {
       "type": "ll-ingredient-information",
       "blocks": {
@@ -485,6 +422,69 @@
         "padding_bottom_mobile": 30
       }
     },
+    "collapsible_content_ATRQY4": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_zniKVQ": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is creatine?",
+            "icon": "none",
+            "row_content": "<p>Creatine is an amino acid found in your body’s muscles and brain. The body naturally produces creatine and it can be consumed through meat. It is the most studied fitness supplement on the market, and research showsit can increase strength, improve recovery, and boost mental acuity.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_t4wtV7": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What are the main benefits of creatine supplementation?",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_x3ine6": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Does creatine have any negative side effects?",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_qhmahd": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Are your creatine gummies NSF for Sport Certified?",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_zniKVQ",
+        "collapsible_row_t4wtV7",
+        "collapsible_row_x3ine6",
+        "collapsible_row_qhmahd"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "custom-class": "productFaqs",
+        "caption": "",
+        "heading": "Frequently Asked Questions",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
     "ll_founding_member_GjJNji": {
       "type": "ll-founding-member",
       "blocks": {
@@ -553,8 +553,8 @@
     "ll_founding_member_QkENPf",
     "custom_video_showcase_KRwkdH",
     "ll_updates_slider_G7DH4f",
-    "collapsible_content_ATRQY4",
     "ll_ingredient_information_JwjbJX",
+    "collapsible_content_ATRQY4",
     "ll_founding_member_GjJNji"
   ]
 }
