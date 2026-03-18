@@ -384,17 +384,52 @@
 
     {% if template.name == 'product' %}
 <style>
+  .ll-sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    padding: 12px 20px;
+    display: none;
+  }
+
   @media screen and (max-width: 749px) {
-    #ProductSubmitButton-template--21614786183386__main {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      right: 20px;
-      z-index: 999;
-      width: calc(100% - 40px);
+    .ll-sticky-bar.visible {
+      display: block;
     }
   }
 </style>
+
+<div class="ll-sticky-bar" id="ll-sticky-bar"></div>
+
+<script>
+(function(){
+  var realBtn = document.getElementById('ProductSubmitButton-template--21614786183386__main');
+  var bar = document.getElementById('ll-sticky-bar');
+  if (!realBtn || !bar) return;
+
+  // Clone with exact same classes
+  var clone = realBtn.cloneNode(true);
+  clone.removeAttribute('id');
+  clone.addEventListener('click', function(){ realBtn.click(); });
+  bar.appendChild(clone);
+
+  function checkScroll() {
+    if (window.innerWidth > 749) { bar.classList.remove('visible'); return; }
+    var rect = realBtn.getBoundingClientRect();
+    if (rect.bottom < 0) {
+      bar.classList.add('visible');
+    } else {
+      bar.classList.remove('visible');
+    }
+  }
+
+  window.addEventListener('scroll', checkScroll, { passive: true });
+  window.addEventListener('resize', checkScroll);
+  checkScroll();
+})();
+</script>
 {% endif %}
 
 
