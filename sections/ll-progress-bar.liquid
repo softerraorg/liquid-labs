@@ -76,6 +76,9 @@ letter-spacing: -0.5px;
     .ll-fp-label {
       font-size: {{ section.settings.font_size_mobile }}px;
     }
+     .ll-fp-track {
+    height: {{ section.settings.bar_height_mobile }}px;
+  }
   }
 {% endstyle %}
 
@@ -144,6 +147,17 @@ letter-spacing: -0.5px;
       "unit": "px",
       "default": 36
     },
+    {
+      "type": "range",
+      "id": "bar_height_mobile",
+      "label": "Bar Height",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 26
+    },
+    
     {
       "type": "range",
       "id": "padding_vertical",
