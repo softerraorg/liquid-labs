@@ -201,12 +201,12 @@
       ],
       "name": "LL The NO List",
       "settings": {
-        "heading": "The \"NO\" List",
-        "subheading": "No nasties in sight.",
+        "heading": "Become a founding member",
+        "subheading": "",
         "main_image": "shopify://shop_images/ChatGPT_Image_Mar_7_2026_10_32_00_PM_1.png",
         "background_color": "rgba(0,0,0,0)",
         "text_color": "#000000",
-        "padding_top_desktop": 60,
+        "padding_top_desktop": 55,
         "padding_bottom_desktop": 60,
         "padding_top_mobile": 40,
         "padding_bottom_mobile": 40
