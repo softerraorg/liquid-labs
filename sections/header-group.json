@@ -50,9 +50,9 @@
         "track_color": "#caddff",
         "fill_color": "#aac9ff",
         "text_color": "#1a1a2e",
-        "font_size_desktop": 14,
+        "font_size_desktop": 18,
         "font_size_mobile": 12,
-        "font_weight": 500
+        "font_weight": 400
       }
     },
     "header": {
