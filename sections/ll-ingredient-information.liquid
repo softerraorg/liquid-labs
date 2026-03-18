@@ -269,9 +269,14 @@
         line-height: 1.5;
       }
 
-      .ll-ingredient-information-right {
-    display: none;
+
+  .ll-ingredient-information-right {
+    {% unless section.settings.show_right_section %}
+      display: none;
+    {% endunless %}
+
 }
+</style>
     }
     
     {% endstyle %}
