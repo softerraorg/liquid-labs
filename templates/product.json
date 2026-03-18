@@ -166,7 +166,7 @@
         "list_item_YFJhMJ": {
           "type": "list_item",
           "settings": {
-            "angle_image": "shopify://shop_images/Group_17.png",
+            "angle_image": "shopify://shop_images/Group_18.png",
             "text": "NO ARTIFICIAL FLAVORS"
           }
         },
@@ -203,8 +203,8 @@
       "settings": {
         "heading": "The \"NO\" List",
         "subheading": "No nasties in sight.",
-        "main_image": "shopify://shop_images/ChatGPT_Image_Mar_9_2026_08_54_21_PM_1_1.png",
-        "background_color": "transparent",
+        "main_image": "shopify://shop_images/ChatGPT_Image_Mar_7_2026_10_32_00_PM_1.png",
+        "background_color": "rgba(0,0,0,0)",
         "text_color": "#000000",
         "padding_top_desktop": 60,
         "padding_bottom_desktop": 60,
