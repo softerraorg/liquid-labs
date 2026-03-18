@@ -146,65 +146,6 @@
         "padding_bottom": 60
       }
     },
-    "ll_founding_member_fFMhVG": {
-      "type": "ll-founding-member",
-      "blocks": {
-        "feature_aR3pww": {
-          "type": "feature",
-          "settings": {
-            "position": "left",
-            "text": "20% off entire purchase",
-            "line_width_desktop": 100,
-            "line_width_mobile": 40
-          }
-        },
-        "feature_RFKVM9": {
-          "type": "feature",
-          "settings": {
-            "position": "left",
-            "text": "Risk free\ncancellation at\nany time",
-            "line_width_desktop": 100,
-            "line_width_mobile": 40
-          }
-        },
-        "feature_hg4C3k": {
-          "type": "feature",
-          "settings": {
-            "position": "right",
-            "text": "Priority shipping",
-            "line_width_desktop": 100,
-            "line_width_mobile": 40
-          }
-        },
-        "feature_JzNGW3": {
-          "type": "feature",
-          "settings": {
-            "position": "right",
-            "text": "$5 off your second\npurchase",
-            "line_width_desktop": 100,
-            "line_width_mobile": 40
-          }
-        }
-      },
-      "block_order": [
-        "feature_aR3pww",
-        "feature_RFKVM9",
-        "feature_hg4C3k",
-        "feature_JzNGW3"
-      ],
-      "name": "LL Founding Member",
-      "settings": {
-        "heading": "Become a founding member",
-        "button_text": "Pre-Order Now!",
-        "button_link": "",
-        "bg_color": "#111115",
-        "text_color": "#FFFFFF",
-        "padding_top_desktop": 80,
-        "padding_bottom_desktop": 80,
-        "padding_top_mobile": 50,
-        "padding_bottom_mobile": 50
-      }
-    },
     "custom_video_showcase_KRwkdH": {
       "type": "custom-video-showcase",
       "blocks": {
@@ -451,7 +392,6 @@
     "main",
     "related-products",
     "rich_text_QK3WKB",
-    "ll_founding_member_fFMhVG",
     "custom_video_showcase_KRwkdH",
     "collapsible_content_ATRQY4",
     "ll_ingredient_information_JwjbJX",
