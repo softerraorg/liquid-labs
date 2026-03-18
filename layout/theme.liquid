@@ -382,7 +382,65 @@
     {%- endif -%}
 
 
-    
+    {% if template.name == 'product' %}
+<style>
+  .ll-sticky-btn {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    padding: 12px 20px;
+    background: #c7d2fe;
+    display: none;
+  }
+
+  .ll-sticky-btn button {
+    width: 100%;
+    padding: 14px;
+    background: #93a8f4;
+    color: #1a1a2e;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+  }
+</style>
+
+<div class="ll-sticky-btn" id="ll-sticky-btn">
+  <button onclick="document.getElementById('ProductSubmitButton-template--21614786183386__main').click()">
+    Pre-Order Now!
+  </button>
+</div>
+
+<script>
+(function(){
+  var stickyBtn = document.getElementById('ll-sticky-btn');
+  var realBtn = document.getElementById('ProductSubmitButton-template--21614786183386__main');
+  
+  if (!realBtn || !stickyBtn) return;
+
+  function checkScroll() {
+    if (window.innerWidth > 749) {
+      stickyBtn.style.display = 'none';
+      return;
+    }
+    var rect = realBtn.getBoundingClientRect();
+    if (rect.bottom < 0) {
+      stickyBtn.style.display = 'block';
+    } else {
+      stickyBtn.style.display = 'none';
+    }
+  }
+
+  window.addEventListener('scroll', checkScroll, { passive: true });
+  window.addEventListener('resize', checkScroll);
+  checkScroll();
+})();
+</script>
+{% endif %}
 
 
   </body>
