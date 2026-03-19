@@ -433,18 +433,8 @@
       var wrapper = invalid.closest('.bundle-flavor-picker__select-wrapper');
       if (wrapper) {
         wrapper.classList.add('bundle-flavor-select--error');
-        var errorMsg = wrapper.querySelector('.bundle-flavor-error-msg');
-        if (!errorMsg) {
-          errorMsg = document.createElement('span');
-          errorMsg.className = 'bundle-flavor-error-msg';
-          errorMsg.textContent = 'Please select a flavor';
-          errorMsg.style.cssText = 'color:#ffffffd9 !important; font-size:14px; font-weight:500; white-space:nowrap; display:block; margin-top:4px;';
-          wrapper.parentNode.insertAdjacentElement('beforeend', errorMsg);
-        }
         invalid.addEventListener('change', function(){
           wrapper.classList.remove('bundle-flavor-select--error');
-          var msg = wrapper.parentNode.querySelector('.bundle-flavor-error-msg');
-          if (msg) msg.remove();
         }, { once: true });
       }
       return;
