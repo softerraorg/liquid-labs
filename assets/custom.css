@@ -545,7 +545,7 @@ details-modal.header__search,
 .bundle-flavor-picker__caret {
     position: absolute;
     right: 14px;
-    top: 50%;
+    top: 33%;
     transform: translateY(-50%);
     color: rgba(255, 255, 255, 0.6);
     pointer-events: none;
