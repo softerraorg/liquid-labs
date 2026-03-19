@@ -108,13 +108,14 @@
 {% comment %} SHOW PRICE OF EACH VARIANT {% endcomment %}
 
 {% if variant_for_value %}
-  <span class="bundle-price">{{ variant_for_value.price | money }}</span>
   {% assign sticks = 12 %}
   {% if value == 'Duo' %}
     {% assign sticks = 24 %}
   {% elsif value == 'Trio' %}
     {% assign sticks = 36 %}
   {% endif %}
+  <span class="stick-count">{{ sticks }} Sticks</span>
+  <span class="bundle-price">{{ variant_for_value.price | money }}</span>
   {% assign per_stick_price = variant_for_value.price | divided_by: sticks %}
   <span class="per-stick">
     {{ per_stick_price | money }}/Stick

@@ -133,8 +133,16 @@ details-modal.header__search,
 }
 
 .template-product #product-option-1 .bundle-price,
-.template-product #product-option-1 .per-stick {
+.template-product #product-option-1 .per-stick,
+.template-product #product-option-1 .stick-count {
     display: none;
+}
+
+.template-product #product-option-2 .stick-count {
+    display: block;
+    font-size: 14px;
+    opacity: 0.7;
+    margin-top: -6px;
 }
 
 .template-product #product-option-2 {
@@ -228,12 +236,14 @@ details-modal.header__search,
     padding: 15px;
 }
 
-.template-product #product-option-1.product-form__input--pill input:first-of-type + label {
-    background-color: #AAC9FF !important;
-    font-weight: bold;
+.template-product #product-option-1.product-form__input--pill input:not(.disabled) + label {
     pointer-events: all;
 }
-.template-product #product-option-1.product-form__input--pill input:first-of-type + label span {
+.template-product #product-option-1.product-form__input--pill input:checked + label {
+    background-color: #AAC9FF !important;
+    font-weight: bold;
+}
+.template-product #product-option-1.product-form__input--pill input:checked + label span {
     color: #1A1A1A !important;
 }
 
@@ -268,7 +278,7 @@ details-modal.header__search,
     font-size: 14px;
 }
 .template-product #product-option-1 label {
-    padding: 10px 0 !important;
+    padding: 15px 0 !important;
 }
 .template-product #product-option-2 label:after {
     font-weight: 700 !important;
@@ -464,5 +474,99 @@ details-modal.header__search,
     }
     .liquidLabs-productbenefits {
         gap: 5px;
+    }
+}
+
+/* ── Bundle Flavor Picker ── */
+.bundle-flavor-picker {
+    margin-top: 20px;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.bundle-flavor-picker__heading {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    color: #fff;
+    letter-spacing: 0.02em;
+}
+
+.bundle-flavor-picker__row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.bundle-flavor-picker__label {
+    min-width: 70px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    white-space: nowrap;
+}
+
+.bundle-flavor-picker__select-wrapper {
+    position: relative;
+    flex: 1;
+}
+
+.bundle-flavor-select {
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 12px 40px 12px 16px;
+    font-size: 15px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bundle-flavor-select:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.bundle-flavor-select:focus {
+    outline: none;
+    border-color: #6CB2FF;
+    box-shadow: 0 0 0 2px rgba(108, 178, 255, 0.25);
+}
+
+.bundle-flavor-select option {
+    background-color: #1a1a2e;
+    color: #fff;
+}
+
+.bundle-flavor-picker__caret {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.6);
+    pointer-events: none;
+}
+
+.bundle-flavor-select--error .bundle-flavor-select {
+    border-color: #ff6b6b;
+    box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.25);
+}
+
+.bundle-flavor-select--error .bundle-flavor-picker__caret {
+    color: #ff6b6b;
+}
+
+@media only screen and (max-width: 480px) {
+    .bundle-flavor-picker__row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    .bundle-flavor-picker__select-wrapper {
+        width: 100%;
     }
 }
