@@ -486,6 +486,40 @@
         "padding_bottom_mobile": 50
       }
     },
+    "newsletter_z7MVp6": {
+      "type": "newsletter",
+      "blocks": {
+        "heading_Tw8Pqz": {
+          "type": "heading",
+          "settings": {
+            "heading": "Not ready to pre-order?",
+            "heading_size": "h2"
+          }
+        },
+        "paragraph_UjXwbQ": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Enter your email to be notified when shipments are live!</p>"
+          }
+        },
+        "email_form_kpq3nw": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading_Tw8Pqz",
+        "paragraph_UjXwbQ",
+        "email_form_kpq3nw"
+      ],
+      "name": "t:sections.newsletter.presets.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
     "collapsible_content_ATRQY4": {
       "type": "collapsible-content",
       "blocks": {
@@ -570,6 +604,7 @@
     "ll_updates_slider_G7DH4f",
     "ll_ingredient_information_JwjbJX",
     "ll_founding_member_GjJNji",
+    "newsletter_z7MVp6",
     "collapsible_content_ATRQY4",
     "contact_form_ADn7tn"
   ]
