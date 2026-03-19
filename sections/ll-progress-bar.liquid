@@ -5,7 +5,7 @@
       assign show_bar = false
     endif
   endif
-  assign current = section.settings.current_count | plus: 0
+  assign current = shop.metafields.custom.founder_count.value | default: section.settings.current_count | plus: 0 
   assign total = section.settings.total_count | plus: 0
   if total > 0
     assign progress_pct = current | times: 100.0 | divided_by: total
@@ -87,7 +87,6 @@ letter-spacing: -0.5px;
     <div class="ll-fp-track">
       <div class="ll-fp-fill" style="display: block;"></div>
       <span class="ll-fp-label">
-        {% assign current = shop.metafields.custom.founder_count.value | default: section.settings.current_count | plus: 0 %}
         {{ section.settings.bar_text | replace: '[current]', current | replace: '[total]', total }}
       </span>
     </div>
