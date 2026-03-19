@@ -552,7 +552,7 @@ details-modal.header__search,
 }
 
 .bundle-flavor-select--error ~ .bundle-flavor-picker__caret {
-  top: 33%;
+  top: 33% !important;
 }
 
 .bundle-flavor-select--error .bundle-flavor-select {
