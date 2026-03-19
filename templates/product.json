@@ -319,32 +319,14 @@
         "block_3zYdfE": {
           "type": "block",
           "settings": {
-            "update_heading": "Revisions Are On The Way!",
-            "update_description": "We’re excited to announce our revision round of samples is on the way! If the flavor is as good as we hope we will be placing a complete first batch order within 30 days!",
-            "update_date": "March 7, 2026"
-          }
-        },
-        "block_WYRBU8": {
-          "type": "block",
-          "settings": {
-            "update_heading": "Revisions Are On The Way! 2",
-            "update_description": "We’re excited to announce our revision round of samples is on the way! If the flavor is as good as we hope we will be placing a complete first batch order within 30 days!",
-            "update_date": "March 7, 2026"
-          }
-        },
-        "block_bVGxjC": {
-          "type": "block",
-          "settings": {
-            "update_heading": "Revisions Are On The Way!",
-            "update_description": "We’re excited to announce our revision round of samples is on the way! If the flavor is as good as we hope we will be placing a complete first batch order within 30 days!",
-            "update_date": "March 7, 2026"
+            "update_heading": "Revision Flavors Came In!",
+            "update_description": "We have solidified 2 great tasting flavors to start production: berry blast and sour straws. Once a full production order is placed the estimated time to recieve the finished product is approximately 2 months. We are hoping to start shipping in May - June!",
+            "update_date": "March 19, 2026"
           }
         }
       },
       "block_order": [
-        "block_3zYdfE",
-        "block_WYRBU8",
-        "block_bVGxjC"
+        "block_3zYdfE"
       ],
       "name": "LL Follow Updates",
       "settings": {
@@ -365,20 +347,33 @@
             "ingredient_amount": "5g"
           }
         },
+        "nutrition_row_XP6yLw": {
+          "type": "nutrition_row",
+          "settings": {
+            "ingredient_name": "Sodium",
+            "ingredient_amount": "150mg"
+          }
+        },
+        "nutrition_row_6dVyDE": {
+          "type": "nutrition_row",
+          "settings": {
+            "ingredient_name": "Potassium",
+            "ingredient_amount": "150mg"
+          }
+        },
+        "nutrition_row_UAWPjn": {
+          "type": "nutrition_row",
+          "settings": {
+            "ingredient_name": "Magnesium",
+            "ingredient_amount": "35mg"
+          }
+        },
         "accordion_VBJ9AL": {
           "type": "accordion",
           "settings": {
             "accordion_title": "Details",
-            "accordion_content": "<p>Creatine is an amino acid found mostly in your muscles and in the brain. It’s naturally produced in the body from other amino acids. Creatine is also found in foods like meats, eggs, and fish. It plays a vital role in the body’s production of cellular energy by helping to make ATP, a molecule needed for intense exercise, as well as for supplying the energy to pump your heart and power your brain.*</p>",
+            "accordion_content": "<p>Creatine is an amino acid found mainly in your muscles and brain. It is naturally produced in the body from other amino acids. Creatine is also found in foods such as meat, eggs, and fish. It plays an important role in the body’s production of cellular energy by helping create ATP, a molecule needed for intense exercise, as well as providing the energy to support heart function and power the brain.*</p>",
             "open_by_default": true
-          }
-        },
-        "accordion_RxyLK6": {
-          "type": "accordion",
-          "settings": {
-            "accordion_title": "Ingredients",
-            "accordion_content": "",
-            "open_by_default": false
           }
         },
         "accordion_QyfrKn": {
@@ -400,11 +395,14 @@
       },
       "block_order": [
         "nutrition_row_KPnLFj",
+        "nutrition_row_XP6yLw",
+        "nutrition_row_6dVyDE",
+        "nutrition_row_UAWPjn",
         "accordion_VBJ9AL",
-        "accordion_RxyLK6",
         "accordion_QyfrKn",
         "accordion_xq8TjK"
       ],
+      "disabled": true,
       "name": "LL Ingredient Information",
       "settings": {
         "heading": "Ingredient Information",
@@ -415,7 +413,7 @@
         "table_col1_label": "Name",
         "table_col2_label": "Amount",
         "other_ingredients_label": "Other Ingredients:",
-        "other_ingredients": "Creatine Monohydrate, Potassium Citrate, Magnesium Glycinate, Citric Acid Monohydrate, Malic Acid, Acesulfame Potassium, Sucralose, Silicon Dioxide, Natural & Artificial Flavors, Spirulina Extract (color).",
+        "other_ingredients": "Citric Acid Monohydrate, Malic Acid, Acesulfame Potassium, Sucralose, Silicon Dioxide, Natural & Artificial Flavors, Elderberry Extract (color).",
         "product_title": "Creatine + Electrolyte Sticks",
         "product_image": "shopify://shop_images/ChatGPT_Image_Mar_9_2026_08_54_21_PM_1_1.png",
         "disclaimer": "Disclaimer: Images shown are generated mockups of the expected final product. Actual packaging and product appearance may vary slightly from what is displayed.",
