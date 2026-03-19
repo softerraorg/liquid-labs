@@ -78,6 +78,9 @@
         "buy_buttons",
         "share"
       ],
+      "custom_css": [
+        ".product-form__input:nth-of-type(1) {display: none !important;}"
+      ],
       "settings": {
         "enable_sticky_info": true,
         "hide_slider_buttons_mobile": true,
