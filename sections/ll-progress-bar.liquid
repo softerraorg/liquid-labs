@@ -88,7 +88,6 @@ letter-spacing: -0.5px;
       <div class="ll-fp-fill" style="display: block;"></div>
       <span class="ll-fp-label">
         {% assign current = shop.metafields.custom.founder_count.value | default: section.settings.current_count | plus: 0 %}
-        {{ current }}
         {{ section.settings.bar_text | replace: '[current]', current | replace: '[total]', total }}
       </span>
     </div>
