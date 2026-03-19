@@ -5,7 +5,11 @@
       assign show_bar = false
     endif
   endif
+  if section.settings.order_count
   assign current = shop.metafields.custom.founder_count.value | default: section.settings.current_count | plus: 0 
+  else
+  assign current = section.settings.current_count | plus: 0 
+  endif
   assign total = section.settings.total_count | plus: 0
   if total > 0
     assign progress_pct = current | times: 100.0 | divided_by: total
