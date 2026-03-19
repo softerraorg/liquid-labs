@@ -526,7 +526,7 @@
           "settings": {
             "heading": "What is creatine?",
             "icon": "none",
-            "row_content": "<p>Creatine is an amino acid found in your body’s muscles and brain. The body naturally produces creatine and it can be consumed through meat. It is the most studied fitness supplement on the market, and research showsit can increase strength, improve recovery, and boost mental acuity.</p>",
+            "row_content": "<p>Creatine is an amino acid found in your muscles and brain. The body naturally produces creatine, and it can also be obtained through foods like meat. It is one of the most studied fitness supplements, and research shows it can increase strength, improve recovery, and support mental performance.</p>",
             "page": ""
           }
         },
@@ -535,7 +535,7 @@
           "settings": {
             "heading": "What are the main benefits of creatine supplementation?",
             "icon": "none",
-            "row_content": "",
+            "row_content": "<p>Creatine helps boost strength, power, and muscle growth while improving recovery and giving you more energy during intense workouts. It can also support focus and mental performance.</p>",
             "page": ""
           }
         },
@@ -544,16 +544,7 @@
           "settings": {
             "heading": "Does creatine have any negative side effects?",
             "icon": "none",
-            "row_content": "",
-            "page": ""
-          }
-        },
-        "collapsible_row_qhmahd": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Are your creatine gummies NSF for Sport Certified?",
-            "icon": "none",
-            "row_content": "<p><br/>Are your creatine gummies NSF for Sport Certified?<br/><br/></p>",
+            "row_content": "<p>Creatine is very safe for most people. Some may notice mild water retention, slight weight gain, or occasional stomach discomfort if taking too much. Staying hydrated and using a normal daily dose helps avoid issues.</p>",
             "page": ""
           }
         }
@@ -561,8 +552,7 @@
       "block_order": [
         "collapsible_row_zniKVQ",
         "collapsible_row_t4wtV7",
-        "collapsible_row_x3ine6",
-        "collapsible_row_qhmahd"
+        "collapsible_row_x3ine6"
       ],
       "name": "t:sections.collapsible_content.presets.name",
       "settings": {
