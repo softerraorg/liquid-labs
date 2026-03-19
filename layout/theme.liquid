@@ -418,29 +418,39 @@
   var clone = realBtn.cloneNode(true);
   clone.removeAttribute('id');
   clone.addEventListener('click', function(){
-  var activeSelects = document.querySelectorAll('.bundle-flavor-select[name]');
-  var invalid = null;
-  activeSelects.forEach(function(select) {
-    if (!select.value && !invalid) {
-      invalid = select;
+    var activeSelects = document.querySelectorAll('.bundle-flavor-select[name]');
+    var invalid = null;
+    activeSelects.forEach(function(select) {
+      if (!select.value && !invalid) {
+        invalid = select;
+      }
+    });
+    if (invalid) {
+      var offset = 120;
+      var top = invalid.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+      invalid.focus();
+      var wrapper = invalid.closest('.bundle-flavor-picker__select-wrapper');
+      if (wrapper) {
+        wrapper.classList.add('bundle-flavor-select--error');
+        var errorMsg = wrapper.querySelector('.bundle-flavor-error-msg');
+        if (!errorMsg) {
+          errorMsg = document.createElement('span');
+          errorMsg.className = 'bundle-flavor-error-msg';
+          errorMsg.textContent = 'Please select a flavor';
+          errorMsg.style.cssText = 'color:red; font-size:12px; display:block; margin-top:4px;';
+          wrapper.appendChild(errorMsg);
+        }
+        invalid.addEventListener('change', function(){
+          wrapper.classList.remove('bundle-flavor-select--error');
+          var msg = wrapper.querySelector('.bundle-flavor-error-msg');
+          if (msg) msg.remove();
+        }, { once: true });
+      }
+      return;
     }
+    realBtn.click();
   });
-  if (invalid) {
-    var offset = 120;
-var top = invalid.getBoundingClientRect().top + window.scrollY - offset;
-window.scrollTo({ top: top, behavior: 'smooth' });
-    invalid.focus();
-    var wrapper = invalid.closest('.bundle-flavor-picker__select-wrapper');
-    if (wrapper) {
-      wrapper.classList.add('bundle-flavor-select--error');
-      invalid.addEventListener('change', function(){
-        wrapper.classList.remove('bundle-flavor-select--error');
-      }, { once: true });
-    }
-    return;
-  }
-  realBtn.click();
-});
   bar.appendChild(clone);
 
   function checkScroll() {
