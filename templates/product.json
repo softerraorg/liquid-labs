@@ -548,6 +548,17 @@
         "padding_top": 60,
         "padding_bottom": 60
       }
+    },
+    "contact_form_ADn7tn": {
+      "type": "contact-form",
+      "name": "t:sections.contact-form.presets.name",
+      "settings": {
+        "heading": "Want to cancel your pre-order? Fill out the form here:",
+        "heading_size": "h2",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -559,6 +570,7 @@
     "ll_updates_slider_G7DH4f",
     "ll_ingredient_information_JwjbJX",
     "ll_founding_member_GjJNji",
-    "collapsible_content_ATRQY4"
+    "collapsible_content_ATRQY4",
+    "contact_form_ADn7tn"
   ]
 }
