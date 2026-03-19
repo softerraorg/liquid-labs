@@ -439,11 +439,11 @@
           errorMsg.className = 'bundle-flavor-error-msg';
           errorMsg.textContent = 'Please select a flavor';
           errorMsg.style.cssText = 'color:red; font-size:12px; display:block; margin-top:4px;';
-          wrapper.appendChild(errorMsg);
+          wrapper.parentNode.insertAdjacentElement('beforeend', errorMsg);
         }
         invalid.addEventListener('change', function(){
           wrapper.classList.remove('bundle-flavor-select--error');
-          var msg = wrapper.querySelector('.bundle-flavor-error-msg');
+          var msg = wrapper.parentNode.querySelector('.bundle-flavor-error-msg');
           if (msg) msg.remove();
         }, { once: true });
       }
