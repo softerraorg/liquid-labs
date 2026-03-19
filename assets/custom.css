@@ -569,8 +569,15 @@ details-modal.header__search,
     .bundle-flavor-picker__select-wrapper {
         width: 100%;
     }
-    .accordion__content,
-.accordion__content p {
-  color: #ffffff !important;
+    .accordion .accordion__content,
+.accordion .accordion__content p,
+.accordion .accordion__content span,
+.accordion .accordion__content li,
+.accordion .accordion__content div,
+.accordion details[open] .accordion__content,
+.product__accordion .accordion__content,
+.product__accordion .accordion__content * {
+  color: #fff !important;
+  opacity: 1 !important;
 }
 }
