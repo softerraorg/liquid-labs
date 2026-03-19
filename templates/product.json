@@ -253,34 +253,16 @@
         "video_DQp4VF": {
           "type": "video",
           "settings": {
-            "cover_image": "shopify://shop_images/video-bg.webp"
+            "cover_image": "shopify://shop_images/IMG_1252.jpg"
           }
         },
         "video_bJDTU3": {
           "type": "video",
           "settings": {
-            "cover_image": "shopify://shop_images/video-bg.webp"
-          }
-        },
-        "video_qHcPg3": {
-          "type": "video",
-          "settings": {
-            "video": "shopify://files/videos/green-wheat-field-in-countryside-close-up-selective-focus-field-of-wheat-blowing-in-the-wind-at-sunset-young-and-green-spikelets-ears-of-barley-crop-in-nature-agronomy-and-food-production-video.mp4"
+            "cover_image": "shopify://shop_images/9292B4B04681E4A75E4F07C310528C82.jpg"
           }
         },
         "video_ypCFRL": {
-          "type": "video",
-          "settings": {
-            "cover_image": "shopify://shop_images/video-bg.webp"
-          }
-        },
-        "video_RfwN9q": {
-          "type": "video",
-          "settings": {
-            "cover_image": "shopify://shop_images/video-bg.webp"
-          }
-        },
-        "video_cYraeV": {
           "type": "video",
           "settings": {
             "cover_image": "shopify://shop_images/video-bg.webp"
@@ -290,10 +272,7 @@
       "block_order": [
         "video_DQp4VF",
         "video_bJDTU3",
-        "video_qHcPg3",
-        "video_ypCFRL",
-        "video_RfwN9q",
-        "video_cYraeV"
+        "video_ypCFRL"
       ],
       "name": "Custom Video Section",
       "settings": {
