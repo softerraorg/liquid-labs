@@ -42,9 +42,11 @@
       "settings": {
         "product_pages_only": false,
         "bar_text": "[current]/[total] founder spots claimed",
-        "current_count": "85",
+        "order_count": true,
+        "current_count": "90",
         "total_count": "300",
         "bar_height": 40,
+        "bar_height_mobile": 25,
         "padding_vertical": 26,
         "bg_color": "rgba(0,0,0,0)",
         "track_color": "#caddff",
