@@ -64,7 +64,30 @@ details-modal.header__search,
 
 /* Product Page CSS */
 
+/* Video play button: centered; Image zoom icon: stays top-left corner */
+.product__modal-opener--video .product__media-icon,
+.product__modal-opener--external_video .product__media-icon {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 6.2rem;
+  height: 6.2rem;
+}
 
+.product__modal-opener--video .product__media-icon .icon,
+.product__modal-opener--external_video .product__media-icon .icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Keep zoom icon at top-left for images (default, no change needed, but explicit) */
+.product__modal-opener--image .product__media-icon {
+  left: 1.2rem;
+  top: 1.2rem;
+  transform: none;
+}
+
+ 
 .productFaqs .collapsible-content-wrapper-narrow {
     max-width: 1100px;
 }
