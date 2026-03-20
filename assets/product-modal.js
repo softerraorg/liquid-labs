@@ -30,11 +30,7 @@ if (!customElements.get('product-modal')) {
         const container = this.querySelector('[role="document"]');
         container.scrollLeft = (activeMedia.width - container.clientWidth) / 2;
 
-        if (
-          activeMedia.nodeName == 'DEFERRED-MEDIA' &&
-          activeMediaContent &&
-          activeMediaContent.querySelector('.js-youtube')
-        )
+        if (activeMedia.nodeName == 'DEFERRED-MEDIA' && activeMediaContent)
           activeMedia.loadContent();
       }
     }
