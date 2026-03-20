@@ -703,7 +703,7 @@
           <div class="ll-item" style="width:{{ section.settings.video_width }}px;" {{ block.shopify_attributes }}>
             <div class="ll-video-wrapper">
               {% if block.settings.video %}
-                {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, preload: 'auto', class: 'll-video' }}
+                {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll-video' }}
               {% endif %}
               {% if block.settings.cover_image %}
                 <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
@@ -729,7 +729,7 @@
                 <li class="splide__slide ll-item" {{ block.shopify_attributes }}>
                   <div class="ll-video-wrapper">
                     {% if block.settings.video %}
-                      {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, preload: 'auto', class: 'll-video' }}
+                      {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll-video' }}
                     {% endif %}
                     {% if block.settings.cover_image %}
                       <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
@@ -863,7 +863,17 @@
       video.addEventListener('pause', function () { item.classList.remove('playing'); });
       cover.addEventListener('click', function () { video.play(); });
       // If autoplay already fired before listener was attached, hide cover now
-      if (!video.paused) { item.classList.add('playing'); }
+      if (!video.paused) {
+        item.classList.add('playing');
+      } else {
+        // Force play — browser autoplay attribute may need a nudge after DOM ready
+        var playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(function () {
+            // Autoplay blocked; wait for user interaction via cover click
+          });
+        }
+      }
     });
   }
 
