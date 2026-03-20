@@ -518,15 +518,11 @@
     margin: 0 auto;
   }
 
-  /* ── Scroll-snap slider ──
-     Using native browser scroll instead of CSS transforms.
-     This is the most iOS-compatible slider approach:
-     scrolled-away slides are truly off-screen, so
-     IntersectionObserver and iOS autoplay both work correctly. */
+  /* ── Scroll-snap slider ── */
   #vs-{{ section.id }} .vs-outer {
     max-width: 1300px;
     margin: 0 auto;
-    overflow: hidden;          /* clips scrolled-away slides */
+    overflow: hidden;
   }
 
   #vs-{{ section.id }} .vs-track {
@@ -540,15 +536,21 @@
   }
   #vs-{{ section.id }} .vs-track::-webkit-scrollbar { display: none; }
 
+  /* CSS sets initial slide widths so the layout is correct before JS runs.
+     JS will override with precise inline px values after layout. */
   #vs-{{ section.id }} .vs-slide {
-    flex-shrink: 0;
+    flex: 0 0 calc(100% / {{ section.settings.slides_to_show }});
+    width: calc(100% / {{ section.settings.slides_to_show }});
     scroll-snap-align: start;
     padding: 0 10px;
     box-sizing: border-box;
-    /* Width is set in px by JS */
   }
   @media (max-width: 749px) {
-    #vs-{{ section.id }} .vs-slide { padding: 0 6px; }
+    #vs-{{ section.id }} .vs-slide {
+      flex: 0 0 calc(100% / {{ section.settings.slides_to_show_mobile }});
+      width: calc(100% / {{ section.settings.slides_to_show_mobile }});
+      padding: 0 6px;
+    }
   }
 
   /* ── Shared item ── */
@@ -587,11 +589,16 @@
     pointer-events: none;
   }
 
-  /* Hide iOS native play-button overlay */
-  #vs-{{ section.id }} video::-webkit-media-controls               { display: none !important; }
-  #vs-{{ section.id }} video::-webkit-media-controls-start-playback-button {
+  /* ── Hide iOS Safari native video controls overlay ──
+     These rules prevent the play button that appears on paused/unstarted videos.
+     We target the video element directly using the class name for maximum specificity. */
+  .vs-video::-webkit-media-controls,
+  .vs-video::-webkit-media-controls-panel,
+  .vs-video::-webkit-media-controls-play-button,
+  .vs-video::-webkit-media-controls-start-playback-button {
     display: none !important;
-    -webkit-appearance: none;
+    opacity: 0 !important;
+    -webkit-appearance: none !important;
   }
 
   /* ── Arrows ── */
@@ -655,12 +662,15 @@
           <div class="vs-item" style="width:{{ section.settings.video_width }}px;" {{ block.shopify_attributes }}>
             <div class="vs-video-wrapper">
               {% if block.settings.video %}
-                {% if block.settings.video.preview_image %}
-                  {% assign poster_url = block.settings.video.preview_image | image_url: width: 1200 %}
-                  {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, poster: poster_url, class: 'vs-video' }}
-                {% else %}
-                  {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'vs-video' }}
-                {% endif %}
+                <video
+                  autoplay muted loop playsinline webkit-playsinline
+                  class="vs-video"
+                  {% if block.settings.video.preview_image %}poster="{{ block.settings.video.preview_image | image_url: width: 1200 }}"{% endif %}
+                >
+                  {% for source in block.settings.video.sources %}
+                    <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                  {% endfor %}
+                </video>
               {% endif %}
               {% if block.settings.cover_image %}
                 <img class="vs-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
@@ -679,12 +689,22 @@
               <div class="vs-item">
                 <div class="vs-video-wrapper">
                   {% if block.settings.video %}
-                    {% if block.settings.video.preview_image %}
-                      {% assign poster_url = block.settings.video.preview_image | image_url: width: 1200 %}
-                      {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, poster: poster_url, class: 'vs-video' }}
-                    {% else %}
-                      {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'vs-video' }}
-                    {% endif %}
+                    {%- comment -%}
+                      Manual <video> element gives us full control over every attribute.
+                      autoplay + muted + playsinline is the required combination for iOS Safari.
+                      webkit-playsinline covers iOS 9 and earlier.
+                      Real slides are the FIRST content the browser sees (scroll starts at 0),
+                      so iOS processes the autoplay attribute on genuinely visible videos.
+                    {%- endcomment -%}
+                    <video
+                      autoplay muted loop playsinline webkit-playsinline
+                      class="vs-video"
+                      {% if block.settings.video.preview_image %}poster="{{ block.settings.video.preview_image | image_url: width: 1200 }}"{% endif %}
+                    >
+                      {% for source in block.settings.video.sources %}
+                        <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                      {% endfor %}
+                    </video>
                   {% endif %}
                   {% if block.settings.cover_image %}
                     <img class="vs-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
@@ -719,70 +739,64 @@
 (function () {
   var SID = '{{ section.id }}';
 
+  /* ─────────────────────────────────────────────────────────────────────
+     SLIDER
+     Key design principle for iOS autoplay:
+       Real slides are at scroll positions 0, sw, 2*sw, …
+       The browser renders them FIRST at scroll=0, so iOS processes the
+       autoplay attribute on visible real videos before any data loads.
+       We only APPEND clone slides at the END (no prepend), so the initial
+       scroll position is 0 and real slides are always what iOS first sees.
+     ───────────────────────────────────────────────────────────────────── */
   function run(sectionEl) {
-    var outerEl = sectionEl.querySelector('#vs-outer-' + SID);
-    var trackEl = sectionEl.querySelector('#vs-track-' + SID);
+    var outerEl  = sectionEl.querySelector('#vs-outer-' + SID);
+    var trackEl  = sectionEl.querySelector('#vs-track-' + SID);
     if (!outerEl || !trackEl) {
-      /* Grid layout — just bind videos */
       bindAllVideos(sectionEl);
       return;
     }
 
-    var dotsWrap  = sectionEl.querySelector('#vs-dots-' + SID);
-    var prevBtn   = sectionEl.querySelector('#vs-prev-' + SID);
-    var nextBtn   = sectionEl.querySelector('#vs-next-' + SID);
+    var dotsWrap    = sectionEl.querySelector('#vs-dots-'  + SID);
+    var prevBtn     = sectionEl.querySelector('#vs-prev-'  + SID);
+    var nextBtn     = sectionEl.querySelector('#vs-next-'  + SID);
     var desktopPer  = {{ section.settings.slides_to_show | json }};
     var mobilePer   = {{ section.settings.slides_to_show_mobile | json }};
     var doAutoplay  = {{ section.settings.autoplay | json }};
     var autoInterval= {{ section.settings.autoplay_speed | json }};
 
-    /* Real slides captured before any cloning */
     var realSlides  = Array.prototype.slice.call(trackEl.children);
     var total       = realSlides.length;
     var clonesAdded = 0;
     var isJumping   = false;
     var autoTimer   = null;
 
-    function pp()  { return window.innerWidth <= 749 ? mobilePer : desktopPer; }
-    function sw()  { return outerEl.offsetWidth / pp(); }
+    function pp() { return window.innerWidth <= 749 ? mobilePer : desktopPer; }
+    function sw() { return outerEl.offsetWidth / pp(); }
 
-    /* ── Build infinite-loop clones ──
-       Clones are real scrolled positions — NOT CSS transforms.
-       IntersectionObserver (default viewport root) correctly
-       detects them as off-screen because overflow:hidden clips them. */
+    /* ── Build ONLY appended clones (copies of first N real slides) ──
+       No clones are prepended, so scroll starts at 0 showing real slides.
+       This is what allows iOS to process the HTML autoplay attribute on
+       genuinely visible videos immediately at page load. */
     function buildClones() {
       Array.prototype.slice.call(trackEl.querySelectorAll('[data-vs-clone]'))
         .forEach(function (c) { trackEl.removeChild(c); });
 
       clonesAdded = Math.min(pp(), total);
 
-      /* Prepend: copies of the last N real slides */
-      var frag = document.createDocumentFragment();
-      for (var i = total - clonesAdded; i < total; i++) {
-        var c = realSlides[i].cloneNode(true);
+      for (var j = 0; j < clonesAdded; j++) {
+        var c = realSlides[j].cloneNode(true);
         c.setAttribute('data-vs-clone', '1');
         c.setAttribute('aria-hidden', 'true');
-        frag.appendChild(c);
-      }
-      trackEl.insertBefore(frag, trackEl.firstChild);
-
-      /* Append: copies of the first N real slides */
-      for (var j = 0; j < clonesAdded; j++) {
-        var c2 = realSlides[j].cloneNode(true);
-        c2.setAttribute('data-vs-clone', '1');
-        c2.setAttribute('aria-hidden', 'true');
-        trackEl.appendChild(c2);
-      }
-
-      /* Ensure every clone video has the right attributes */
-      Array.prototype.slice.call(trackEl.querySelectorAll('[data-vs-clone] video'))
-        .forEach(function (v) {
+        Array.prototype.slice.call(c.querySelectorAll('video')).forEach(function (v) {
           v.setAttribute('autoplay', '');
           v.setAttribute('muted', '');
           v.setAttribute('playsinline', '');
+          v.setAttribute('webkit-playsinline', '');
           v.muted = true;
           delete v.dataset.vsBound;
         });
+        trackEl.appendChild(c);
+      }
     }
 
     function applyWidths() {
@@ -791,19 +805,9 @@
         .forEach(function (s) { s.style.width = w; });
     }
 
-    /* Scroll to first real slide (no animation) */
-    function scrollToReal(ri) {
-      isJumping = true;
-      trackEl.scrollLeft = (clonesAdded + ri) * sw();
-      /* Reset flag after browser has processed the scroll */
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () { isJumping = false; });
-      });
-    }
-
-    /* Current real index from scrollLeft */
+    /* Real slide index from scrollLeft (no prepend offset) */
     function currentRealIdx() {
-      var idx = Math.round(trackEl.scrollLeft / sw()) - clonesAdded;
+      var idx = Math.round(trackEl.scrollLeft / sw());
       return ((idx % total) + total) % total;
     }
 
@@ -818,24 +822,28 @@
         btn.setAttribute('aria-label', 'Slide ' + (i + 1));
         dotsWrap.appendChild(btn);
       }
-      dotsWrap.querySelectorAll('.vs-dot').forEach(function (dot) {
-        dot.addEventListener('click', function () {
-          var ri = parseInt(dot.getAttribute('data-ri'), 10);
-          trackEl.scrollTo({ left: (clonesAdded + ri) * sw(), behavior: 'smooth' });
-          resetAuto();
+      Array.prototype.slice.call(dotsWrap.querySelectorAll('.vs-dot'))
+        .forEach(function (dot) {
+          dot.addEventListener('click', function () {
+            var ri = parseInt(dot.getAttribute('data-ri'), 10);
+            trackEl.scrollTo({ left: ri * sw(), behavior: 'smooth' });
+            resetAuto();
+          });
         });
-      });
     }
 
     function updateDots() {
       if (!dotsWrap) return;
       var ri = currentRealIdx();
-      dotsWrap.querySelectorAll('.vs-dot').forEach(function (d) {
-        d.classList.toggle('is-active', parseInt(d.getAttribute('data-ri'), 10) === ri);
-      });
+      Array.prototype.slice.call(dotsWrap.querySelectorAll('.vs-dot'))
+        .forEach(function (d) {
+          d.classList.toggle('is-active', parseInt(d.getAttribute('data-ri'), 10) === ri);
+        });
     }
 
-    /* ── Infinite loop: detect when scrolled into clone territory ── */
+    /* ── Infinite loop: detect when user scrolls into the appended-clone zone ──
+       Clone zone starts at total * sw (right after the last real slide).
+       We jump back by total * sw to the equivalent real slide position. */
     var scrollTimer;
     trackEl.addEventListener('scroll', function () {
       if (isJumping) return;
@@ -843,19 +851,9 @@
       clearTimeout(scrollTimer);
       scrollTimer = setTimeout(function () {
         if (isJumping) return;
-        var s      = trackEl.scrollLeft;
-        var minPos = clonesAdded * sw();
-        var maxPos = (clonesAdded + total - pp()) * sw();
-
-        if (s < minPos - 2) {
-          /* Scrolled into before-clones → jump forward by totalSlides */
-          isJumping = true;
-          trackEl.scrollLeft = s + total * sw();
-          requestAnimationFrame(function () {
-            requestAnimationFrame(function () { isJumping = false; });
-          });
-        } else if (s > maxPos + 2) {
-          /* Scrolled into after-clones → jump back by totalSlides */
+        var s       = trackEl.scrollLeft;
+        var cloneStart = total * sw();
+        if (s >= cloneStart - 2) {
           isJumping = true;
           trackEl.scrollLeft = s - total * sw();
           requestAnimationFrame(function () {
@@ -866,14 +864,34 @@
     }, { passive: true });
 
     /* ── Arrows ── */
-    if (prevBtn) prevBtn.addEventListener('click', function () {
-      trackEl.scrollBy({ left: -sw(), behavior: 'smooth' });
-      resetAuto();
-    });
-    if (nextBtn) nextBtn.addEventListener('click', function () {
-      trackEl.scrollBy({ left: sw(), behavior: 'smooth' });
-      resetAuto();
-    });
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        var s = trackEl.scrollLeft;
+        if (s < sw() * 0.5) {
+          /* At the first real slide — wrap to last.
+             Jump directly to the last-visible real position (no animation).
+             One frame flash is acceptable and much better than no autoplay. */
+          isJumping = true;
+          trackEl.scrollLeft = (total - pp()) * sw();
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              isJumping = false;
+              updateDots();
+            });
+          });
+        } else {
+          trackEl.scrollBy({ left: -sw(), behavior: 'smooth' });
+          resetAuto();
+        }
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        trackEl.scrollBy({ left: sw(), behavior: 'smooth' });
+        resetAuto();
+      });
+    }
 
     /* ── Slider autoplay ── */
     function startAuto() {
@@ -899,35 +917,35 @@
         applyWidths();
         buildDots();
         bindAllVideos(sectionEl);
-        scrollToReal(ri);
+        trackEl.scrollLeft = ri * sw();
         updateDots();
       }, 100);
     });
 
-    /* ── Boot slider ── */
-    buildClones();
-    applyWidths();
-    buildDots();
-    bindAllVideos(sectionEl);
-
-    /* Set initial scroll position after layout is painted */
+    /* ── Boot ──
+       Double rAF ensures layout is complete so offsetWidth is accurate.
+       Because real slides start at scroll=0 (no prepend offset),
+       the initial render already shows the correct content — the double rAF
+       here is only needed for JS layout reads, NOT to set scroll position.
+       iOS sees real slides from the first paint and processes autoplay naturally. */
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
-        scrollToReal(0);
+        buildClones();
+        applyWidths();
+        buildDots();
+        bindAllVideos(sectionEl);
         startAuto();
       });
     });
   }
 
-  /* ─────────────────────────────────────────
+  /* ─────────────────────────────────────────────────────────────────────
      VIDEO BINDING
-     Per-video IntersectionObserver uses the
-     default viewport root, which correctly
-     accounts for the overflow:hidden clip on
-     .vs-outer. Off-screen slides are genuinely
-     outside the viewport → play() is ONLY called
-     on truly visible videos — the iOS requirement.
-  ───────────────────────────────────────── */
+     Per-video IntersectionObserver with the default viewport root.
+     overflow:hidden on .vs-outer means videos scrolled off the side have
+     zero viewport intersection, so play() is only called on truly visible
+     videos — which is exactly what iOS Safari requires.
+     ───────────────────────────────────────────────────────────────────── */
   function bindAllVideos(sectionEl) {
     if (!sectionEl) return;
     Array.prototype.slice.call(sectionEl.querySelectorAll('video'))
@@ -939,7 +957,6 @@
     v.dataset.vsBound = '1';
     v.muted = true;
 
-    /* Find parent .vs-item for the playing CSS class */
     var item = v.parentNode;
     while (item && !item.classList.contains('vs-item')) item = item.parentNode;
     if (item) {
@@ -955,10 +972,6 @@
       }
     }
 
-    /* IntersectionObserver with viewport root.
-       overflow:hidden on .vs-outer means any video scrolled
-       off the side has zero intersection area → not intersecting.
-       This is exactly when we should pause and not play. */
     var io = new IntersectionObserver(function (entries) {
       var e = entries[0];
       if (e.isIntersecting) {
@@ -966,7 +979,7 @@
         var p = v.play();
         if (p && p.catch) {
           p.catch(function () {
-            /* iOS may need the video to be ready first */
+            /* iOS may reject play() if data isn't ready yet — retry on canplay */
             function onReady() {
               v.removeEventListener('canplay', onReady);
               v.muted = true;
@@ -979,7 +992,7 @@
       } else {
         if (!v.paused) v.pause();
       }
-    }, { threshold: 0.3 });
+    }, { threshold: 0.1 });
 
     io.observe(v);
   }
@@ -988,8 +1001,7 @@
   function init() {
     var sectionEl = document.getElementById('vs-' + SID);
     if (!sectionEl) return;
-    /* Reset bound flags in case of re-init */
-    sectionEl.querySelectorAll('video').forEach(function (v) {
+    Array.prototype.slice.call(sectionEl.querySelectorAll('video')).forEach(function (v) {
       delete v.dataset.vsBound;
     });
     run(sectionEl);
