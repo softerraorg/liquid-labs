@@ -286,6 +286,12 @@
   cursor: pointer;
   user-select: none;
 }
+.ll-slider-track {
+  visibility: hidden;
+}
+.ll-slider-track.ll-ready {
+  visibility: visible;
+}
 @media screen and (max-width: 749px) {
   #ll-section-{{ section.id }} {
     padding-top: {{ section.settings.padding_top_mobile }}px;
