@@ -779,12 +779,16 @@
     if (p && p.catch) p.catch(function () {});
   }
 
+  function isVisible(el) {
+    var r = el.getBoundingClientRect();
+    return r.bottom > 0 && r.top < window.innerHeight;
+  }
+
   function bindItem(item) {
     var video = item.querySelector('video');
     if (!video) return;
     if (item.dataset.llBound) return;
     item.dataset.llBound = '1';
-
     video.muted = true;
 
     var cover = item.querySelector('.ll-cover');
@@ -795,23 +799,51 @@
       if (!video.paused) item.classList.add('playing');
     }
 
+    // When browser auto-pauses video (off-screen), restart it if it's back in view
+    video.addEventListener('pause', function () {
+      setTimeout(function () {
+        if (video.paused && !document.hidden && isVisible(item)) {
+          playVideo(video);
+        }
+      }, 300);
+    });
+
+    // Layer 1: IntersectionObserver — play when element enters viewport
     if ('IntersectionObserver' in window) {
-      var obs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            playVideo(video);
-          }
-        });
-      }, { threshold: 0.3 });
-      obs.observe(item);
+      new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) playVideo(video);
+      }, { threshold: 0.1 }).observe(item);
     } else {
       playVideo(video);
     }
   }
 
   function bindVideos(section) {
-    section.querySelectorAll('.ll-item').forEach(function (item) {
-      bindItem(item);
+    section.querySelectorAll('.ll-item').forEach(bindItem);
+
+    // Layer 2: Scroll fallback — on every scroll, play any visible paused videos
+    // (scroll callbacks fire inside a user-gesture context on mobile, making play() more reliable)
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        section.querySelectorAll('.ll-item').forEach(function (item) {
+          var video = item.querySelector('video');
+          if (video && video.paused && isVisible(item)) playVideo(video);
+        });
+        ticking = false;
+      });
+    }, { passive: true });
+
+    // Layer 3: Visibility API — resume all videos when tab becomes active again
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) {
+        section.querySelectorAll('.ll-item').forEach(function (item) {
+          var video = item.querySelector('video');
+          if (video && video.paused && isVisible(item)) playVideo(video);
+        });
+      }
     });
   }
 
