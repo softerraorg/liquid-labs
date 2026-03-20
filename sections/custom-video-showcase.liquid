@@ -494,6 +494,12 @@
 
 {{- 'splide-core.css' | asset_url | stylesheet_tag -}}
 
+{% for block in section.blocks %}
+  {% if block.settings.cover_image %}
+    <link rel="preload" as="image" href="{{ block.settings.cover_image | image_url: width: 1200 }}" fetchpriority="high">
+  {% endif %}
+{% endfor %}
+
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide-core.min.css"
@@ -698,7 +704,7 @@
                 {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll-video' }}
               {% endif %}
               {% if block.settings.cover_image %}
-                <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" alt="">
+                <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
               {% endif %}
             </div>
           </div>
@@ -722,7 +728,7 @@
                       {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll-video' }}
                     {% endif %}
                     {% if block.settings.cover_image %}
-                      <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" alt="">
+                      <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
                     {% endif %}
                   </div>
                 </li>
