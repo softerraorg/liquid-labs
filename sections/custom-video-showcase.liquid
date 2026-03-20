@@ -544,10 +544,6 @@
     will-change: transform;
   }
 
-  #ll2-section-{{ section.id }} .ll2-track.is-animated {
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
   #ll2-section-{{ section.id }} .ll2-slide {
     flex-shrink: 0;
     width: calc(100% / {{ section.settings.slides_to_show }});
@@ -832,8 +828,12 @@
   }
 
   /* ─────────────────────────────────────────
-     CUSTOM CSS SLIDER
-     Pure transform-based, no library.
+     INFINITE LOOP SLIDER
+     Clones perPage slides from each end of
+     the track. After each animated transition
+     into clone territory, the position is
+     silently reset to the matching real slide
+     — creating a seamless infinite loop.
   ───────────────────────────────────────── */
   function initSlider() {
     var track    = document.getElementById('ll2-track-' + ID);
@@ -842,37 +842,109 @@
     var nextBtn  = document.getElementById('ll2-next-' + ID);
     if (!track) return;
 
-    var totalSlides   = track.children.length;
+    /* Store original (real) slides before any cloning */
+    var realSlides    = Array.prototype.slice.call(track.children);
+    var totalSlides   = realSlides.length;
     var desktopPer    = {{ section.settings.slides_to_show | json }};
     var mobilePer     = {{ section.settings.slides_to_show_mobile | json }};
     var doAutoplay    = {{ section.settings.autoplay | json }};
     var autoInterval  = {{ section.settings.autoplay_speed | json }};
-    var currentIdx    = 0;
+    var currentIdx    = 0;   /* DOM index into track.children (includes clones) */
+    var clonesAdded   = 0;   /* how many clone slides were prepended */
+    var isBusy        = false;
     var autoTimer     = null;
 
     function perPage() {
       return window.innerWidth <= 749 ? mobilePer : desktopPer;
     }
 
-    function maxIdx() {
-      return Math.max(0, totalSlides - perPage());
+    /* Pixel width of one slide based on current container size */
+    function slideW() {
+      return track.parentElement.offsetWidth / perPage();
     }
 
-    /* Build / rebuild dot buttons */
+    /* ── Build clones ──
+       Prepend clones of the last  N real slides.
+       Append  clones of the first N real slides.
+       N = perPage, capped to totalSlides.
+    */
+    function buildClones() {
+      /* Remove any existing clones */
+      Array.prototype.slice.call(
+        track.querySelectorAll('[data-ll2-clone]')
+      ).forEach(function (c) { track.removeChild(c); });
+
+      clonesAdded = Math.min(perPage(), totalSlides);
+
+      /* Prepend: clones of the LAST clonesAdded real slides */
+      var frag = document.createDocumentFragment();
+      for (var i = totalSlides - clonesAdded; i < totalSlides; i++) {
+        var c = realSlides[i].cloneNode(true);
+        c.setAttribute('data-ll2-clone', '1');
+        c.setAttribute('aria-hidden', 'true');
+        frag.appendChild(c);
+      }
+      track.insertBefore(frag, track.firstChild);
+
+      /* Append: clones of the FIRST clonesAdded real slides */
+      for (var j = 0; j < clonesAdded; j++) {
+        var c2 = realSlides[j].cloneNode(true);
+        c2.setAttribute('data-ll2-clone', '1');
+        c2.setAttribute('aria-hidden', 'true');
+        track.appendChild(c2);
+      }
+
+      /* Prepare clone videos — JS handles all playback */
+      Array.prototype.slice.call(
+        track.querySelectorAll('[data-ll2-clone] video')
+      ).forEach(function (v) {
+        v.removeAttribute('autoplay');
+        v.muted = true;
+      });
+
+      /* Start at the first real slide */
+      currentIdx = clonesAdded;
+    }
+
+    /* ── Apply position ── */
+    function applyPos(animated) {
+      track.style.transition = animated
+        ? 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+        : 'none';
+      track.style.transform = 'translateX(' + (-currentIdx * slideW()) + 'px)';
+    }
+
+    /* ── Resize all slides to current px width ── */
+    function applyWidths() {
+      var w = slideW() + 'px';
+      Array.prototype.slice.call(track.children).forEach(function (s) {
+        s.style.width = w;
+      });
+    }
+
+    /* ── Real index (0 … totalSlides-1) from DOM index ── */
+    function realIdx() {
+      return ((currentIdx - clonesAdded) % totalSlides + totalSlides) % totalSlides;
+    }
+
+    /* ── Dots ── */
     function buildDots() {
       if (!dotsWrap) return;
       dotsWrap.innerHTML = '';
-      var count = maxIdx() + 1;
-      for (var i = 0; i < count; i++) {
+      for (var i = 0; i < totalSlides; i++) {
         var btn = document.createElement('button');
         btn.className = 'll2-dot' + (i === 0 ? ' is-active' : '');
-        btn.setAttribute('data-index', String(i));
+        btn.setAttribute('data-ri', String(i));
         btn.setAttribute('aria-label', 'Go to slide ' + (i + 1));
         dotsWrap.appendChild(btn);
       }
       dotsWrap.querySelectorAll('.ll2-dot').forEach(function (dot) {
         dot.addEventListener('click', function () {
-          goTo(parseInt(dot.getAttribute('data-index'), 10));
+          if (isBusy) return;
+          isBusy = true;
+          currentIdx = clonesAdded + parseInt(dot.getAttribute('data-ri'), 10);
+          applyPos(true);
+          updateDots();
           resetAuto();
         });
       });
@@ -880,39 +952,52 @@
 
     function updateDots() {
       if (!dotsWrap) return;
-      dotsWrap.querySelectorAll('.ll2-dot').forEach(function (d, i) {
-        d.classList.toggle('is-active', i === currentIdx);
+      var ri = realIdx();
+      dotsWrap.querySelectorAll('.ll2-dot').forEach(function (d) {
+        d.classList.toggle('is-active', parseInt(d.getAttribute('data-ri'), 10) === ri);
       });
     }
 
-    /* Move the track */
-    function moveTo(idx, animated) {
-      currentIdx = Math.max(0, Math.min(idx, maxIdx()));
-      if (animated) {
-        track.classList.add('is-animated');
-      } else {
-        track.classList.remove('is-animated');
-      }
-      var pct = -(currentIdx * (100 / perPage()));
-      track.style.transform = 'translateX(' + pct + '%)';
+    /* ── Navigation ── */
+    function goNext() {
+      if (isBusy) return;
+      isBusy = true;
+      currentIdx++;
+      applyPos(true);
       updateDots();
     }
 
-    function goTo(idx) { moveTo(idx, true); }
-
-    function goNext() {
-      goTo(currentIdx >= maxIdx() ? 0 : currentIdx + 1);
-    }
-
     function goPrev() {
-      goTo(currentIdx <= 0 ? maxIdx() : currentIdx - 1);
+      if (isBusy) return;
+      isBusy = true;
+      currentIdx--;
+      applyPos(true);
+      updateDots();
     }
 
-    /* Arrows */
+    /* ── After each transition: silently jump if in clone zone ── */
+    track.addEventListener('transitionend', function (e) {
+      if (e.propertyName !== 'transform') return;
+      isBusy = false;
+
+      /* Slid past the end → jump back to matching real slide */
+      if (currentIdx >= clonesAdded + totalSlides) {
+        currentIdx -= totalSlides;
+        applyPos(false);
+      }
+      /* Slid before the start → jump forward to matching real slide */
+      if (currentIdx < clonesAdded) {
+        currentIdx += totalSlides;
+        applyPos(false);
+      }
+      updateDots();
+    });
+
+    /* ── Arrows ── */
     if (prevBtn) prevBtn.addEventListener('click', function () { goPrev(); resetAuto(); });
     if (nextBtn) nextBtn.addEventListener('click', function () { goNext(); resetAuto(); });
 
-    /* Touch swipe */
+    /* ── Touch swipe ── */
     var tx = 0, ty = 0;
     track.addEventListener('touchstart', function (e) {
       tx = e.touches[0].clientX;
@@ -927,7 +1012,7 @@
       }
     }, { passive: true });
 
-    /* Slider autoplay (for the slider carousel — separate from video autoplay) */
+    /* ── Slider autoplay ── */
     function startAuto() {
       if (!doAutoplay) return;
       clearInterval(autoTimer);
@@ -940,14 +1025,26 @@
       startAuto();
     }
 
-    /* Recalculate on resize */
+    /* ── Resize: rebuild clones + widths ── */
+    var resizeTimer;
     window.addEventListener('resize', function () {
-      buildDots();
-      moveTo(Math.min(currentIdx, maxIdx()), false);
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var ri = realIdx();
+        buildClones();
+        applyWidths();
+        buildDots();
+        currentIdx = clonesAdded + ri;
+        applyPos(false);
+        updateDots();
+      }, 100);
     });
 
+    /* ── Boot ── */
+    buildClones();
+    applyWidths();
     buildDots();
-    moveTo(0, false);
+    applyPos(false);
     startAuto();
   }
 
