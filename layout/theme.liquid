@@ -460,7 +460,119 @@
 </script>
 {% endif %}
 
+<script>
+(function () {
 
+  function initProductVideoAutoplay() {
+
+    var productSection = document.querySelector('.product, [id*="MainProduct"], .product__info-container, .product-section');
+    if (!productSection) return;
+
+    // Watch for the product section scrolling into view
+    var sectionObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        sectionObserver.disconnect();
+
+        // Now watch the active slide in the gallery slider
+        watchGallerySlider();
+      });
+    }, { threshold: 0.3 });
+
+    sectionObserver.observe(productSection);
+  }
+
+  function watchGallerySlider() {
+
+    var slider = document.querySelector(
+      '.product__media-list, ' +
+      '.product-single__photos, ' +
+      '.product__media-wrapper slider-component'
+    );
+    if (!slider) return;
+
+    // Use a MutationObserver to detect when the active slide changes
+    var mutationObs = new MutationObserver(function () {
+      checkActiveVideoSlide();
+    });
+
+    mutationObs.observe(slider, {
+      attributes      : true,
+      subtree         : true,
+      attributeFilter : ['aria-current', 'class', 'data-active']
+    });
+
+    // Also check immediately in case video is already visible
+    checkActiveVideoSlide();
+  }
+
+  function checkActiveVideoSlide() {
+
+    // Find the currently active/visible slide
+    var activeSlide = document.querySelector(
+      '.product__media-item.is-active deferred-media, ' +
+      '.product__media-item[aria-current="true"] deferred-media, ' +
+      '.slider__slide.is-active deferred-media, ' +
+      '.product__media-item--single deferred-media'
+    );
+
+    // Fallback: find any deferred-media video that is in viewport
+    if (!activeSlide) {
+      document.querySelectorAll('deferred-media').forEach(function (dm) {
+        var template = dm.querySelector('template');
+        if (!template || !template.innerHTML.includes('<video')) return;
+        var rect = dm.getBoundingClientRect();
+        var inView = rect.top >= 0 && rect.left >= 0 &&
+                     rect.bottom <= window.innerHeight &&
+                     rect.right <= window.innerWidth;
+        if (inView) activeSlide = dm;
+      });
+    }
+
+    if (!activeSlide) return;
+
+    var template = activeSlide.querySelector('template');
+    if (!template || !template.innerHTML.includes('<video')) return;
+
+    // Already playing
+    var existingVideo = activeSlide.querySelector('video');
+    if (existingVideo && !existingVideo.paused) return;
+
+    if (existingVideo) {
+      existingVideo.muted = true;
+      existingVideo.loop  = true;
+      existingVideo.play().catch(function () {});
+      return;
+    }
+
+    // Load and play
+    var posterBtn = activeSlide.querySelector('.deferred-media__poster');
+    if (!posterBtn) return;
+    posterBtn.click();
+
+    var attempts = 0;
+    var waitForVideo = setInterval(function () {
+      attempts++;
+      var video = activeSlide.querySelector('video');
+      if (video) {
+        clearInterval(waitForVideo);
+        video.muted       = true;
+        video.loop        = true;
+        video.playsInline = true;
+        video.play().catch(function () {});
+      }
+      if (attempts > 40) clearInterval(waitForVideo);
+    }, 100);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProductVideoAutoplay);
+  } else {
+    initProductVideoAutoplay();
+  }
+
+})();
+</script>
 
 
   </body>
