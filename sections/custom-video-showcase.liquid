@@ -753,25 +753,32 @@
   var sectionInView = false;
   var rafId      = null;
 
-  /* ─────────────────────────────────────────
-     VIDEO HELPERS
-     All playback is managed entirely in JS.
-     The autoplay attribute is stripped so the
-     browser never auto-manages these videos.
-  ───────────────────────────────────────── */
+  /* ── Is this video actually visible in the browser viewport? ──
+     iOS Safari silently rejects play() on any video that is
+     translated/clipped off-screen, so we must check before calling. */
+  function isInViewport(v) {
+    var r = v.getBoundingClientRect();
+    return r.width > 0 && r.height > 0
+      && r.right  > 0 && r.left < (window.innerWidth  || document.documentElement.clientWidth)
+      && r.bottom > 0 && r.top  < (window.innerHeight || document.documentElement.clientHeight);
+  }
+
   function getVideos() {
     return sectionEl ? Array.prototype.slice.call(sectionEl.querySelectorAll('video')) : [];
   }
 
+  /* safePlay: only plays if video is actually on screen.
+     On rejection (iOS not ready yet) waits for canplay and retries. */
   function safePlay(v) {
+    if (!isInViewport(v)) return;
     v.muted = true;
     if (!v.paused) return;
     var p = v.play();
     if (p && p.catch) {
       p.catch(function () {
-        /* iOS may reject play() if the video isn't ready yet — retry on canplay */
         function onReady() {
           v.removeEventListener('canplay', onReady);
+          if (!isInViewport(v)) return;
           v.muted = true;
           var p2 = v.play();
           if (p2 && p2.catch) p2.catch(function () {});
@@ -785,13 +792,11 @@
     if (!v.paused) v.pause();
   }
 
-  /* ─────────────────────────────────────────
-     POLLING LOOP
-     Runs via requestAnimationFrame, checks
-     every 500 ms while section is visible.
-     Any external pause (Dawn, media-gallery,
-     etc.) is immediately reversed.
-  ───────────────────────────────────────── */
+  /* ── Polling loop ──
+     Runs every 500 ms while section is visible.
+     Restarts any video that was externally paused (Dawn theme, etc.)
+     The isInViewport check inside safePlay means only truly
+     visible videos are played — safe for iOS. */
   function startPolling() {
     if (rafId) return;
     var last = 0;
@@ -810,28 +815,46 @@
     getVideos().forEach(safePause);
   }
 
-  /* ─────────────────────────────────────────
-     COVER OVERLAYS
-  ───────────────────────────────────────── */
-  function bindCovers() {
-    if (!sectionEl) return;
-    sectionEl.querySelectorAll('.ll2-item').forEach(function (item) {
-      var video = item.querySelector('video');
+  /* ── Bind a single video ──
+     Sets up playing/pause class, cover click, and critically a
+     per-video IntersectionObserver so the INSTANT a video slides
+     into the viewport (slider transition) iOS gets the play() call
+     at exactly the right moment. */
+  function bindVideo(v) {
+    if (v.dataset.ll2Bound) return;
+    v.dataset.ll2Bound = '1';
+    v.muted = true;
+
+    var item  = v.closest ? v.closest('.ll2-item') : null;
+    if (!item) { item = v.parentNode; while (item && !item.classList.contains('ll2-item')) item = item.parentNode; }
+
+    if (item) {
+      v.addEventListener('playing', function () { item.classList.add('playing'); });
+      v.addEventListener('pause',   function () { item.classList.remove('playing'); });
       var cover = item.querySelector('.ll2-cover');
-      if (!video || video.dataset.ll2Bound) return;
-      video.dataset.ll2Bound = '1';
-      video.muted = true;
-      video.addEventListener('playing', function () { item.classList.add('playing'); });
-      video.addEventListener('pause',   function () { item.classList.remove('playing'); });
       if (cover) {
-        cover.addEventListener('click', function () { safePlay(video); });
+        cover.addEventListener('click', function () { safePlay(v); });
       }
-    });
+    }
+
+    /* Per-video IO: fires play() the moment this video enters the viewport.
+       This is the key fix for iOS — play() must be called at the exact
+       moment visibility is confirmed, not from a polling loop tick. */
+    new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) {
+        safePlay(v);
+      } else {
+        if (!v.paused) v.pause();
+      }
+    }, { threshold: 0.3 }).observe(v);
   }
 
-  /* ─────────────────────────────────────────
-     INTERSECTION OBSERVER
-  ───────────────────────────────────────── */
+  function bindAllVideos() {
+    if (!sectionEl) return;
+    getVideos().forEach(bindVideo);
+  }
+
+  /* ── Section-level IO ── */
   function observeSection() {
     if (!sectionEl) return;
     new IntersectionObserver(function (entries) {
@@ -848,11 +871,6 @@
 
   /* ─────────────────────────────────────────
      INFINITE LOOP SLIDER
-     Clones perPage slides from each end of
-     the track. After each animated transition
-     into clone territory, the position is
-     silently reset to the matching real slide
-     — creating a seamless infinite loop.
   ───────────────────────────────────────── */
   function initSlider() {
     var track    = document.getElementById('ll2-track-' + ID);
@@ -861,41 +879,26 @@
     var nextBtn  = document.getElementById('ll2-next-' + ID);
     if (!track) return;
 
-    /* Store original (real) slides before any cloning */
     var realSlides    = Array.prototype.slice.call(track.children);
     var totalSlides   = realSlides.length;
     var desktopPer    = {{ section.settings.slides_to_show | json }};
     var mobilePer     = {{ section.settings.slides_to_show_mobile | json }};
     var doAutoplay    = {{ section.settings.autoplay | json }};
     var autoInterval  = {{ section.settings.autoplay_speed | json }};
-    var currentIdx    = 0;   /* DOM index into track.children (includes clones) */
-    var clonesAdded   = 0;   /* how many clone slides were prepended */
+    var currentIdx    = 0;
+    var clonesAdded   = 0;
     var isBusy        = false;
     var autoTimer     = null;
 
-    function perPage() {
-      return window.innerWidth <= 749 ? mobilePer : desktopPer;
-    }
+    function perPage() { return window.innerWidth <= 749 ? mobilePer : desktopPer; }
+    function slideW()  { return track.parentElement.offsetWidth / perPage(); }
 
-    /* Pixel width of one slide based on current container size */
-    function slideW() {
-      return track.parentElement.offsetWidth / perPage();
-    }
-
-    /* ── Build clones ──
-       Prepend clones of the last  N real slides.
-       Append  clones of the first N real slides.
-       N = perPage, capped to totalSlides.
-    */
     function buildClones() {
-      /* Remove any existing clones */
-      Array.prototype.slice.call(
-        track.querySelectorAll('[data-ll2-clone]')
-      ).forEach(function (c) { track.removeChild(c); });
+      Array.prototype.slice.call(track.querySelectorAll('[data-ll2-clone]'))
+        .forEach(function (c) { track.removeChild(c); });
 
       clonesAdded = Math.min(perPage(), totalSlides);
 
-      /* Prepend: clones of the LAST clonesAdded real slides */
       var frag = document.createDocumentFragment();
       for (var i = totalSlides - clonesAdded; i < totalSlides; i++) {
         var c = realSlides[i].cloneNode(true);
@@ -905,7 +908,6 @@
       }
       track.insertBefore(frag, track.firstChild);
 
-      /* Append: clones of the FIRST clonesAdded real slides */
       for (var j = 0; j < clonesAdded; j++) {
         var c2 = realSlides[j].cloneNode(true);
         c2.setAttribute('data-ll2-clone', '1');
@@ -913,23 +915,23 @@
         track.appendChild(c2);
       }
 
-      /* Prepare clone videos.
-         Remove autoplay from clones so iOS doesn't see N×autoplay elements
-         and throttle them all. JS polling will play them when they scroll in. */
-      Array.prototype.slice.call(
-        track.querySelectorAll('[data-ll2-clone] video')
-      ).forEach(function (v) {
-        v.removeAttribute('autoplay');
-        v.setAttribute('muted', '');
-        v.setAttribute('playsinline', '');
-        v.muted = true;
-      });
+      /* Clone videos: remove autoplay (per-video IO + polling handles playback)
+         and reset the ll2Bound flag so bindAllVideos will bind them freshly. */
+      Array.prototype.slice.call(track.querySelectorAll('[data-ll2-clone] video'))
+        .forEach(function (v) {
+          v.removeAttribute('autoplay');
+          v.setAttribute('muted', '');
+          v.setAttribute('playsinline', '');
+          v.muted = true;
+          delete v.dataset.ll2Bound;
+        });
 
-      /* Start at the first real slide */
+      /* Bind newly created clone videos immediately */
+      bindAllVideos();
+
       currentIdx = clonesAdded;
     }
 
-    /* ── Apply position ── */
     function applyPos(animated) {
       track.style.transition = animated
         ? 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
@@ -937,20 +939,15 @@
       track.style.transform = 'translateX(' + (-currentIdx * slideW()) + 'px)';
     }
 
-    /* ── Resize all slides to current px width ── */
     function applyWidths() {
       var w = slideW() + 'px';
-      Array.prototype.slice.call(track.children).forEach(function (s) {
-        s.style.width = w;
-      });
+      Array.prototype.slice.call(track.children).forEach(function (s) { s.style.width = w; });
     }
 
-    /* ── Real index (0 … totalSlides-1) from DOM index ── */
     function realIdx() {
       return ((currentIdx - clonesAdded) % totalSlides + totalSlides) % totalSlides;
     }
 
-    /* ── Dots ── */
     function buildDots() {
       if (!dotsWrap) return;
       dotsWrap.innerHTML = '';
@@ -981,80 +978,46 @@
       });
     }
 
-    /* ── Navigation ── */
     function goNext() {
       if (isBusy) return;
-      isBusy = true;
-      currentIdx++;
-      applyPos(true);
-      updateDots();
+      isBusy = true; currentIdx++;
+      applyPos(true); updateDots();
     }
 
     function goPrev() {
       if (isBusy) return;
-      isBusy = true;
-      currentIdx--;
-      applyPos(true);
-      updateDots();
+      isBusy = true; currentIdx--;
+      applyPos(true); updateDots();
     }
 
-    /* ── After each transition: silently jump if in clone zone ── */
     track.addEventListener('transitionend', function (e) {
       if (e.propertyName !== 'transform') return;
       isBusy = false;
-
-      /* Slid past the end → jump back to matching real slide */
-      if (currentIdx >= clonesAdded + totalSlides) {
-        currentIdx -= totalSlides;
-        applyPos(false);
-      }
-      /* Slid before the start → jump forward to matching real slide */
-      if (currentIdx < clonesAdded) {
-        currentIdx += totalSlides;
-        applyPos(false);
-      }
+      if (currentIdx >= clonesAdded + totalSlides) { currentIdx -= totalSlides; applyPos(false); }
+      if (currentIdx < clonesAdded)                { currentIdx += totalSlides; applyPos(false); }
       updateDots();
     });
 
-    /* ── Arrows ── */
     if (prevBtn) prevBtn.addEventListener('click', function () { goPrev(); resetAuto(); });
     if (nextBtn) nextBtn.addEventListener('click', function () { goNext(); resetAuto(); });
 
-    /* ── Touch swipe ── */
     var tx = 0, ty = 0;
-    track.addEventListener('touchstart', function (e) {
-      tx = e.touches[0].clientX;
-      ty = e.touches[0].clientY;
-    }, { passive: true });
+    track.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
     track.addEventListener('touchend', function (e) {
       var dx = e.changedTouches[0].clientX - tx;
       var dy = e.changedTouches[0].clientY - ty;
-      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-        if (dx < 0) goNext(); else goPrev();
-        resetAuto();
-      }
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) { if (dx < 0) goNext(); else goPrev(); resetAuto(); }
     }, { passive: true });
 
-    /* ── Slider autoplay ── */
-    function startAuto() {
-      if (!doAutoplay) return;
-      clearInterval(autoTimer);
-      autoTimer = setInterval(goNext, autoInterval);
-    }
+    function startAuto() { if (!doAutoplay) return; clearInterval(autoTimer); autoTimer = setInterval(goNext, autoInterval); }
+    function resetAuto()  { if (!doAutoplay) return; clearInterval(autoTimer); startAuto(); }
 
-    function resetAuto() {
-      if (!doAutoplay) return;
-      clearInterval(autoTimer);
-      startAuto();
-    }
-
-    /* ── Resize: rebuild clones + widths ── */
     var resizeTimer;
     window.addEventListener('resize', function () {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(function () {
         var ri = realIdx();
-        buildClones();
+        buildClones();   /* also calls bindAllVideos() internally */
         applyWidths();
         buildDots();
         currentIdx = clonesAdded + ri;
@@ -1063,7 +1026,6 @@
       }, 100);
     });
 
-    /* ── Boot ── */
     buildClones();
     applyWidths();
     buildDots();
@@ -1071,23 +1033,17 @@
     startAuto();
   }
 
-  /* ─────────────────────────────────────────
-     ENTRY POINT
-  ───────────────────────────────────────── */
+  /* ── Entry point ── */
   function init() {
     if (!sectionEl) return;
 
-    /* Strip autoplay attribute — JS owns all playback */
-    getVideos().forEach(function (v) {
-      v.muted = true;
-    });
-
-    bindCovers();
-    observeSection();
-
     if (document.getElementById('ll2-track-' + ID)) {
-      initSlider();
+      initSlider(); /* buildClones() inside calls bindAllVideos() for clones */
     }
+
+    /* Bind real slide videos (clones already bound inside initSlider) */
+    bindAllVideos();
+    observeSection();
   }
 
   if (document.readyState === 'loading') {
@@ -1096,15 +1052,12 @@
     init();
   }
 
-  /* Theme editor reload */
   document.addEventListener('shopify:section:load', function () {
-    sectionEl = document.getElementById('ll2-section-' + ID);
+    sectionEl     = document.getElementById('ll2-section-' + ID);
     sectionInView = false;
     if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
     if (sectionEl) {
-      sectionEl.querySelectorAll('video').forEach(function (v) {
-        delete v.dataset.ll2Bound;
-      });
+      sectionEl.querySelectorAll('video').forEach(function (v) { delete v.dataset.ll2Bound; });
     }
     init();
   });
