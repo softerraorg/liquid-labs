@@ -497,8 +497,6 @@
 {% for block in section.blocks %}
   {% if block.settings.cover_image %}
     <link rel="preload" as="image" href="{{ block.settings.cover_image | image_url: width: 1200 }}" fetchpriority="high">
-  {% elsif block.settings.video.preview_image %}
-    <link rel="preload" as="image" href="{{ block.settings.video.preview_image | image_url: width: 1200 }}" fetchpriority="high">
   {% endif %}
 {% endfor %}
 
@@ -703,12 +701,15 @@
           <div class="ll-item" style="width:{{ section.settings.video_width }}px;" {{ block.shopify_attributes }}>
             <div class="ll-video-wrapper">
               {% if block.settings.video %}
-                {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll-video' }}
+                {% if block.settings.video.preview_image %}
+                  {% assign poster_url = block.settings.video.preview_image | image_url: width: 1200 %}
+                  {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, poster: poster_url, class: 'll-video' }}
+                {% else %}
+                  {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll-video' }}
+                {% endif %}
               {% endif %}
               {% if block.settings.cover_image %}
                 <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
-              {% elsif block.settings.video.preview_image %}
-                <img class="ll-cover" src="{{ block.settings.video.preview_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
               {% endif %}
             </div>
           </div>
@@ -729,12 +730,15 @@
                 <li class="splide__slide ll-item" {{ block.shopify_attributes }}>
                   <div class="ll-video-wrapper">
                     {% if block.settings.video %}
-                      {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll-video' }}
+                      {% if block.settings.video.preview_image %}
+                        {% assign poster_url = block.settings.video.preview_image | image_url: width: 1200 %}
+                        {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, poster: poster_url, class: 'll-video' }}
+                      {% else %}
+                        {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll-video' }}
+                      {% endif %}
                     {% endif %}
                     {% if block.settings.cover_image %}
                       <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
-                    {% elsif block.settings.video.preview_image %}
-                      <img class="ll-cover" src="{{ block.settings.video.preview_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
                     {% endif %}
                   </div>
                 </li>
@@ -769,8 +773,51 @@
 <script>
 (function () {
 
-  function initSlider() {
+  function playVideo(video) {
+    video.muted = true;
+    var p = video.play();
+    if (p && p.catch) p.catch(function () {});
+  }
 
+  function bindItem(item) {
+    var video = item.querySelector('video');
+    if (!video) return;
+    if (item.dataset.llBound) return;
+    item.dataset.llBound = '1';
+
+    video.muted = true;
+
+    var cover = item.querySelector('.ll-cover');
+    if (cover) {
+      video.addEventListener('playing', function () { item.classList.add('playing'); });
+      video.addEventListener('pause',   function () { item.classList.remove('playing'); });
+      cover.addEventListener('click',   function () { playVideo(video); });
+      if (!video.paused) item.classList.add('playing');
+    }
+
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            playVideo(video);
+          } else {
+            video.pause();
+          }
+        });
+      }, { threshold: 0.3 });
+      obs.observe(item);
+    } else {
+      playVideo(video);
+    }
+  }
+
+  function bindVideos(section) {
+    section.querySelectorAll('.ll-item').forEach(function (item) {
+      bindItem(item);
+    });
+  }
+
+  function initSlider() {
     var section  = document.getElementById('ll-section-{{ section.id }}');
     if (!section) return;
 
@@ -801,41 +848,30 @@
       speed       : 500,
       easing      : 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
       breakpoints : {
-        749: {
-          perPage : mobileShow,
-          gap     : '12px'
-        }
+        749: { perPage : mobileShow, gap : '12px' }
       }
     };
 
     if (doAutoplay) {
-      opts.autoplay    = true;
-      opts.interval    = autoplaySpeed;
+      opts.autoplay     = true;
+      opts.interval     = autoplaySpeed;
       opts.pauseOnHover = true;
     }
 
     var splide = new Splide('#ll-splide-{{ section.id }}', opts);
     splide.mount();
 
-    // Wire existing arrow buttons — iOS-safe touchend
     var prevBtn = section.querySelector('#ll-prev-{{ section.id }}');
     var nextBtn = section.querySelector('#ll-next-{{ section.id }}');
 
     function bindBtn(btn, dir) {
       if (!btn) return;
       var tapped = false;
-
-      btn.addEventListener('touchstart', function () {
-        tapped = false;
-      }, { passive: true });
-
+      btn.addEventListener('touchstart', function () { tapped = false; }, { passive: true });
       btn.addEventListener('touchend', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        tapped = true;
-        splide.go(dir);
+        e.preventDefault(); e.stopPropagation();
+        tapped = true; splide.go(dir);
       }, { passive: false });
-
       btn.addEventListener('click', function () {
         if (tapped) { tapped = false; return; }
         splide.go(dir);
@@ -845,57 +881,22 @@
     bindBtn(prevBtn, '<');
     bindBtn(nextBtn, '>');
 
-    // Bind video cover play after Splide clones slides
-    splide.on('mounted', function () {
-      bindVideos(section);
-    });
-  }
-
-  function bindVideos(section) {
-    section.querySelectorAll('.ll-item').forEach(function (item) {
-      var video = item.querySelector('video');
-      var cover = item.querySelector('.ll-cover');
-      if (!video || !cover) return;
-      // Avoid double-binding on clones
-      if (cover.dataset.llBound) return;
-      cover.dataset.llBound = '1';
-      video.addEventListener('play',  function () { item.classList.add('playing'); });
-      video.addEventListener('pause', function () { item.classList.remove('playing'); });
-      cover.addEventListener('click', function () { video.play(); });
-      // If autoplay already fired before listener was attached, hide cover now
-      if (!video.paused) {
-        item.classList.add('playing');
-      } else {
-        // Force play — browser autoplay attribute may need a nudge after DOM ready
-        var playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(function () {
-            // Autoplay blocked; wait for user interaction via cover click
-          });
-        }
-      }
-    });
-  }
-
-  function initGrid() {
-    var section = document.getElementById('ll-section-{{ section.id }}');
-    if (!section) return;
-    bindVideos(section);
+    splide.on('mounted', function () { bindVideos(section); });
   }
 
   function init() {
     var section = document.getElementById('ll-section-{{ section.id }}');
-    if (section && section.querySelector('.ll-grid')) {
-      initGrid();
+    if (!section) return;
+
+    if (section.querySelector('.ll-grid')) {
+      bindVideos(section);
       return;
     }
+
     if (typeof Splide === 'undefined') {
       var s = document.querySelector('script[src*="splide"]');
-      if (s) {
-        s.addEventListener('load', initSlider);
-      } else {
-        setTimeout(initSlider, 300);
-      }
+      if (s) { s.addEventListener('load', initSlider); }
+      else    { setTimeout(initSlider, 300); }
     } else {
       initSlider();
     }
@@ -912,7 +913,7 @@
     if (el) delete el.dataset.llInit;
     var section = document.getElementById('ll-section-{{ section.id }}');
     if (section) {
-      section.querySelectorAll('.ll-cover').forEach(function (c) { delete c.dataset.llBound; });
+      section.querySelectorAll('.ll-item').forEach(function (i) { delete i.dataset.llBound; });
     }
     init();
   });
