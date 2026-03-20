@@ -800,8 +800,6 @@
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
             playVideo(video);
-          } else {
-            video.pause();
           }
         });
       }, { threshold: 0.3 });
