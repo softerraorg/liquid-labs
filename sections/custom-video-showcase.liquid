@@ -698,7 +698,7 @@
                 {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll-video' }}
               {% endif %}
               {% if block.settings.cover_image %}
-                <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 800 }}" loading="lazy" alt="">
+                <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" alt="">
               {% endif %}
             </div>
           </div>
@@ -722,7 +722,7 @@
                       {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll-video' }}
                     {% endif %}
                     {% if block.settings.cover_image %}
-                      <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 800 }}" loading="lazy" alt="">
+                      <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" alt="">
                     {% endif %}
                   </div>
                 </li>
