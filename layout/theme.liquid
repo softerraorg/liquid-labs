@@ -460,6 +460,71 @@
 </script>
 {% endif %}
 
+<script>
+(function () {
+
+  function initAutoplayVideos() {
+
+    // Find all deferred-media elements that contain a video template
+    var deferredVideos = document.querySelectorAll('deferred-media');
+
+    deferredVideos.forEach(function (deferredMedia) {
+
+      // Only target video type deferred media
+      var template = deferredMedia.querySelector('template');
+      if (!template) return;
+      if (!template.innerHTML.includes('<video')) return;
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+
+            // Already loaded — just play
+            var existingVideo = deferredMedia.querySelector('video');
+            if (existingVideo) {
+              existingVideo.play();
+              return;
+            }
+
+            // Not loaded yet — trigger the poster button click to load & play
+            var posterBtn = deferredMedia.querySelector('.deferred-media__poster');
+            if (posterBtn) {
+              posterBtn.click();
+
+              // After click, video element gets injected — wait for it then play
+              var waitForVideo = setInterval(function () {
+                var video = deferredMedia.querySelector('video');
+                if (video) {
+                  clearInterval(waitForVideo);
+                  video.muted = true;       // must be muted for autoplay to work
+                  video.playsInline = true;
+                  video.play();
+                }
+              }, 100);
+            }
+
+            // Stop observing once triggered
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.5  // trigger when 50% of the video is visible
+      });
+
+      observer.observe(deferredMedia);
+    });
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAutoplayVideos);
+  } else {
+    initAutoplayVideos();
+  }
+
+})();
+</script>
+
 
   </body>
 </html>
