@@ -10,6 +10,7 @@ if (!customElements.get('media-gallery')) {
           thumbnails: this.querySelector('[id^="GalleryThumbnails"]'),
         };
         this.mql = window.matchMedia('(min-width: 750px)');
+        this.initVideoAutoplay();
         if (!this.elements.thumbnails) return;
 
         this.elements.viewer.addEventListener('slideChanged', debounce(this.onSlideChanged.bind(this), 500));
@@ -99,6 +100,77 @@ if (!customElements.get('media-gallery')) {
         window.pauseAllMedia();
         const deferredMedia = activeItem.querySelector('.deferred-media');
         if (deferredMedia) deferredMedia.loadContent(false);
+      }
+
+      initVideoAutoplay() {
+        const galleryViewer = this.elements.viewer;
+        if (!galleryViewer) return;
+
+        const deferredMediaElements = galleryViewer.querySelectorAll('deferred-media');
+        if (!deferredMediaElements.length) return;
+
+        const playDeferredVideo = (deferredMedia) => {
+          const template = deferredMedia.querySelector('template');
+          if (!template) return;
+
+          if (!deferredMedia.getAttribute('loaded')) {
+            window.pauseAllMedia();
+
+            const fragment = template.content.firstElementChild.cloneNode(true);
+
+            if (fragment.nodeName === 'VIDEO') {
+              fragment.muted = true;
+              fragment.setAttribute('muted', '');
+              fragment.setAttribute('playsinline', '');
+            }
+
+            deferredMedia.setAttribute('loaded', true);
+            const deferredElement = deferredMedia.appendChild(fragment);
+
+            if (deferredElement.nodeName === 'VIDEO') {
+              deferredElement.play().catch(() => {});
+            } else if (deferredElement.nodeName === 'IFRAME') {
+              const formerStyle = deferredElement.getAttribute('style');
+              deferredElement.setAttribute('style', 'display: block;');
+              window.setTimeout(() => deferredElement.setAttribute('style', formerStyle || ''), 0);
+            }
+          } else {
+            window.pauseAllMedia();
+            const video = deferredMedia.querySelector('video');
+            if (video) {
+              video.muted = true;
+              video.play().catch(() => {});
+            }
+          }
+        };
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              const deferredMedia = entry.target;
+              if (entry.isIntersecting) {
+                playDeferredVideo(deferredMedia);
+              } else {
+                const video = deferredMedia.querySelector('video');
+                if (video) video.pause();
+              }
+            });
+          },
+          { threshold: 0.3 }
+        );
+
+        deferredMediaElements.forEach((el) => observer.observe(el));
+
+        galleryViewer.addEventListener('slideChanged', (event) => {
+          const currentSlide = event.detail?.currentElement;
+          if (!currentSlide) return;
+          const deferredMedia = currentSlide.querySelector('deferred-media');
+          if (deferredMedia) {
+            playDeferredVideo(deferredMedia);
+          } else {
+            window.pauseAllMedia();
+          }
+        });
       }
 
       preventStickyHeader() {
