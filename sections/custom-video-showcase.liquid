@@ -774,6 +774,7 @@
 (function () {
 
   var sectionEl = document.getElementById('ll-section-{{ section.id }}');
+  var sectionInView = false;
 
   function playFromStart(video) {
     video.muted = true;
@@ -806,20 +807,39 @@
     sectionEl.querySelectorAll('.ll-item').forEach(function (item) {
       var video = item.querySelector('video');
       var cover = item.querySelector('.ll-cover');
-      if (!video || !cover || cover.dataset.llBound) return;
-      cover.dataset.llBound = '1';
+      if (!video) return;
+
+      // Bind cover click once
+      if (cover && !cover.dataset.llBound) {
+        cover.dataset.llBound = '1';
+        cover.addEventListener('click', function () { playFromStart(video); });
+      }
+
+      // Bind video events once
+      if (video.dataset.llBound) return;
+      video.dataset.llBound = '1';
+
       video.muted = true;
       video.addEventListener('playing', function () { item.classList.add('playing'); });
-      video.addEventListener('pause',   function () { item.classList.remove('playing'); });
-      cover.addEventListener('click',   function () { playFromStart(video); });
+      video.addEventListener('pause', function () {
+        item.classList.remove('playing');
+        // If something external pauses the video while the section is visible,
+        // restart it automatically (handles Dawn theme media-pause signals, etc.)
+        if (sectionInView) {
+          setTimeout(function () {
+            if (sectionInView && video.paused) {
+              var p = video.play();
+              if (p && p.catch) p.catch(function () {});
+            }
+          }, 200);
+        }
+      });
     });
   }
 
   // ── Section-level IntersectionObserver ──
   function observeSection() {
     if (!sectionEl) return;
-
-    var sectionInView = false;
 
     var observer = new IntersectionObserver(function (entries) {
       sectionInView = entries[0].isIntersecting;
