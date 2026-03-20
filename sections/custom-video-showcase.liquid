@@ -374,91 +374,96 @@
     var track = section.querySelector("#ll-track-{{ section.id }}");
     if(!track) return;
 
-    var viewport = track.parentElement;
-    var originalSlides = Array.from(track.children);
-    var totalOriginal = originalSlides.length;
+    // Guard: prevent double-init (shopify:section:load fires on editor reload)
+    if(track.dataset.llInit) return;
+    track.dataset.llInit = "1";
+
+    var viewport    = track.parentElement;
+    var origSlides  = Array.from(track.children);
+    var total       = origSlides.length;
 
     var desktopShow = {{ section.settings.slides_to_show | json }};
     var mobileShow  = {{ section.settings.slides_to_show_mobile | json }};
-    var show = window.innerWidth > 749 ? desktopShow : mobileShow;
-    var gap  = 20;
+    var show        = window.innerWidth > 749 ? desktopShow : mobileShow;
+    var GAP         = 20;
 
-    // --- Clone for infinite loop ---
-    var clonesBefore = originalSlides.slice(-show).map(function(s){ return s.cloneNode(true); });
-    var clonesAfter  = originalSlides.slice(0, show).map(function(s){ return s.cloneNode(true); });
-    clonesBefore.reverse().forEach(function(c){ track.insertBefore(c, track.firstChild); });
-    clonesAfter.forEach(function(c){ track.appendChild(c); });
+    // ── Clone SHOW slides on each end for infinite loop ──
+    origSlides.slice(-show).forEach(function(s){
+      track.insertBefore(s.cloneNode(true), track.firstChild);
+    });
+    origSlides.slice(0, show).forEach(function(s){
+      track.appendChild(s.cloneNode(true));
+    });
 
     var allSlides  = Array.from(track.children);
     var realOffset = show;
     var index      = realOffset;
 
-    // --- Smooth lerp engine ---
-    var currentX   = 0;   // actual rendered position
-    var targetX    = 0;   // where we want to be
-    var rafId      = null;
-    var LERP       = 0.10; // 0.08–0.12 feels natural; lower = slower/silkier
+    // ── Smooth lerp engine ──
+    var curX  = 0;
+    var tgtX  = 0;
+    var rafId = null;
+    var LERP  = 0.11;
 
-    var prevBtn = section.querySelector("#ll-prev-{{ section.id }}");
-    var nextBtn = section.querySelector("#ll-next-{{ section.id }}");
+    var prevBtn       = section.querySelector("#ll-prev-{{ section.id }}");
+    var nextBtn       = section.querySelector("#ll-next-{{ section.id }}");
     var dotsContainer = section.querySelector("#ll-dots-{{ section.id }}");
-    var dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll(".ll-dot")) : [];
+    var dots          = dotsContainer ? Array.from(dotsContainer.querySelectorAll(".ll-dot")) : [];
 
-    function slideWidth(){
-      return (viewport.offsetWidth - gap * (show - 1)) / show;
+    function sw(){
+      return (viewport.offsetWidth - GAP * (show - 1)) / show;
     }
 
+    function offset(i){
+      return i * (sw() + GAP);
+    }
+
+    // ── CRITICAL FIX: resize sets width on ALL slides including clones ──
     function resize(){
-      var w = slideWidth();
+      var w = sw();
       allSlides.forEach(function(s){ s.style.width = w + "px"; });
     }
 
-    function getOffset(i){
-      return i * (slideWidth() + gap);
-    }
-
-    // Apply transform directly — no CSS transition, RAF handles smoothness
-    function applyTransform(x){
+    function apply(x){
       track.style.transform = "translateX(" + (-x) + "px)";
     }
 
-    // Instant jump (no animation — for infinite-loop wraparound)
+    // Instant jump — no animation, used for infinite-loop wraparound
     function jumpTo(i){
-      index    = i;
-      targetX  = getOffset(i);
-      currentX = targetX;
-      applyTransform(currentX);
+      index = i;
+      tgtX  = offset(i);
+      curX  = tgtX;
+      apply(curX);
     }
 
-    // Smooth move
-    function moveTo(i){
-      index   = i;
-      targetX = getOffset(i);
-      updateDots();
-      startRAF();
+    function realIdx(){
+      return ((index - realOffset) % total + total) % total;
     }
 
-    // RAF loop — lerp currentX toward targetX
+    function updateDots(){
+      var ri = realIdx();
+      dots.forEach(function(dot, i){
+        dot.classList.toggle("active", i === ri);
+      });
+    }
+
+    // RAF lerp tick
     function tick(){
-      var diff = targetX - currentX;
-
-      // Snap when close enough to avoid infinite micro-crawl
+      var diff = tgtX - curX;
       if(Math.abs(diff) < 0.3){
-        currentX = targetX;
-        applyTransform(currentX);
+        curX = tgtX;
+        apply(curX);
         rafId = null;
-
-        // Infinite-loop wraparound — silent jump after lerp settles
+        // Infinite loop: silent jump after lerp fully settles
         if(index < realOffset){
-          jumpTo(index + totalOriginal);
-        } else if(index >= realOffset + totalOriginal){
-          jumpTo(index - totalOriginal);
+          jumpTo(index + total);
+        } else if(index >= realOffset + total){
+          jumpTo(index - total);
         }
         return;
       }
-
-      currentX += diff * LERP;
-      applyTransform(currentX);
+      curX += diff * LERP;
+      apply(curX);
       rafId = requestAnimationFrame(tick);
     }
 
@@ -467,23 +472,19 @@
       rafId = requestAnimationFrame(tick);
     }
 
-    function realIndex(){
-      return ((index - realOffset) % totalOriginal + totalOriginal) % totalOriginal;
-    }
-
-    function updateDots(){
-      var ri = realIndex();
-      dots.forEach(function(dot, i){
-        dot.classList.toggle("active", i === ri);
-      });
+    function moveTo(i){
+      index = i;
+      tgtX  = offset(i);
+      updateDots();
+      startRAF();
     }
 
     // Init
+    track.style.transition = "none";
     resize();
-    track.style.transition = "none"; // no CSS transition — RAF only
     jumpTo(realOffset);
 
-    // --- Arrow buttons (iOS-safe) ---
+    // ── Arrow buttons (iOS-safe touchend) ──
     function bindBtn(btn, direction){
       if(!btn) return;
       var tapped = false;
@@ -508,80 +509,69 @@
     bindBtn(prevBtn, -1);
     bindBtn(nextBtn, +1);
 
-    // --- Dots ---
+    // ── Dots ──
     dots.forEach(function(dot, i){
       dot.addEventListener("click", function(){
         moveTo(realOffset + i);
       });
     });
 
-    // --- Touch / Swipe (iOS + Android) ---
-    var touchStartX     = 0;
-    var touchStartY     = 0;
-    var touchCurrentX   = 0;
-    var touchMoved      = false;
-    var isHorizSwipe    = false;
-    var dragStartTarget = 0; // targetX at drag start
+    // ── Touch / Swipe ──
+    var tx0         = 0;
+    var ty0         = 0;
+    var moved       = false;
+    var horizSwipe  = false;
+    var dragBase    = 0; // tgtX value at drag start
 
     viewport.addEventListener("touchstart", function(e){
-      touchStartX     = e.changedTouches[0].clientX;
-      touchStartY     = e.changedTouches[0].clientY;
-      touchCurrentX   = touchStartX;
-      touchMoved      = false;
-      isHorizSwipe    = false;
-      dragStartTarget = targetX;
-
-      // Pause RAF so drag takes full control
+      tx0        = e.changedTouches[0].clientX;
+      ty0        = e.changedTouches[0].clientY;
+      moved      = false;
+      horizSwipe = false;
+      dragBase   = tgtX;
       if(rafId){ cancelAnimationFrame(rafId); rafId = null; }
     }, { passive: true });
 
     viewport.addEventListener("touchmove", function(e){
-      var dx = e.changedTouches[0].clientX - touchStartX;
-      var dy = e.changedTouches[0].clientY - touchStartY;
-      touchCurrentX = e.changedTouches[0].clientX;
-
-      if(!touchMoved){
-        touchMoved   = true;
-        isHorizSwipe = Math.abs(dx) > Math.abs(dy);
+      var dx = e.changedTouches[0].clientX - tx0;
+      var dy = e.changedTouches[0].clientY - ty0;
+      if(!moved){
+        moved      = true;
+        horizSwipe = Math.abs(dx) > Math.abs(dy);
       }
-
-      if(isHorizSwipe){
+      if(horizSwipe){
         e.preventDefault();
-        // Live drag — move track in real time for tactile feel
-        var dragX = dragStartTarget - dx;
-        currentX  = dragX;
-        targetX   = dragX;
-        applyTransform(currentX);
+        curX = tgtX = dragBase - dx; // live finger tracking
+        apply(curX);
       }
     }, { passive: false });
 
     viewport.addEventListener("touchend", function(e){
-      var diff = touchStartX - e.changedTouches[0].clientX;
+      var diff = tx0 - e.changedTouches[0].clientX;
+      if(horizSwipe){
+        var step    = sw() + GAP;
+        var nearest = Math.round(tgtX / step);
 
-      if(isHorizSwipe){
-        // Snap to nearest slide or flick to next/prev
-        var w       = slideWidth() + gap;
-        var nearest = Math.round(targetX / w);
-
-        // Flick threshold: if fast swipe (> 40px), force next/prev
+        // Flick: force next/prev on fast swipe
         if(Math.abs(diff) > 40){
-          nearest = diff > 0 ? Math.floor(dragStartTarget / w) + 1
-                              : Math.ceil(dragStartTarget / w)  - 1;
+          nearest = diff > 0
+            ? Math.floor(dragBase / step) + 1
+            : Math.ceil(dragBase / step)  - 1;
         }
 
-        // Clamp to valid range (including clones)
+        // ── CRITICAL FIX: clamp includes full clone range ──
         nearest = Math.max(0, Math.min(allSlides.length - show, nearest));
         moveTo(nearest);
       }
     }, { passive: true });
 
-    // --- Autoplay ---
+    // ── Autoplay ──
     {% if section.settings.autoplay %}
     var autoplaySpeed = {{ section.settings.autoplay_speed | json }};
     setInterval(function(){ moveTo(index + 1); }, autoplaySpeed);
     {% endif %}
 
-    // --- Resize ---
+    // ── Resize ──
     window.addEventListener("resize", function(){
       show = window.innerWidth > 749 ? desktopShow : mobileShow;
       resize();
@@ -595,7 +585,12 @@
     initSlider();
   }
 
-  document.addEventListener("shopify:section:load", initSlider);
+  document.addEventListener("shopify:section:load", function(){
+    // Reset init guard so re-init works cleanly in editor
+    var track = document.querySelector("#ll-track-{{ section.id }}");
+    if(track) delete track.dataset.llInit;
+    initSlider();
+  });
 
 })();
 </script>
