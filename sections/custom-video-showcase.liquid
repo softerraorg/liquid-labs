@@ -492,36 +492,16 @@
 }
 {% endschema %}
 
-{{- 'splide-core.css' | asset_url | stylesheet_tag -}}
-
 {% for block in section.blocks %}
   {% if block.settings.cover_image %}
     <link rel="preload" as="image" href="{{ block.settings.cover_image | image_url: width: 1200 }}" fetchpriority="high">
   {% endif %}
 {% endfor %}
 
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide-core.min.css"
-  media="print"
-  onload="this.media='all'"
->
-
 <style>
-  #ll-section-{{ section.id }} {
+  #ll2-section-{{ section.id }} {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
-  }
-
-  @media screen and (max-width: 749px) {
-    #ll-section-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top_mobile }}px;
-      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
-    }
-  }
-
-  .ll-section {
-    padding: 0;
     text-align: center;
     background: radial-gradient(circle at center, #302d3a, #191720), url(/cdn/shop/files/bg.webp?v=1773264135);
     background-size: cover;
@@ -529,14 +509,21 @@
     background-blend-mode: soft-light;
   }
 
-  .ll-title {
+  @media screen and (max-width: 749px) {
+    #ll2-section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+  }
+
+  #ll2-section-{{ section.id }} .ll2-title {
     font-size: 40px;
     margin: 0 0 40px;
     color: #fff;
   }
 
-  /* ── Grid layout ── */
-  .ll-grid {
+  /* ── Grid ── */
+  #ll2-section-{{ section.id }} .ll2-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -545,78 +532,50 @@
     margin: 0 auto;
   }
 
-  /* ── Slider layout ── */
-  .ll-slider-outer {
-    position: relative;
+  /* ── Slider ── */
+  #ll2-section-{{ section.id }} .ll2-slider-outer {
     max-width: 1300px;
     margin: 0 auto;
-    padding: 0;
+    overflow: hidden;
+  }
+
+  #ll2-section-{{ section.id }} .ll2-track {
+    display: flex;
+    will-change: transform;
+  }
+
+  #ll2-section-{{ section.id }} .ll2-track.is-animated {
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  #ll2-section-{{ section.id }} .ll2-slide {
+    flex-shrink: 0;
+    width: calc(100% / {{ section.settings.slides_to_show }});
+    padding: 0 10px;
     box-sizing: border-box;
   }
 
-  /* Splide overrides */
-  #ll-section-{{ section.id }} .splide__track {
-    overflow: hidden;
+  @media screen and (max-width: 749px) {
+    #ll2-section-{{ section.id }} .ll2-slide {
+      width: calc(100% / {{ section.settings.slides_to_show_mobile }});
+      padding: 0 6px;
+    }
   }
 
-  #ll-section-{{ section.id }} .splide__list {
-    display: flex;
-    align-items: stretch;
-  }
-
-  #ll-section-{{ section.id }} .splide__slide {
-    border-radius: 10px;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-
-  #ll-section-{{ section.id }} .splide__arrow {
-    display: none !important;
-  }
-
-  /* Dots */
-  #ll-section-{{ section.id }} .splide__pagination {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 20px;
-    list-style: none;
-    padding: 0;
-    position: relative;
-    bottom: unset;
-  }
-
-  #ll-section-{{ section.id }} .splide__pagination__page {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.35);
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    opacity: 1;
-    transition: background 0.2s, transform 0.2s;
-  }
-
-  #ll-section-{{ section.id }} .splide__pagination__page.is-active {
-    background: #fff;
-    transform: scale(1.3);
-  }
-
-  /* ── Shared item styles ── */
-  .ll-item {
+  /* ── Shared item ── */
+  #ll2-section-{{ section.id }} .ll2-item {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
   }
 
-  .ll-video-wrapper {
+  #ll2-section-{{ section.id }} .ll2-video-wrapper {
     position: relative;
     width: 100%;
     padding-top: 177.78%;
   }
 
-  .ll-video {
+  #ll2-section-{{ section.id }} .ll2-video {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -626,7 +585,7 @@
     pointer-events: none;
   }
 
-  .ll-cover {
+  #ll2-section-{{ section.id }} .ll2-cover {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -638,21 +597,20 @@
     touch-action: manipulation;
   }
 
-  .ll-item.playing .ll-cover {
+  #ll2-section-{{ section.id }} .ll2-item.playing .ll2-cover {
     opacity: 0;
     pointer-events: none;
   }
 
   /* ── Arrows ── */
-  .ll-arrows-wrapper {
+  #ll2-section-{{ section.id }} .ll2-arrows-wrapper {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    column-gap: 30px;
+    gap: 30px;
     margin-top: 40px;
   }
 
-  .ll-arrow {
+  #ll2-section-{{ section.id }} .ll2-arrow {
     width: 48px;
     height: 48px;
     border-radius: 50%;
@@ -669,11 +627,9 @@
     user-select: none;
   }
 
-  .ll-arrow:hover {
-    background: #fff;
-  }
+  #ll2-section-{{ section.id }} .ll2-arrow:hover { background: #f0f0f0; }
 
-  .ll-arrow svg {
+  #ll2-section-{{ section.id }} .ll2-arrow svg {
     width: 20px;
     height: 20px;
     fill: none;
@@ -684,32 +640,52 @@
     display: block;
   }
 
-  /* Slider viewport hidden until Splide ready */
-  .ll-slider-outer .splide:not(.is-initialized) .splide__list {
-    visibility: hidden;
+  /* ── Dots ── */
+  #ll2-section-{{ section.id }} .ll2-dots-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 0;
+  }
+
+  #ll2-section-{{ section.id }} .ll2-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  #ll2-section-{{ section.id }} .ll2-dot.is-active {
+    background: #fff;
+    transform: scale(1.3);
   }
 </style>
 
-<div class="ll-section" id="ll-section-{{ section.id }}">
+<div id="ll2-section-{{ section.id }}">
   <div class="page-width">
-    <h2 class="ll-title">{{ section.settings.title }}</h2>
+    <h2 class="ll2-title">{{ section.settings.title }}</h2>
 
     {% if section.settings.layout == 'grid' %}
 
-      <div class="ll-grid">
+      <div class="ll2-grid">
         {% for block in section.blocks %}
-          <div class="ll-item" style="width:{{ section.settings.video_width }}px;" {{ block.shopify_attributes }}>
-            <div class="ll-video-wrapper">
+          <div class="ll2-item" style="width:{{ section.settings.video_width }}px;" {{ block.shopify_attributes }}>
+            <div class="ll2-video-wrapper">
               {% if block.settings.video %}
                 {% if block.settings.video.preview_image %}
                   {% assign poster_url = block.settings.video.preview_image | image_url: width: 1200 %}
-                  {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, poster: poster_url, class: 'll-video' }}
+                  {{ block.settings.video | video_tag: muted: true, loop: true, playsinline: true, poster: poster_url, class: 'll2-video' }}
                 {% else %}
-                  {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll-video' }}
+                  {{ block.settings.video | video_tag: muted: true, loop: true, playsinline: true, class: 'll2-video' }}
                 {% endif %}
               {% endif %}
               {% if block.settings.cover_image %}
-                <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
+                <img class="ll2-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
               {% endif %}
             </div>
           </div>
@@ -718,243 +694,279 @@
 
     {% else %}
 
-      <div class="ll-slider-outer">
-
-        <div
-          class="splide ll-splide"
-          id="ll-splide-{{ section.id }}"
-        >
-          <div class="splide__track">
-            <ul class="splide__list">
-              {% for block in section.blocks %}
-                <li class="splide__slide ll-item" {{ block.shopify_attributes }}>
-                  <div class="ll-video-wrapper">
-                    {% if block.settings.video %}
-                      {% if block.settings.video.preview_image %}
-                        {% assign poster_url = block.settings.video.preview_image | image_url: width: 1200 %}
-                        {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, poster: poster_url, class: 'll-video' }}
-                      {% else %}
-                        {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll-video' }}
-                      {% endif %}
+      <div class="ll2-slider-outer">
+        <div class="ll2-track" id="ll2-track-{{ section.id }}">
+          {% for block in section.blocks %}
+            <div class="ll2-slide" {{ block.shopify_attributes }}>
+              <div class="ll2-item">
+                <div class="ll2-video-wrapper">
+                  {% if block.settings.video %}
+                    {% if block.settings.video.preview_image %}
+                      {% assign poster_url = block.settings.video.preview_image | image_url: width: 1200 %}
+                      {{ block.settings.video | video_tag: muted: true, loop: true, playsinline: true, poster: poster_url, class: 'll2-video' }}
+                    {% else %}
+                      {{ block.settings.video | video_tag: muted: true, loop: true, playsinline: true, class: 'll2-video' }}
                     {% endif %}
-                    {% if block.settings.cover_image %}
-                      <img class="ll-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
-                    {% endif %}
-                  </div>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
+                  {% endif %}
+                  {% if block.settings.cover_image %}
+                    <img class="ll2-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
         </div>
-
-        {% if section.settings.show_arrows %}
-          <div class="ll-arrows-wrapper">
-            <button type="button" class="ll-arrow ll-arrow-prev" id="ll-prev-{{ section.id }}" aria-label="Previous">
-              <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M23.848 13.1275H2.41211M2.41211 13.1275L13.1284 23.8438M2.41211 13.1275L13.1284 2.41113" stroke="#5D5D5D" stroke-width="4.82283" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-            <button type="button" class="ll-arrow ll-arrow-next" id="ll-next-{{ section.id }}" aria-label="Next">
-              <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2.41211 13.1275H23.848M23.848 13.1275L13.1317 23.8438M23.848 13.1275L13.1317 2.41113" stroke="#5D5D5D" stroke-width="4.82283" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-          </div>
-        {% endif %}
-
       </div>
+
+      {% if section.settings.show_arrows %}
+        <div class="ll2-arrows-wrapper">
+          <button type="button" class="ll2-arrow" id="ll2-prev-{{ section.id }}" aria-label="Previous">
+            <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
+              <path d="M23.848 13.1275H2.41211M2.41211 13.1275L13.1284 23.8438M2.41211 13.1275L13.1284 2.41113" stroke="#5D5D5D" stroke-width="4.82283" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button type="button" class="ll2-arrow" id="ll2-next-{{ section.id }}" aria-label="Next">
+            <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.41211 13.1275H23.848M23.848 13.1275L13.1317 23.8438M23.848 13.1275L13.1317 2.41113" stroke="#5D5D5D" stroke-width="4.82283" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_dots %}
+        <div class="ll2-dots-wrapper" id="ll2-dots-{{ section.id }}"></div>
+      {% endif %}
 
     {% endif %}
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js" defer></script>
-
 <script>
 (function () {
-
-  var sectionEl = document.getElementById('ll-section-{{ section.id }}');
+  var ID         = '{{ section.id }}';
+  var sectionEl  = document.getElementById('ll2-section-' + ID);
   var sectionInView = false;
+  var rafId      = null;
 
-  function playFromStart(video) {
-    video.muted = true;
-    video.currentTime = 0;
-    var p = video.play();
-    if (p && p.catch) p.catch(function () {});
+  /* ─────────────────────────────────────────
+     VIDEO HELPERS
+     All playback is managed entirely in JS.
+     The autoplay attribute is stripped so the
+     browser never auto-manages these videos.
+  ───────────────────────────────────────── */
+  function getVideos() {
+    return sectionEl ? Array.prototype.slice.call(sectionEl.querySelectorAll('video')) : [];
   }
 
-  function stopVideo(video) {
-    video.pause();
-    video.currentTime = 0;
+  function safePlay(v) {
+    v.muted = true;
+    if (v.paused) {
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+    }
   }
 
-  function getAllVideos() {
-    if (!sectionEl) return [];
-    return Array.prototype.slice.call(sectionEl.querySelectorAll('.ll-item video'));
+  function safePause(v) {
+    if (!v.paused) v.pause();
   }
 
-  function playAll() {
-    getAllVideos().forEach(function (v) { playFromStart(v); });
+  /* ─────────────────────────────────────────
+     POLLING LOOP
+     Runs via requestAnimationFrame, checks
+     every 500 ms while section is visible.
+     Any external pause (Dawn, media-gallery,
+     etc.) is immediately reversed.
+  ───────────────────────────────────────── */
+  function startPolling() {
+    if (rafId) return;
+    var last = 0;
+    function tick(ts) {
+      if (ts - last >= 500) {
+        last = ts;
+        getVideos().forEach(safePlay);
+      }
+      rafId = sectionInView ? requestAnimationFrame(tick) : null;
+    }
+    rafId = requestAnimationFrame(tick);
   }
 
-  function stopAll() {
-    getAllVideos().forEach(function (v) { stopVideo(v); });
+  function stopPolling() {
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    getVideos().forEach(safePause);
   }
 
-  // ── Cover overlay binding (for manually uploaded cover images) ──
+  /* ─────────────────────────────────────────
+     COVER OVERLAYS
+  ───────────────────────────────────────── */
   function bindCovers() {
     if (!sectionEl) return;
-    sectionEl.querySelectorAll('.ll-item').forEach(function (item) {
+    sectionEl.querySelectorAll('.ll2-item').forEach(function (item) {
       var video = item.querySelector('video');
-      var cover = item.querySelector('.ll-cover');
-      if (!video) return;
-
-      // Bind cover click once
-      if (cover && !cover.dataset.llBound) {
-        cover.dataset.llBound = '1';
-        cover.addEventListener('click', function () { playFromStart(video); });
-      }
-
-      // Bind video events once
-      if (video.dataset.llBound) return;
-      video.dataset.llBound = '1';
-
+      var cover = item.querySelector('.ll2-cover');
+      if (!video || video.dataset.ll2Bound) return;
+      video.dataset.ll2Bound = '1';
       video.muted = true;
       video.addEventListener('playing', function () { item.classList.add('playing'); });
-      video.addEventListener('pause', function () {
-        item.classList.remove('playing');
-        // If something external pauses the video while the section is visible,
-        // restart it automatically (handles Dawn theme media-pause signals, etc.)
-        if (sectionInView) {
-          setTimeout(function () {
-            if (sectionInView && video.paused) {
-              var p = video.play();
-              if (p && p.catch) p.catch(function () {});
-            }
-          }, 200);
-        }
-      });
+      video.addEventListener('pause',   function () { item.classList.remove('playing'); });
+      if (cover) {
+        cover.addEventListener('click', function () { safePlay(video); });
+      }
     });
   }
 
-  // ── Section-level IntersectionObserver ──
+  /* ─────────────────────────────────────────
+     INTERSECTION OBSERVER
+  ───────────────────────────────────────── */
   function observeSection() {
     if (!sectionEl) return;
-
-    var observer = new IntersectionObserver(function (entries) {
+    new IntersectionObserver(function (entries) {
       sectionInView = entries[0].isIntersecting;
-      if (sectionInView) {
-        playAll();
-      } else {
-        stopAll();
+      if (sectionInView) startPolling();
+      else stopPolling();
+    }, { threshold: 0.1 }).observe(sectionEl);
+
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden && sectionInView) startPolling();
+      else if (document.hidden) stopPolling();
+    });
+  }
+
+  /* ─────────────────────────────────────────
+     CUSTOM CSS SLIDER
+     Pure transform-based, no library.
+  ───────────────────────────────────────── */
+  function initSlider() {
+    var track    = document.getElementById('ll2-track-' + ID);
+    var dotsWrap = document.getElementById('ll2-dots-' + ID);
+    var prevBtn  = document.getElementById('ll2-prev-' + ID);
+    var nextBtn  = document.getElementById('ll2-next-' + ID);
+    if (!track) return;
+
+    var totalSlides   = track.children.length;
+    var desktopPer    = {{ section.settings.slides_to_show | json }};
+    var mobilePer     = {{ section.settings.slides_to_show_mobile | json }};
+    var doAutoplay    = {{ section.settings.autoplay | json }};
+    var autoInterval  = {{ section.settings.autoplay_speed | json }};
+    var currentIdx    = 0;
+    var autoTimer     = null;
+
+    function perPage() {
+      return window.innerWidth <= 749 ? mobilePer : desktopPer;
+    }
+
+    function maxIdx() {
+      return Math.max(0, totalSlides - perPage());
+    }
+
+    /* Build / rebuild dot buttons */
+    function buildDots() {
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = '';
+      var count = maxIdx() + 1;
+      for (var i = 0; i < count; i++) {
+        var btn = document.createElement('button');
+        btn.className = 'll2-dot' + (i === 0 ? ' is-active' : '');
+        btn.setAttribute('data-index', String(i));
+        btn.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        dotsWrap.appendChild(btn);
       }
-    }, { threshold: 0.15 });
-
-    observer.observe(sectionEl);
-
-    // Scroll fallback: on iOS the IO callback is async and may get blocked;
-    // during an active scroll gesture video.play() is more likely to succeed
-    var ticking = false;
-    window.addEventListener('scroll', function () {
-      if (!sectionInView || ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () {
-        getAllVideos().forEach(function (v) {
-          if (v.paused) playFromStart(v);
+      dotsWrap.querySelectorAll('.ll2-dot').forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          goTo(parseInt(dot.getAttribute('data-index'), 10));
+          resetAuto();
         });
-        ticking = false;
       });
+    }
+
+    function updateDots() {
+      if (!dotsWrap) return;
+      dotsWrap.querySelectorAll('.ll2-dot').forEach(function (d, i) {
+        d.classList.toggle('is-active', i === currentIdx);
+      });
+    }
+
+    /* Move the track */
+    function moveTo(idx, animated) {
+      currentIdx = Math.max(0, Math.min(idx, maxIdx()));
+      if (animated) {
+        track.classList.add('is-animated');
+      } else {
+        track.classList.remove('is-animated');
+      }
+      var pct = -(currentIdx * (100 / perPage()));
+      track.style.transform = 'translateX(' + pct + '%)';
+      updateDots();
+    }
+
+    function goTo(idx) { moveTo(idx, true); }
+
+    function goNext() {
+      goTo(currentIdx >= maxIdx() ? 0 : currentIdx + 1);
+    }
+
+    function goPrev() {
+      goTo(currentIdx <= 0 ? maxIdx() : currentIdx - 1);
+    }
+
+    /* Arrows */
+    if (prevBtn) prevBtn.addEventListener('click', function () { goPrev(); resetAuto(); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { goNext(); resetAuto(); });
+
+    /* Touch swipe */
+    var tx = 0, ty = 0;
+    track.addEventListener('touchstart', function (e) {
+      tx = e.touches[0].clientX;
+      ty = e.touches[0].clientY;
+    }, { passive: true });
+    track.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - tx;
+      var dy = e.changedTouches[0].clientY - ty;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+        if (dx < 0) goNext(); else goPrev();
+        resetAuto();
+      }
     }, { passive: true });
 
-    // Tab visibility: resume when user switches back to the tab
-    document.addEventListener('visibilitychange', function () {
-      if (!document.hidden && sectionInView) playAll();
+    /* Slider autoplay (for the slider carousel — separate from video autoplay) */
+    function startAuto() {
+      if (!doAutoplay) return;
+      clearInterval(autoTimer);
+      autoTimer = setInterval(goNext, autoInterval);
+    }
+
+    function resetAuto() {
+      if (!doAutoplay) return;
+      clearInterval(autoTimer);
+      startAuto();
+    }
+
+    /* Recalculate on resize */
+    window.addEventListener('resize', function () {
+      buildDots();
+      moveTo(Math.min(currentIdx, maxIdx()), false);
     });
+
+    buildDots();
+    moveTo(0, false);
+    startAuto();
   }
 
-  // ── Slider init ──
-  function initSlider() {
-    if (!sectionEl) return;
-
-    var splideEl = document.getElementById('ll-splide-{{ section.id }}');
-    if (!splideEl) return;
-
-    if (splideEl.dataset.llInit) return;
-    splideEl.dataset.llInit = '1';
-
-    if (typeof Splide === 'undefined') {
-      setTimeout(initSlider, 100);
-      return;
-    }
-
-    var desktopShow   = {{ section.settings.slides_to_show | json }};
-    var mobileShow    = {{ section.settings.slides_to_show_mobile | json }};
-    var showDots      = {{ section.settings.show_dots | json }};
-    var doAutoplay    = {{ section.settings.autoplay | json }};
-    var autoplaySpeed = {{ section.settings.autoplay_speed | json }};
-
-    var opts = {
-      type        : 'loop',
-      perPage     : desktopShow,
-      perMove     : 1,
-      gap         : '20px',
-      arrows      : false,
-      pagination  : showDots,
-      speed       : 500,
-      easing      : 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-      breakpoints : { 749: { perPage : mobileShow, gap : '12px' } }
-    };
-
-    if (doAutoplay) {
-      opts.autoplay     = true;
-      opts.interval     = autoplaySpeed;
-      opts.pauseOnHover = true;
-    }
-
-    var splide = new Splide('#ll-splide-{{ section.id }}', opts);
-    splide.mount();
-
-    var prevBtn = sectionEl.querySelector('#ll-prev-{{ section.id }}');
-    var nextBtn = sectionEl.querySelector('#ll-next-{{ section.id }}');
-
-    function bindBtn(btn, dir) {
-      if (!btn) return;
-      var tapped = false;
-      btn.addEventListener('touchstart', function () { tapped = false; }, { passive: true });
-      btn.addEventListener('touchend', function (e) {
-        e.preventDefault(); e.stopPropagation();
-        tapped = true; splide.go(dir);
-      }, { passive: false });
-      btn.addEventListener('click', function () {
-        if (tapped) { tapped = false; return; }
-        splide.go(dir);
-      });
-    }
-
-    bindBtn(prevBtn, '<');
-    bindBtn(nextBtn, '>');
-
-    splide.on('mounted', function () {
-      bindCovers();
-      observeSection();
-    });
-  }
-
-  // ── Entry point ──
+  /* ─────────────────────────────────────────
+     ENTRY POINT
+  ───────────────────────────────────────── */
   function init() {
     if (!sectionEl) return;
 
-    if (sectionEl.querySelector('.ll-grid')) {
-      bindCovers();
-      observeSection();
-      return;
-    }
+    /* Strip autoplay attribute — JS owns all playback */
+    getVideos().forEach(function (v) {
+      v.removeAttribute('autoplay');
+      v.muted = true;
+    });
 
-    if (typeof Splide === 'undefined') {
-      var s = document.querySelector('script[src*="splide"]');
-      if (s) { s.addEventListener('load', initSlider); }
-      else    { setTimeout(initSlider, 300); }
-    } else {
+    bindCovers();
+    observeSection();
+
+    if (document.getElementById('ll2-track-' + ID)) {
       initSlider();
     }
   }
@@ -965,14 +977,15 @@
     init();
   }
 
+  /* Theme editor reload */
   document.addEventListener('shopify:section:load', function () {
-    sectionEl = document.getElementById('ll-section-{{ section.id }}');
+    sectionEl = document.getElementById('ll2-section-' + ID);
     sectionInView = false;
-    var el = document.getElementById('ll-splide-{{ section.id }}');
-    if (el) delete el.dataset.llInit;
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
     if (sectionEl) {
-      sectionEl.querySelectorAll('.ll-cover').forEach(function (c) { delete c.dataset.llBound; });
-      sectionEl.querySelectorAll('video').forEach(function (v) { delete v.dataset.llBound; });
+      sectionEl.querySelectorAll('video').forEach(function (v) {
+        delete v.dataset.ll2Bound;
+      });
     }
     init();
   });
