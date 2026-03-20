@@ -310,15 +310,21 @@
         },
         "video_VVfqtJ": {
           "type": "video",
-          "settings": {}
+          "settings": {
+            "cover_image": "shopify://shop_images/9292B4B04681E4A75E4F07C310528C82.jpg"
+          }
         },
         "video_47HDrT": {
           "type": "video",
-          "settings": {}
+          "settings": {
+            "cover_image": "shopify://shop_images/video-bg.webp"
+          }
         },
         "video_Jb3Fid": {
           "type": "video",
-          "settings": {}
+          "settings": {
+            "cover_image": "shopify://shop_images/IMG_1252.jpg"
+          }
         }
       },
       "block_order": [
