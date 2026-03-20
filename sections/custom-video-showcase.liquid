@@ -675,9 +675,9 @@
               {% if block.settings.video %}
                 {% if block.settings.video.preview_image %}
                   {% assign poster_url = block.settings.video.preview_image | image_url: width: 1200 %}
-                  {{ block.settings.video | video_tag: muted: true, loop: true, playsinline: true, poster: poster_url, class: 'll2-video' }}
+                  {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, poster: poster_url, class: 'll2-video' }}
                 {% else %}
-                  {{ block.settings.video | video_tag: muted: true, loop: true, playsinline: true, class: 'll2-video' }}
+                  {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll2-video' }}
                 {% endif %}
               {% endif %}
               {% if block.settings.cover_image %}
@@ -699,9 +699,9 @@
                   {% if block.settings.video %}
                     {% if block.settings.video.preview_image %}
                       {% assign poster_url = block.settings.video.preview_image | image_url: width: 1200 %}
-                      {{ block.settings.video | video_tag: muted: true, loop: true, playsinline: true, poster: poster_url, class: 'll2-video' }}
+                      {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, poster: poster_url, class: 'll2-video' }}
                     {% else %}
-                      {{ block.settings.video | video_tag: muted: true, loop: true, playsinline: true, class: 'll2-video' }}
+                      {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll2-video' }}
                     {% endif %}
                   {% endif %}
                   {% if block.settings.cover_image %}
@@ -898,7 +898,6 @@
       Array.prototype.slice.call(
         track.querySelectorAll('[data-ll2-clone] video')
       ).forEach(function (v) {
-        v.removeAttribute('autoplay');
         v.muted = true;
       });
 
@@ -1056,7 +1055,6 @@
 
     /* Strip autoplay attribute — JS owns all playback */
     getVideos().forEach(function (v) {
-      v.removeAttribute('autoplay');
       v.muted = true;
     });
 
