@@ -446,49 +446,35 @@
   "tag": "section",
   "class": "section",
   "settings": [
-    { "type": "text", "id": "title", "label": "Title", "default": "Behind the scenes" },
+    { "type": "text",  "id": "title",  "label": "Title",  "default": "Behind the scenes" },
     { "type": "header", "content": "Section Padding" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding Top (Desktop)", "default": 36 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding Bottom (Desktop)", "default": 36 },
-    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding Top (Mobile)", "default": 20 },
-    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding Bottom (Mobile)", "default": 20 },
+    { "type": "range", "id": "padding_top",           "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding Top (Desktop)",  "default": 36 },
+    { "type": "range", "id": "padding_bottom",         "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding Bottom (Desktop)","default": 36 },
+    { "type": "range", "id": "padding_top_mobile",     "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding Top (Mobile)",    "default": 20 },
+    { "type": "range", "id": "padding_bottom_mobile",  "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding Bottom (Mobile)", "default": 20 },
     {
-      "type": "select",
-      "id": "layout",
-      "label": "Layout",
-      "options": [
-        { "value": "grid", "label": "Grid" },
-        { "value": "slider", "label": "Slider" }
-      ],
+      "type": "select", "id": "layout", "label": "Layout",
+      "options": [{ "value": "grid", "label": "Grid" }, { "value": "slider", "label": "Slider" }],
       "default": "grid"
     },
-    { "type": "range", "id": "video_width", "min": 200, "max": 600, "step": 10, "unit": "px", "label": "Video Width (Grid)", "default": 360 },
-    { "type": "color", "id": "background_color", "label": "Background Color" },
-    { "type": "header", "content": "Slider Settings" },
-    { "type": "range", "id": "slides_to_show", "min": 1, "max": 5, "step": 1, "label": "Slides to Show", "default": 3 },
-    { "type": "range", "id": "slides_to_show_mobile", "min": 1, "max": 3, "step": 1, "label": "Slides to Show (Mobile)", "default": 2 },
-    { "type": "checkbox", "id": "show_arrows", "label": "Show Navigation Arrows", "default": true },
-    { "type": "checkbox", "id": "show_dots", "label": "Show Navigation Dots", "default": true },
-    { "type": "checkbox", "id": "autoplay", "label": "Autoplay Slider", "default": false },
-    { "type": "range", "id": "autoplay_speed", "min": 2000, "max": 8000, "step": 500, "unit": "ms", "label": "Autoplay Speed", "default": 3000 }
+    { "type": "range",    "id": "video_width",           "min": 200, "max": 600, "step": 10, "unit": "px", "label": "Video Width (Grid)", "default": 360 },
+    { "type": "color",    "id": "background_color",      "label": "Background Color" },
+    { "type": "header",   "content": "Slider Settings" },
+    { "type": "range",    "id": "slides_to_show",        "min": 1, "max": 5, "step": 1, "label": "Slides to Show",          "default": 3 },
+    { "type": "range",    "id": "slides_to_show_mobile", "min": 1, "max": 3, "step": 1, "label": "Slides to Show (Mobile)", "default": 2 },
+    { "type": "checkbox", "id": "show_arrows",   "label": "Show Navigation Arrows", "default": true  },
+    { "type": "checkbox", "id": "show_dots",     "label": "Show Navigation Dots",   "default": true  },
+    { "type": "checkbox", "id": "autoplay",      "label": "Autoplay Slider",        "default": false },
+    { "type": "range",    "id": "autoplay_speed","min": 2000, "max": 8000, "step": 500, "unit": "ms", "label": "Autoplay Speed", "default": 3000 }
   ],
-  "blocks": [
-    {
-      "type": "video",
-      "name": "Video",
-      "limit": 10,
-      "settings": [
-        { "type": "video", "id": "video", "label": "Video" },
-        { "type": "image_picker", "id": "cover_image", "label": "Cover Image" }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Custom Video Section",
-      "blocks": [{ "type": "video" }, { "type": "video" }, { "type": "video" }]
-    }
-  ]
+  "blocks": [{
+    "type": "video", "name": "Video", "limit": 10,
+    "settings": [
+      { "type": "video",        "id": "video",       "label": "Video"       },
+      { "type": "image_picker", "id": "cover_image", "label": "Cover Image" }
+    ]
+  }],
+  "presets": [{ "name": "Custom Video Section", "blocks": [{ "type": "video" }, { "type": "video" }, { "type": "video" }] }]
 }
 {% endschema %}
 
@@ -499,31 +485,31 @@
 {% endfor %}
 
 <style>
-  #ll2-section-{{ section.id }} {
+  #vs-{{ section.id }} {
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
     text-align: center;
-    background: radial-gradient(circle at center, #302d3a, #191720), url(/cdn/shop/files/bg.webp?v=1773264135);
+    background: radial-gradient(circle at center, #302d3a, #191720),
+                url(/cdn/shop/files/bg.webp?v=1773264135);
     background-size: cover;
     background-position: center;
     background-blend-mode: soft-light;
   }
-
-  @media screen and (max-width: 749px) {
-    #ll2-section-{{ section.id }} {
+  @media (max-width: 749px) {
+    #vs-{{ section.id }} {
       padding-top: {{ section.settings.padding_top_mobile }}px;
       padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
     }
   }
 
-  #ll2-section-{{ section.id }} .ll2-title {
+  #vs-{{ section.id }} .vs-title {
     font-size: 40px;
     margin: 0 0 40px;
     color: #fff;
   }
 
   /* ── Grid ── */
-  #ll2-section-{{ section.id }} .ll2-grid {
+  #vs-{{ section.id }} .vs-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -532,46 +518,51 @@
     margin: 0 auto;
   }
 
-  /* ── Slider ── */
-  #ll2-section-{{ section.id }} .ll2-slider-outer {
+  /* ── Scroll-snap slider ──
+     Using native browser scroll instead of CSS transforms.
+     This is the most iOS-compatible slider approach:
+     scrolled-away slides are truly off-screen, so
+     IntersectionObserver and iOS autoplay both work correctly. */
+  #vs-{{ section.id }} .vs-outer {
     max-width: 1300px;
     margin: 0 auto;
-    overflow: hidden;
+    overflow: hidden;          /* clips scrolled-away slides */
   }
 
-  #ll2-section-{{ section.id }} .ll2-track {
+  #vs-{{ section.id }} .vs-track {
     display: flex;
-    will-change: transform;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-snap-stop: always;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: none;
+    scrollbar-width: none;
   }
+  #vs-{{ section.id }} .vs-track::-webkit-scrollbar { display: none; }
 
-  #ll2-section-{{ section.id }} .ll2-slide {
+  #vs-{{ section.id }} .vs-slide {
     flex-shrink: 0;
-    width: calc(100% / {{ section.settings.slides_to_show }});
+    scroll-snap-align: start;
     padding: 0 10px;
     box-sizing: border-box;
+    /* Width is set in px by JS */
   }
-
-  @media screen and (max-width: 749px) {
-    #ll2-section-{{ section.id }} .ll2-slide {
-      width: calc(100% / {{ section.settings.slides_to_show_mobile }});
-      padding: 0 6px;
-    }
+  @media (max-width: 749px) {
+    #vs-{{ section.id }} .vs-slide { padding: 0 6px; }
   }
 
   /* ── Shared item ── */
-  #ll2-section-{{ section.id }} .ll2-item {
+  #vs-{{ section.id }} .vs-item {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
   }
-
-  #ll2-section-{{ section.id }} .ll2-video-wrapper {
+  #vs-{{ section.id }} .vs-video-wrapper {
     position: relative;
     width: 100%;
     padding-top: 177.78%;
   }
-
-  #ll2-section-{{ section.id }} .ll2-video {
+  #vs-{{ section.id }} .vs-video {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -580,8 +571,7 @@
     display: block;
     pointer-events: none;
   }
-
-  #ll2-section-{{ section.id }} .ll2-cover {
+  #vs-{{ section.id }} .vs-cover {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -592,105 +582,88 @@
     cursor: pointer;
     touch-action: manipulation;
   }
-
-  #ll2-section-{{ section.id }} .ll2-item.playing .ll2-cover {
+  #vs-{{ section.id }} .vs-item.playing .vs-cover {
     opacity: 0;
     pointer-events: none;
   }
 
+  /* Hide iOS native play-button overlay */
+  #vs-{{ section.id }} video::-webkit-media-controls               { display: none !important; }
+  #vs-{{ section.id }} video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none;
+  }
+
   /* ── Arrows ── */
-  #ll2-section-{{ section.id }} .ll2-arrows-wrapper {
+  #vs-{{ section.id }} .vs-arrows {
     display: flex;
     justify-content: center;
     gap: 30px;
     margin-top: 40px;
   }
-
-  #ll2-section-{{ section.id }} .ll2-arrow {
-    width: 48px;
-    height: 48px;
+  #vs-{{ section.id }} .vs-arrow {
+    width: 48px; height: 48px;
     border-radius: 50%;
     border: 2px solid rgba(255,255,255,0.6);
     background: #fff;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     padding: 0;
     transition: background 0.2s;
     -webkit-tap-highlight-color: transparent;
     -webkit-appearance: none;
     user-select: none;
   }
-
-  #ll2-section-{{ section.id }} .ll2-arrow:hover { background: #f0f0f0; }
-
-  #ll2-section-{{ section.id }} .ll2-arrow svg {
-    width: 20px;
-    height: 20px;
-    fill: none;
-    stroke: #5D5D5D;
-    stroke-width: 2.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  #vs-{{ section.id }} .vs-arrow:hover { background: #f0f0f0; }
+  #vs-{{ section.id }} .vs-arrow svg {
+    width: 20px; height: 20px;
+    fill: none; stroke: #5D5D5D;
+    stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
     display: block;
   }
 
   /* ── Dots ── */
-  #ll2-section-{{ section.id }} .ll2-dots-wrapper {
+  #vs-{{ section.id }} .vs-dots {
     display: flex;
     justify-content: center;
     gap: 8px;
     margin-top: 20px;
     padding: 0;
   }
-
-  #ll2-section-{{ section.id }} .ll2-dot {
-    width: 8px;
-    height: 8px;
+  #vs-{{ section.id }} .vs-dot {
+    width: 8px; height: 8px;
     border-radius: 50%;
     background: rgba(255,255,255,0.35);
-    border: none;
-    padding: 0;
+    border: none; padding: 0;
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
   }
-
-  #ll2-section-{{ section.id }} .ll2-dot.is-active {
+  #vs-{{ section.id }} .vs-dot.is-active {
     background: #fff;
     transform: scale(1.3);
   }
-
-  /* Hide iOS Safari's native "tap to play" overlay on muted autoplay videos */
-  #ll2-section-{{ section.id }} video::-webkit-media-controls-start-playback-button {
-    display: none !important;
-    -webkit-appearance: none;
-  }
-  #ll2-section-{{ section.id }} video::-webkit-media-controls {
-    display: none !important;
-  }
 </style>
 
-<div id="ll2-section-{{ section.id }}">
+<div id="vs-{{ section.id }}">
   <div class="page-width">
-    <h2 class="ll2-title">{{ section.settings.title }}</h2>
+    <h2 class="vs-title">{{ section.settings.title }}</h2>
 
     {% if section.settings.layout == 'grid' %}
 
-      <div class="ll2-grid">
+      <div class="vs-grid">
         {% for block in section.blocks %}
-          <div class="ll2-item" style="width:{{ section.settings.video_width }}px;" {{ block.shopify_attributes }}>
-            <div class="ll2-video-wrapper">
+          <div class="vs-item" style="width:{{ section.settings.video_width }}px;" {{ block.shopify_attributes }}>
+            <div class="vs-video-wrapper">
               {% if block.settings.video %}
                 {% if block.settings.video.preview_image %}
                   {% assign poster_url = block.settings.video.preview_image | image_url: width: 1200 %}
-                  {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, poster: poster_url, class: 'll2-video' }}
+                  {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, poster: poster_url, class: 'vs-video' }}
                 {% else %}
-                  {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll2-video' }}
+                  {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'vs-video' }}
                 {% endif %}
               {% endif %}
               {% if block.settings.cover_image %}
-                <img class="ll2-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
+                <img class="vs-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
               {% endif %}
             </div>
           </div>
@@ -699,22 +672,22 @@
 
     {% else %}
 
-      <div class="ll2-slider-outer">
-        <div class="ll2-track" id="ll2-track-{{ section.id }}">
+      <div class="vs-outer" id="vs-outer-{{ section.id }}">
+        <div class="vs-track" id="vs-track-{{ section.id }}">
           {% for block in section.blocks %}
-            <div class="ll2-slide" {{ block.shopify_attributes }}>
-              <div class="ll2-item">
-                <div class="ll2-video-wrapper">
+            <div class="vs-slide" {{ block.shopify_attributes }}>
+              <div class="vs-item">
+                <div class="vs-video-wrapper">
                   {% if block.settings.video %}
                     {% if block.settings.video.preview_image %}
                       {% assign poster_url = block.settings.video.preview_image | image_url: width: 1200 %}
-                      {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, poster: poster_url, class: 'll2-video' }}
+                      {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, poster: poster_url, class: 'vs-video' }}
                     {% else %}
-                      {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'll2-video' }}
+                      {{ block.settings.video | video_tag: autoplay: true, muted: true, loop: true, playsinline: true, class: 'vs-video' }}
                     {% endif %}
                   {% endif %}
                   {% if block.settings.cover_image %}
-                    <img class="ll2-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
+                    <img class="vs-cover" src="{{ block.settings.cover_image | image_url: width: 1200 }}" loading="eager" fetchpriority="high" decoding="sync" alt="">
                   {% endif %}
                 </div>
               </div>
@@ -724,22 +697,18 @@
       </div>
 
       {% if section.settings.show_arrows %}
-        <div class="ll2-arrows-wrapper">
-          <button type="button" class="ll2-arrow" id="ll2-prev-{{ section.id }}" aria-label="Previous">
-            <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
-              <path d="M23.848 13.1275H2.41211M2.41211 13.1275L13.1284 23.8438M2.41211 13.1275L13.1284 2.41113" stroke="#5D5D5D" stroke-width="4.82283" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+        <div class="vs-arrows">
+          <button type="button" class="vs-arrow" id="vs-prev-{{ section.id }}" aria-label="Previous">
+            <svg viewBox="0 0 27 27"><path d="M23.848 13.128H2.412M2.412 13.128l10.716 10.716M2.412 13.128l10.716-10.717" stroke-width="4.82" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-          <button type="button" class="ll2-arrow" id="ll2-next-{{ section.id }}" aria-label="Next">
-            <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2.41211 13.1275H23.848M23.848 13.1275L13.1317 23.8438M23.848 13.1275L13.1317 2.41113" stroke="#5D5D5D" stroke-width="4.82283" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+          <button type="button" class="vs-arrow" id="vs-next-{{ section.id }}" aria-label="Next">
+            <svg viewBox="0 0 27 27"><path d="M2.412 13.128H23.848M23.848 13.128L13.132 23.844M23.848 13.128L13.132 2.411" stroke-width="4.82" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
       {% endif %}
 
       {% if section.settings.show_dots %}
-        <div class="ll2-dots-wrapper" id="ll2-dots-{{ section.id }}"></div>
+        <div class="vs-dots" id="vs-dots-{{ section.id }}"></div>
       {% endif %}
 
     {% endif %}
@@ -748,223 +717,111 @@
 
 <script>
 (function () {
-  var ID         = '{{ section.id }}';
-  var sectionEl  = document.getElementById('ll2-section-' + ID);
-  var sectionInView = false;
-  var rafId      = null;
+  var SID = '{{ section.id }}';
 
-  /* ── Is this video actually visible in the browser viewport? ──
-     iOS Safari silently rejects play() on any video that is
-     translated/clipped off-screen, so we must check before calling. */
-  function isInViewport(v) {
-    var r = v.getBoundingClientRect();
-    return r.width > 0 && r.height > 0
-      && r.right  > 0 && r.left < (window.innerWidth  || document.documentElement.clientWidth)
-      && r.bottom > 0 && r.top  < (window.innerHeight || document.documentElement.clientHeight);
-  }
-
-  function getVideos() {
-    return sectionEl ? Array.prototype.slice.call(sectionEl.querySelectorAll('video')) : [];
-  }
-
-  /* safePlay: only plays if video is actually on screen.
-     On rejection (iOS not ready yet) waits for canplay and retries. */
-  function safePlay(v) {
-    if (!isInViewport(v)) return;
-    v.muted = true;
-    if (!v.paused) return;
-    var p = v.play();
-    if (p && p.catch) {
-      p.catch(function () {
-        function onReady() {
-          v.removeEventListener('canplay', onReady);
-          if (!isInViewport(v)) return;
-          v.muted = true;
-          var p2 = v.play();
-          if (p2 && p2.catch) p2.catch(function () {});
-        }
-        v.addEventListener('canplay', onReady);
-      });
-    }
-  }
-
-  function safePause(v) {
-    if (!v.paused) v.pause();
-  }
-
-  /* ── Polling loop ──
-     Runs every 500 ms while section is visible.
-     Restarts any video that was externally paused (Dawn theme, etc.)
-     The isInViewport check inside safePlay means only truly
-     visible videos are played — safe for iOS. */
-  function startPolling() {
-    if (rafId) return;
-    var last = 0;
-    function tick(ts) {
-      if (ts - last >= 500) {
-        last = ts;
-        getVideos().forEach(safePlay);
-      }
-      rafId = sectionInView ? requestAnimationFrame(tick) : null;
-    }
-    rafId = requestAnimationFrame(tick);
-  }
-
-  function stopPolling() {
-    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-    getVideos().forEach(safePause);
-  }
-
-  /* ── Bind a single video ──
-     Sets up playing/pause class, cover click, and critically a
-     per-video IntersectionObserver so the INSTANT a video slides
-     into the viewport (slider transition) iOS gets the play() call
-     at exactly the right moment. */
-  function bindVideo(v) {
-    if (v.dataset.ll2Bound) return;
-    v.dataset.ll2Bound = '1';
-    v.muted = true;
-
-    var item  = v.closest ? v.closest('.ll2-item') : null;
-    if (!item) { item = v.parentNode; while (item && !item.classList.contains('ll2-item')) item = item.parentNode; }
-
-    if (item) {
-      v.addEventListener('playing', function () { item.classList.add('playing'); });
-      v.addEventListener('pause',   function () { item.classList.remove('playing'); });
-      var cover = item.querySelector('.ll2-cover');
-      if (cover) {
-        cover.addEventListener('click', function () { safePlay(v); });
-      }
+  function run(sectionEl) {
+    var outerEl = sectionEl.querySelector('#vs-outer-' + SID);
+    var trackEl = sectionEl.querySelector('#vs-track-' + SID);
+    if (!outerEl || !trackEl) {
+      /* Grid layout — just bind videos */
+      bindAllVideos(sectionEl);
+      return;
     }
 
-    /* Per-video IO: fires play() the moment this video enters the viewport.
-       This is the key fix for iOS — play() must be called at the exact
-       moment visibility is confirmed, not from a polling loop tick. */
-    new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) {
-        safePlay(v);
-      } else {
-        if (!v.paused) v.pause();
-      }
-    }, { threshold: 0.3 }).observe(v);
-  }
+    var dotsWrap  = sectionEl.querySelector('#vs-dots-' + SID);
+    var prevBtn   = sectionEl.querySelector('#vs-prev-' + SID);
+    var nextBtn   = sectionEl.querySelector('#vs-next-' + SID);
+    var desktopPer  = {{ section.settings.slides_to_show | json }};
+    var mobilePer   = {{ section.settings.slides_to_show_mobile | json }};
+    var doAutoplay  = {{ section.settings.autoplay | json }};
+    var autoInterval= {{ section.settings.autoplay_speed | json }};
 
-  function bindAllVideos() {
-    if (!sectionEl) return;
-    getVideos().forEach(bindVideo);
-  }
+    /* Real slides captured before any cloning */
+    var realSlides  = Array.prototype.slice.call(trackEl.children);
+    var total       = realSlides.length;
+    var clonesAdded = 0;
+    var isJumping   = false;
+    var autoTimer   = null;
 
-  /* ── Section-level IO ── */
-  function observeSection() {
-    if (!sectionEl) return;
-    new IntersectionObserver(function (entries) {
-      sectionInView = entries[0].isIntersecting;
-      if (sectionInView) startPolling();
-      else stopPolling();
-    }, { threshold: 0.1 }).observe(sectionEl);
+    function pp()  { return window.innerWidth <= 749 ? mobilePer : desktopPer; }
+    function sw()  { return outerEl.offsetWidth / pp(); }
 
-    document.addEventListener('visibilitychange', function () {
-      if (!document.hidden && sectionInView) startPolling();
-      else if (document.hidden) stopPolling();
-    });
-  }
-
-  /* ─────────────────────────────────────────
-     INFINITE LOOP SLIDER
-  ───────────────────────────────────────── */
-  function initSlider() {
-    var track    = document.getElementById('ll2-track-' + ID);
-    var dotsWrap = document.getElementById('ll2-dots-' + ID);
-    var prevBtn  = document.getElementById('ll2-prev-' + ID);
-    var nextBtn  = document.getElementById('ll2-next-' + ID);
-    if (!track) return;
-
-    var realSlides    = Array.prototype.slice.call(track.children);
-    var totalSlides   = realSlides.length;
-    var desktopPer    = {{ section.settings.slides_to_show | json }};
-    var mobilePer     = {{ section.settings.slides_to_show_mobile | json }};
-    var doAutoplay    = {{ section.settings.autoplay | json }};
-    var autoInterval  = {{ section.settings.autoplay_speed | json }};
-    var currentIdx    = 0;
-    var clonesAdded   = 0;
-    var isBusy        = false;
-    var autoTimer     = null;
-
-    function perPage() { return window.innerWidth <= 749 ? mobilePer : desktopPer; }
-    function slideW()  { return track.parentElement.offsetWidth / perPage(); }
-
+    /* ── Build infinite-loop clones ──
+       Clones are real scrolled positions — NOT CSS transforms.
+       IntersectionObserver (default viewport root) correctly
+       detects them as off-screen because overflow:hidden clips them. */
     function buildClones() {
-      Array.prototype.slice.call(track.querySelectorAll('[data-ll2-clone]'))
-        .forEach(function (c) { track.removeChild(c); });
+      Array.prototype.slice.call(trackEl.querySelectorAll('[data-vs-clone]'))
+        .forEach(function (c) { trackEl.removeChild(c); });
 
-      clonesAdded = Math.min(perPage(), totalSlides);
+      clonesAdded = Math.min(pp(), total);
 
+      /* Prepend: copies of the last N real slides */
       var frag = document.createDocumentFragment();
-      for (var i = totalSlides - clonesAdded; i < totalSlides; i++) {
+      for (var i = total - clonesAdded; i < total; i++) {
         var c = realSlides[i].cloneNode(true);
-        c.setAttribute('data-ll2-clone', '1');
+        c.setAttribute('data-vs-clone', '1');
         c.setAttribute('aria-hidden', 'true');
         frag.appendChild(c);
       }
-      track.insertBefore(frag, track.firstChild);
+      trackEl.insertBefore(frag, trackEl.firstChild);
 
+      /* Append: copies of the first N real slides */
       for (var j = 0; j < clonesAdded; j++) {
         var c2 = realSlides[j].cloneNode(true);
-        c2.setAttribute('data-ll2-clone', '1');
+        c2.setAttribute('data-vs-clone', '1');
         c2.setAttribute('aria-hidden', 'true');
-        track.appendChild(c2);
+        trackEl.appendChild(c2);
       }
 
-      /* Clone videos: remove autoplay (per-video IO + polling handles playback)
-         and reset the ll2Bound flag so bindAllVideos will bind them freshly. */
-      Array.prototype.slice.call(track.querySelectorAll('[data-ll2-clone] video'))
+      /* Ensure every clone video has the right attributes */
+      Array.prototype.slice.call(trackEl.querySelectorAll('[data-vs-clone] video'))
         .forEach(function (v) {
-          v.removeAttribute('autoplay');
+          v.setAttribute('autoplay', '');
           v.setAttribute('muted', '');
           v.setAttribute('playsinline', '');
           v.muted = true;
-          delete v.dataset.ll2Bound;
+          delete v.dataset.vsBound;
         });
-
-      /* Bind newly created clone videos immediately */
-      bindAllVideos();
-
-      currentIdx = clonesAdded;
-    }
-
-    function applyPos(animated) {
-      track.style.transition = animated
-        ? 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-        : 'none';
-      track.style.transform = 'translateX(' + (-currentIdx * slideW()) + 'px)';
     }
 
     function applyWidths() {
-      var w = slideW() + 'px';
-      Array.prototype.slice.call(track.children).forEach(function (s) { s.style.width = w; });
+      var w = sw() + 'px';
+      Array.prototype.slice.call(trackEl.children)
+        .forEach(function (s) { s.style.width = w; });
     }
 
-    function realIdx() {
-      return ((currentIdx - clonesAdded) % totalSlides + totalSlides) % totalSlides;
+    /* Scroll to first real slide (no animation) */
+    function scrollToReal(ri) {
+      isJumping = true;
+      trackEl.scrollLeft = (clonesAdded + ri) * sw();
+      /* Reset flag after browser has processed the scroll */
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { isJumping = false; });
+      });
     }
 
+    /* Current real index from scrollLeft */
+    function currentRealIdx() {
+      var idx = Math.round(trackEl.scrollLeft / sw()) - clonesAdded;
+      return ((idx % total) + total) % total;
+    }
+
+    /* ── Dots ── */
     function buildDots() {
       if (!dotsWrap) return;
       dotsWrap.innerHTML = '';
-      for (var i = 0; i < totalSlides; i++) {
+      for (var i = 0; i < total; i++) {
         var btn = document.createElement('button');
-        btn.className = 'll2-dot' + (i === 0 ? ' is-active' : '');
+        btn.className = 'vs-dot' + (i === 0 ? ' is-active' : '');
         btn.setAttribute('data-ri', String(i));
-        btn.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        btn.setAttribute('aria-label', 'Slide ' + (i + 1));
         dotsWrap.appendChild(btn);
       }
-      dotsWrap.querySelectorAll('.ll2-dot').forEach(function (dot) {
+      dotsWrap.querySelectorAll('.vs-dot').forEach(function (dot) {
         dot.addEventListener('click', function () {
-          if (isBusy) return;
-          isBusy = true;
-          currentIdx = clonesAdded + parseInt(dot.getAttribute('data-ri'), 10);
-          applyPos(true);
-          updateDots();
+          var ri = parseInt(dot.getAttribute('data-ri'), 10);
+          trackEl.scrollTo({ left: (clonesAdded + ri) * sw(), behavior: 'smooth' });
           resetAuto();
         });
       });
@@ -972,78 +829,170 @@
 
     function updateDots() {
       if (!dotsWrap) return;
-      var ri = realIdx();
-      dotsWrap.querySelectorAll('.ll2-dot').forEach(function (d) {
+      var ri = currentRealIdx();
+      dotsWrap.querySelectorAll('.vs-dot').forEach(function (d) {
         d.classList.toggle('is-active', parseInt(d.getAttribute('data-ri'), 10) === ri);
       });
     }
 
-    function goNext() {
-      if (isBusy) return;
-      isBusy = true; currentIdx++;
-      applyPos(true); updateDots();
-    }
-
-    function goPrev() {
-      if (isBusy) return;
-      isBusy = true; currentIdx--;
-      applyPos(true); updateDots();
-    }
-
-    track.addEventListener('transitionend', function (e) {
-      if (e.propertyName !== 'transform') return;
-      isBusy = false;
-      if (currentIdx >= clonesAdded + totalSlides) { currentIdx -= totalSlides; applyPos(false); }
-      if (currentIdx < clonesAdded)                { currentIdx += totalSlides; applyPos(false); }
+    /* ── Infinite loop: detect when scrolled into clone territory ── */
+    var scrollTimer;
+    trackEl.addEventListener('scroll', function () {
+      if (isJumping) return;
       updateDots();
-    });
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(function () {
+        if (isJumping) return;
+        var s      = trackEl.scrollLeft;
+        var minPos = clonesAdded * sw();
+        var maxPos = (clonesAdded + total - pp()) * sw();
 
-    if (prevBtn) prevBtn.addEventListener('click', function () { goPrev(); resetAuto(); });
-    if (nextBtn) nextBtn.addEventListener('click', function () { goNext(); resetAuto(); });
-
-    var tx = 0, ty = 0;
-    track.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
-    track.addEventListener('touchend', function (e) {
-      var dx = e.changedTouches[0].clientX - tx;
-      var dy = e.changedTouches[0].clientY - ty;
-      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) { if (dx < 0) goNext(); else goPrev(); resetAuto(); }
+        if (s < minPos - 2) {
+          /* Scrolled into before-clones → jump forward by totalSlides */
+          isJumping = true;
+          trackEl.scrollLeft = s + total * sw();
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () { isJumping = false; });
+          });
+        } else if (s > maxPos + 2) {
+          /* Scrolled into after-clones → jump back by totalSlides */
+          isJumping = true;
+          trackEl.scrollLeft = s - total * sw();
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () { isJumping = false; });
+          });
+        }
+      }, 80);
     }, { passive: true });
 
-    function startAuto() { if (!doAutoplay) return; clearInterval(autoTimer); autoTimer = setInterval(goNext, autoInterval); }
-    function resetAuto()  { if (!doAutoplay) return; clearInterval(autoTimer); startAuto(); }
+    /* ── Arrows ── */
+    if (prevBtn) prevBtn.addEventListener('click', function () {
+      trackEl.scrollBy({ left: -sw(), behavior: 'smooth' });
+      resetAuto();
+    });
+    if (nextBtn) nextBtn.addEventListener('click', function () {
+      trackEl.scrollBy({ left: sw(), behavior: 'smooth' });
+      resetAuto();
+    });
 
+    /* ── Slider autoplay ── */
+    function startAuto() {
+      if (!doAutoplay) return;
+      clearInterval(autoTimer);
+      autoTimer = setInterval(function () {
+        trackEl.scrollBy({ left: sw(), behavior: 'smooth' });
+      }, autoInterval);
+    }
+    function resetAuto() {
+      if (!doAutoplay) return;
+      clearInterval(autoTimer);
+      startAuto();
+    }
+
+    /* ── Resize ── */
     var resizeTimer;
     window.addEventListener('resize', function () {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(function () {
-        var ri = realIdx();
-        buildClones();   /* also calls bindAllVideos() internally */
+        var ri = currentRealIdx();
+        buildClones();
         applyWidths();
         buildDots();
-        currentIdx = clonesAdded + ri;
-        applyPos(false);
+        bindAllVideos(sectionEl);
+        scrollToReal(ri);
         updateDots();
       }, 100);
     });
 
+    /* ── Boot slider ── */
     buildClones();
     applyWidths();
     buildDots();
-    applyPos(false);
-    startAuto();
+    bindAllVideos(sectionEl);
+
+    /* Set initial scroll position after layout is painted */
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        scrollToReal(0);
+        startAuto();
+      });
+    });
+  }
+
+  /* ─────────────────────────────────────────
+     VIDEO BINDING
+     Per-video IntersectionObserver uses the
+     default viewport root, which correctly
+     accounts for the overflow:hidden clip on
+     .vs-outer. Off-screen slides are genuinely
+     outside the viewport → play() is ONLY called
+     on truly visible videos — the iOS requirement.
+  ───────────────────────────────────────── */
+  function bindAllVideos(sectionEl) {
+    if (!sectionEl) return;
+    Array.prototype.slice.call(sectionEl.querySelectorAll('video'))
+      .forEach(function (v) { bindVideo(v); });
+  }
+
+  function bindVideo(v) {
+    if (v.dataset.vsBound) return;
+    v.dataset.vsBound = '1';
+    v.muted = true;
+
+    /* Find parent .vs-item for the playing CSS class */
+    var item = v.parentNode;
+    while (item && !item.classList.contains('vs-item')) item = item.parentNode;
+    if (item) {
+      v.addEventListener('playing', function () { item.classList.add('playing'); });
+      v.addEventListener('pause',   function () { item.classList.remove('playing'); });
+      var cover = item.querySelector('.vs-cover');
+      if (cover) {
+        cover.addEventListener('click', function () {
+          v.muted = true;
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        });
+      }
+    }
+
+    /* IntersectionObserver with viewport root.
+       overflow:hidden on .vs-outer means any video scrolled
+       off the side has zero intersection area → not intersecting.
+       This is exactly when we should pause and not play. */
+    var io = new IntersectionObserver(function (entries) {
+      var e = entries[0];
+      if (e.isIntersecting) {
+        v.muted = true;
+        var p = v.play();
+        if (p && p.catch) {
+          p.catch(function () {
+            /* iOS may need the video to be ready first */
+            function onReady() {
+              v.removeEventListener('canplay', onReady);
+              v.muted = true;
+              var p2 = v.play();
+              if (p2 && p2.catch) p2.catch(function () {});
+            }
+            v.addEventListener('canplay', onReady);
+          });
+        }
+      } else {
+        if (!v.paused) v.pause();
+      }
+    }, { threshold: 0.3 });
+
+    io.observe(v);
   }
 
   /* ── Entry point ── */
   function init() {
+    var sectionEl = document.getElementById('vs-' + SID);
     if (!sectionEl) return;
-
-    if (document.getElementById('ll2-track-' + ID)) {
-      initSlider(); /* buildClones() inside calls bindAllVideos() for clones */
-    }
-
-    /* Bind real slide videos (clones already bound inside initSlider) */
-    bindAllVideos();
-    observeSection();
+    /* Reset bound flags in case of re-init */
+    sectionEl.querySelectorAll('video').forEach(function (v) {
+      delete v.dataset.vsBound;
+    });
+    run(sectionEl);
   }
 
   if (document.readyState === 'loading') {
@@ -1052,15 +1001,7 @@
     init();
   }
 
-  document.addEventListener('shopify:section:load', function () {
-    sectionEl     = document.getElementById('ll2-section-' + ID);
-    sectionInView = false;
-    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
-    if (sectionEl) {
-      sectionEl.querySelectorAll('video').forEach(function (v) { delete v.dataset.ll2Bound; });
-    }
-    init();
-  });
+  document.addEventListener('shopify:section:load', init);
 
 })();
 </script>
