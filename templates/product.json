@@ -299,58 +299,6 @@
         "autoplay_speed": 3000
       }
     },
-    "custom_video_section_dKkxLU": {
-      "type": "custom-video-section",
-      "blocks": {
-        "video_KeqNeV": {
-          "type": "video",
-          "settings": {
-            "video": "shopify://files/videos/IMG_1307 2.mov"
-          }
-        },
-        "video_VVfqtJ": {
-          "type": "video",
-          "settings": {
-            "cover_image": "shopify://shop_images/9292B4B04681E4A75E4F07C310528C82.jpg"
-          }
-        },
-        "video_47HDrT": {
-          "type": "video",
-          "settings": {
-            "cover_image": "shopify://shop_images/video-bg.webp"
-          }
-        },
-        "video_Jb3Fid": {
-          "type": "video",
-          "settings": {
-            "cover_image": "shopify://shop_images/IMG_1252.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "video_KeqNeV",
-        "video_VVfqtJ",
-        "video_47HDrT",
-        "video_Jb3Fid"
-      ],
-      "name": "Liquid Labs Video",
-      "settings": {
-        "title": "Behind the scenes",
-        "padding_top": 36,
-        "padding_bottom": 36,
-        "padding_top_mobile": 20,
-        "padding_bottom_mobile": 20,
-        "layout": "slider",
-        "video_width": 360,
-        "background_color": "",
-        "slides_to_show": 3,
-        "slides_to_show_mobile": 2,
-        "show_arrows": true,
-        "show_dots": true,
-        "autoplay": false,
-        "autoplay_speed": 3000
-      }
-    },
     "ll_updates_slider_G7DH4f": {
       "type": "ll-updates-slider",
       "blocks": {
@@ -643,7 +591,6 @@
     "rich_text_QK3WKB",
     "ll_founding_member_QkENPf",
     "custom_video_showcase_KRwkdH",
-    "custom_video_section_dKkxLU",
     "ll_updates_slider_G7DH4f",
     "ll_ingredient_information_JwjbJX",
     "ll_founding_member_GjJNji",
