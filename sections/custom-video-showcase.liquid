@@ -967,10 +967,12 @@
 
   document.addEventListener('shopify:section:load', function () {
     sectionEl = document.getElementById('ll-section-{{ section.id }}');
+    sectionInView = false;
     var el = document.getElementById('ll-splide-{{ section.id }}');
     if (el) delete el.dataset.llInit;
     if (sectionEl) {
       sectionEl.querySelectorAll('.ll-cover').forEach(function (c) { delete c.dataset.llBound; });
+      sectionEl.querySelectorAll('video').forEach(function (v) { delete v.dataset.llBound; });
     }
     init();
   });
