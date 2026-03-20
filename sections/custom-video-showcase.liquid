@@ -380,7 +380,6 @@
     var track = section.querySelector("#ll-track-{{ section.id }}");
     if(!track) return;
 
-    // Guard: prevent double-init (shopify:section:load fires on editor reload)
     if(track.dataset.llInit) return;
     track.dataset.llInit = "1";
 
@@ -393,7 +392,7 @@
     var show        = window.innerWidth > 749 ? desktopShow : mobileShow;
     var GAP         = 20;
 
-    // ── Clone SHOW slides on each end for infinite loop ──
+    // Clone SHOW slides on each end for infinite loop
     origSlides.slice(-show).forEach(function(s){
       track.insertBefore(s.cloneNode(true), track.firstChild);
     });
@@ -405,7 +404,7 @@
     var realOffset = show;
     var index      = realOffset;
 
-    // ── Smooth lerp engine ──
+    // Smooth lerp engine
     var curX  = 0;
     var tgtX  = 0;
     var rafId = null;
@@ -424,7 +423,6 @@
       return i * (sw() + GAP);
     }
 
-    // ── CRITICAL FIX: resize sets width on ALL slides including clones ──
     function resize(){
       var w = sw();
       allSlides.forEach(function(s){ s.style.width = w + "px"; });
@@ -434,12 +432,12 @@
       track.style.transform = "translateX(" + (-x) + "px)";
     }
 
-    // Instant jump — no animation, used for infinite-loop wraparound
     function jumpTo(i){
       index = i;
       tgtX  = offset(i);
       curX  = tgtX;
       apply(curX);
+      track.classList.add("ll-ready");
     }
 
     function realIdx(){
@@ -453,14 +451,12 @@
       });
     }
 
-    // RAF lerp tick
     function tick(){
       var diff = tgtX - curX;
       if(Math.abs(diff) < 0.3){
         curX = tgtX;
         apply(curX);
         rafId = null;
-        // Infinite loop: silent jump after lerp fully settles
         if(index < realOffset){
           jumpTo(index + total);
         } else if(index >= realOffset + total){
@@ -485,12 +481,7 @@
       startRAF();
     }
 
-    // Init
-    track.style.transition = "none";
-    resize();
-    jumpTo(realOffset);
-
-    // ── Arrow buttons (iOS-safe touchend) ──
+    // Arrow buttons iOS-safe
     function bindBtn(btn, direction){
       if(!btn) return;
       var tapped = false;
@@ -515,19 +506,19 @@
     bindBtn(prevBtn, -1);
     bindBtn(nextBtn, +1);
 
-    // ── Dots ──
+    // Dots
     dots.forEach(function(dot, i){
       dot.addEventListener("click", function(){
         moveTo(realOffset + i);
       });
     });
 
-    // ── Touch / Swipe ──
-    var tx0         = 0;
-    var ty0         = 0;
-    var moved       = false;
-    var horizSwipe  = false;
-    var dragBase    = 0; // tgtX value at drag start
+    // Touch / Swipe
+    var tx0        = 0;
+    var ty0        = 0;
+    var moved      = false;
+    var horizSwipe = false;
+    var dragBase   = 0;
 
     viewport.addEventListener("touchstart", function(e){
       tx0        = e.changedTouches[0].clientX;
@@ -547,7 +538,7 @@
       }
       if(horizSwipe){
         e.preventDefault();
-        curX = tgtX = dragBase - dx; // live finger tracking
+        curX = tgtX = dragBase - dx;
         apply(curX);
       }
     }, { passive: false });
@@ -557,32 +548,41 @@
       if(horizSwipe){
         var step    = sw() + GAP;
         var nearest = Math.round(tgtX / step);
-
-        // Flick: force next/prev on fast swipe
         if(Math.abs(diff) > 40){
           nearest = diff > 0
             ? Math.floor(dragBase / step) + 1
             : Math.ceil(dragBase / step)  - 1;
         }
-
-        // ── CRITICAL FIX: clamp includes full clone range ──
         nearest = Math.max(0, Math.min(allSlides.length - show, nearest));
         moveTo(nearest);
       }
     }, { passive: true });
 
-    // ── Autoplay ──
+    // Autoplay
     {% if section.settings.autoplay %}
     var autoplaySpeed = {{ section.settings.autoplay_speed | json }};
     setInterval(function(){ moveTo(index + 1); }, autoplaySpeed);
     {% endif %}
 
-    // ── Resize ──
+    // Resize
     window.addEventListener("resize", function(){
       show = window.innerWidth > 749 ? desktopShow : mobileShow;
       resize();
       jumpTo(index);
     });
+
+    // Init — wait for real DOM width before booting
+    track.style.transition = "none";
+
+    function boot(){
+      if(viewport.offsetWidth === 0){
+        requestAnimationFrame(boot);
+        return;
+      }
+      resize();
+      jumpTo(realOffset);
+    }
+    requestAnimationFrame(boot);
   }
 
   if(document.readyState === "loading"){
@@ -592,7 +592,6 @@
   }
 
   document.addEventListener("shopify:section:load", function(){
-    // Reset init guard so re-init works cleanly in editor
     var track = document.querySelector("#ll-track-{{ section.id }}");
     if(track) delete track.dataset.llInit;
     initSlider();
