@@ -660,6 +660,15 @@
     background: #fff;
     transform: scale(1.3);
   }
+
+  /* Hide iOS Safari's native "tap to play" overlay on muted autoplay videos */
+  #ll2-section-{{ section.id }} video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none;
+  }
+  #ll2-section-{{ section.id }} video::-webkit-media-controls {
+    display: none !important;
+  }
 </style>
 
 <div id="ll2-section-{{ section.id }}">
@@ -756,9 +765,19 @@
 
   function safePlay(v) {
     v.muted = true;
-    if (v.paused) {
-      var p = v.play();
-      if (p && p.catch) p.catch(function () {});
+    if (!v.paused) return;
+    var p = v.play();
+    if (p && p.catch) {
+      p.catch(function () {
+        /* iOS may reject play() if the video isn't ready yet — retry on canplay */
+        function onReady() {
+          v.removeEventListener('canplay', onReady);
+          v.muted = true;
+          var p2 = v.play();
+          if (p2 && p2.catch) p2.catch(function () {});
+        }
+        v.addEventListener('canplay', onReady);
+      });
     }
   }
 
@@ -894,10 +913,15 @@
         track.appendChild(c2);
       }
 
-      /* Prepare clone videos — JS handles all playback */
+      /* Prepare clone videos.
+         Remove autoplay from clones so iOS doesn't see N×autoplay elements
+         and throttle them all. JS polling will play them when they scroll in. */
       Array.prototype.slice.call(
         track.querySelectorAll('[data-ll2-clone] video')
       ).forEach(function (v) {
+        v.removeAttribute('autoplay');
+        v.setAttribute('muted', '');
+        v.setAttribute('playsinline', '');
         v.muted = true;
       });
 
