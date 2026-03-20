@@ -340,7 +340,7 @@
         "padding_bottom": 36,
         "padding_top_mobile": 20,
         "padding_bottom_mobile": 20,
-        "layout": "grid",
+        "layout": "slider",
         "video_width": 360,
         "background_color": "",
         "slides_to_show": 3,
