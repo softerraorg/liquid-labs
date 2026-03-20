@@ -267,12 +267,19 @@
           "settings": {
             "cover_image": "shopify://shop_images/video-bg.webp"
           }
+        },
+        "video_kMcinY": {
+          "type": "video",
+          "settings": {
+            "cover_image": "shopify://shop_images/IMG_1252.jpg"
+          }
         }
       },
       "block_order": [
         "video_DQp4VF",
         "video_bJDTU3",
-        "video_ypCFRL"
+        "video_ypCFRL",
+        "video_kMcinY"
       ],
       "name": "Custom Video Section",
       "settings": {
