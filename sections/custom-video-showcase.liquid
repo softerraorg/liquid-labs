@@ -773,83 +773,88 @@
 <script>
 (function () {
 
-  function playVideo(video) {
+  var sectionEl = document.getElementById('ll-section-{{ section.id }}');
+
+  function playFromStart(video) {
     video.muted = true;
+    video.currentTime = 0;
     var p = video.play();
     if (p && p.catch) p.catch(function () {});
   }
 
-  function isVisible(el) {
-    var r = el.getBoundingClientRect();
-    return r.bottom > 0 && r.top < window.innerHeight;
+  function stopVideo(video) {
+    video.pause();
+    video.currentTime = 0;
   }
 
-  function bindItem(item) {
-    var video = item.querySelector('video');
-    if (!video) return;
-    if (item.dataset.llBound) return;
-    item.dataset.llBound = '1';
-    video.muted = true;
+  function getAllVideos() {
+    if (!sectionEl) return [];
+    return Array.prototype.slice.call(sectionEl.querySelectorAll('.ll-item video'));
+  }
 
-    var cover = item.querySelector('.ll-cover');
-    if (cover) {
+  function playAll() {
+    getAllVideos().forEach(function (v) { playFromStart(v); });
+  }
+
+  function stopAll() {
+    getAllVideos().forEach(function (v) { stopVideo(v); });
+  }
+
+  // ── Cover overlay binding (for manually uploaded cover images) ──
+  function bindCovers() {
+    if (!sectionEl) return;
+    sectionEl.querySelectorAll('.ll-item').forEach(function (item) {
+      var video = item.querySelector('video');
+      var cover = item.querySelector('.ll-cover');
+      if (!video || !cover || cover.dataset.llBound) return;
+      cover.dataset.llBound = '1';
+      video.muted = true;
       video.addEventListener('playing', function () { item.classList.add('playing'); });
       video.addEventListener('pause',   function () { item.classList.remove('playing'); });
-      cover.addEventListener('click',   function () { playVideo(video); });
-      if (!video.paused) item.classList.add('playing');
-    }
-
-    // When browser auto-pauses video (off-screen), restart it if it's back in view
-    video.addEventListener('pause', function () {
-      setTimeout(function () {
-        if (video.paused && !document.hidden && isVisible(item)) {
-          playVideo(video);
-        }
-      }, 300);
+      cover.addEventListener('click',   function () { playFromStart(video); });
     });
-
-    // Layer 1: IntersectionObserver — play when element enters viewport
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) playVideo(video);
-      }, { threshold: 0.1 }).observe(item);
-    } else {
-      playVideo(video);
-    }
   }
 
-  function bindVideos(section) {
-    section.querySelectorAll('.ll-item').forEach(bindItem);
+  // ── Section-level IntersectionObserver ──
+  function observeSection() {
+    if (!sectionEl) return;
 
-    // Layer 2: Scroll fallback — on every scroll, play any visible paused videos
-    // (scroll callbacks fire inside a user-gesture context on mobile, making play() more reliable)
+    var sectionInView = false;
+
+    var observer = new IntersectionObserver(function (entries) {
+      sectionInView = entries[0].isIntersecting;
+      if (sectionInView) {
+        playAll();
+      } else {
+        stopAll();
+      }
+    }, { threshold: 0.15 });
+
+    observer.observe(sectionEl);
+
+    // Scroll fallback: on iOS the IO callback is async and may get blocked;
+    // during an active scroll gesture video.play() is more likely to succeed
     var ticking = false;
     window.addEventListener('scroll', function () {
-      if (ticking) return;
+      if (!sectionInView || ticking) return;
       ticking = true;
       requestAnimationFrame(function () {
-        section.querySelectorAll('.ll-item').forEach(function (item) {
-          var video = item.querySelector('video');
-          if (video && video.paused && isVisible(item)) playVideo(video);
+        getAllVideos().forEach(function (v) {
+          if (v.paused) playFromStart(v);
         });
         ticking = false;
       });
     }, { passive: true });
 
-    // Layer 3: Visibility API — resume all videos when tab becomes active again
+    // Tab visibility: resume when user switches back to the tab
     document.addEventListener('visibilitychange', function () {
-      if (!document.hidden) {
-        section.querySelectorAll('.ll-item').forEach(function (item) {
-          var video = item.querySelector('video');
-          if (video && video.paused && isVisible(item)) playVideo(video);
-        });
-      }
+      if (!document.hidden && sectionInView) playAll();
     });
   }
 
+  // ── Slider init ──
   function initSlider() {
-    var section  = document.getElementById('ll-section-{{ section.id }}');
-    if (!section) return;
+    if (!sectionEl) return;
 
     var splideEl = document.getElementById('ll-splide-{{ section.id }}');
     if (!splideEl) return;
@@ -877,9 +882,7 @@
       pagination  : showDots,
       speed       : 500,
       easing      : 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-      breakpoints : {
-        749: { perPage : mobileShow, gap : '12px' }
-      }
+      breakpoints : { 749: { perPage : mobileShow, gap : '12px' } }
     };
 
     if (doAutoplay) {
@@ -891,8 +894,8 @@
     var splide = new Splide('#ll-splide-{{ section.id }}', opts);
     splide.mount();
 
-    var prevBtn = section.querySelector('#ll-prev-{{ section.id }}');
-    var nextBtn = section.querySelector('#ll-next-{{ section.id }}');
+    var prevBtn = sectionEl.querySelector('#ll-prev-{{ section.id }}');
+    var nextBtn = sectionEl.querySelector('#ll-next-{{ section.id }}');
 
     function bindBtn(btn, dir) {
       if (!btn) return;
@@ -911,15 +914,19 @@
     bindBtn(prevBtn, '<');
     bindBtn(nextBtn, '>');
 
-    splide.on('mounted', function () { bindVideos(section); });
+    splide.on('mounted', function () {
+      bindCovers();
+      observeSection();
+    });
   }
 
+  // ── Entry point ──
   function init() {
-    var section = document.getElementById('ll-section-{{ section.id }}');
-    if (!section) return;
+    if (!sectionEl) return;
 
-    if (section.querySelector('.ll-grid')) {
-      bindVideos(section);
+    if (sectionEl.querySelector('.ll-grid')) {
+      bindCovers();
+      observeSection();
       return;
     }
 
@@ -939,11 +946,11 @@
   }
 
   document.addEventListener('shopify:section:load', function () {
+    sectionEl = document.getElementById('ll-section-{{ section.id }}');
     var el = document.getElementById('ll-splide-{{ section.id }}');
     if (el) delete el.dataset.llInit;
-    var section = document.getElementById('ll-section-{{ section.id }}');
-    if (section) {
-      section.querySelectorAll('.ll-item').forEach(function (i) { delete i.dataset.llBound; });
+    if (sectionEl) {
+      sectionEl.querySelectorAll('.ll-cover').forEach(function (c) { delete c.dataset.llBound; });
     }
     init();
   });
