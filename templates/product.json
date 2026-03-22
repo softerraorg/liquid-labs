@@ -306,17 +306,26 @@
           "type": "block",
           "settings": {
             "update_heading": "Revision Flavors Came In!",
-            "update_description": "We have solidified 2 great tasting flavors to start production: berry blast and sour straws. Once a full production order is placed the estimated time to recieve the finished product is approximately 2 months. We are hoping to start shipping in May - June!",
+            "update_description": "Final flavors locked in: Berry Blast & Sour Straws. First batch is now in production. Founder orders will ship once ready!",
             "update_date": "March 19, 2026"
+          }
+        },
+        "block_mBL3a6": {
+          "type": "block",
+          "settings": {
+            "update_heading": "Samples Arrived!",
+            "update_description": "Taste tested first flavor batch, making some final revisions!",
+            "update_date": "March 2, 2026"
           }
         }
       },
       "block_order": [
-        "block_3zYdfE"
+        "block_3zYdfE",
+        "block_mBL3a6"
       ],
       "name": "LL Follow Updates",
       "settings": {
-        "heading": "Follow our updates!",
+        "heading": "Stay Updated on Your Order",
         "padding-top-desktop": 60,
         "padding-bottom-desktop": 60,
         "padding-top-mobile": 30,
