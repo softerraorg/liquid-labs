@@ -339,7 +339,7 @@
           "type": "nutrition_row",
           "settings": {
             "ingredient_name": "Creatine Monohydrate",
-            "ingredient_amount": "5g"
+            "ingredient_amount": "5g (full daily dose)"
           }
         },
         "nutrition_row_XP6yLw": {
@@ -373,6 +373,7 @@
         },
         "accordion_QyfrKn": {
           "type": "accordion",
+          "disabled": true,
           "settings": {
             "accordion_title": "The \"NO\" List",
             "accordion_content": "",
@@ -381,6 +382,7 @@
         },
         "accordion_xq8TjK": {
           "type": "accordion",
+          "disabled": true,
           "settings": {
             "accordion_title": "Certifications and Testing",
             "accordion_content": "",
@@ -399,7 +401,7 @@
       ],
       "name": "LL Ingredient Information",
       "settings": {
-        "heading": "Ingredient Information",
+        "heading": "What’s Inside Each Stick",
         "serving_size_label": "Serving Size:",
         "serving_size": "1 Stick",
         "servings_per_label": "Servings Per Container:",
