@@ -405,7 +405,12 @@ details-modal.header__search,
 .template-product .product-form__submit:hover:after {
     box-shadow: none;
 }
-
+.template-product .product__text.inline-richtext {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.2;
+    text-align: center;
+}
 .product__media img,
 .thumbnail-slider img {
     border-radius: 20px !important;
