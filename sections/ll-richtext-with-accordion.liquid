@@ -39,6 +39,14 @@
     background: #FFFFFF;
     border-radius: 8px;
 }
+.LL-Richtxt-wit-Accor-accor-item {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.816832px;
+    color: #000000;
+}
   @media screen and (min-width: 750px) {
     #shopify-section-{{ section.id }} .LL-Richtxt-wit-Accor-root {
       padding-top: {{ section.settings.padding_top_desktop }}px;
@@ -72,7 +80,11 @@
             >
               <summary class="LL-Richtxt-wit-Accor-accor-summary">
                 <span class="LL-Richtxt-wit-Accor-accor-header">{{ block.settings.heading }}</span>
-                <span class="LL-Richtxt-wit-Accor-accor-icon"></span>
+                <span class="LL-Richtxt-wit-Accor-accor-icon"><svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="11" cy="13" r="11" fill="#F7F7F7"/>
+<path d="M10.3954 17.8139V8.82244H11.6099V17.8139H10.3954ZM6.50337 13.9219V12.7145H15.502V13.9219H6.50337Z" fill="black"/>
+</svg>
+</span>
               </summary>
               <div class="LL-Richtxt-wit-Accor-accor-content rte">{{ block.settings.content }}</div>
             </details>
