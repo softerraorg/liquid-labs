@@ -437,7 +437,7 @@
         "product_title": "",
         "product_image": "shopify://shop_images/picture.styles_placeholder__i3I9x.png",
         "disclaimer": "",
-        "show_right_section": false,
+        "show_right_section": true,
         "padding_top_desktop": 60,
         "padding_bottom_desktop": 60,
         "padding_top_mobile": 40,
