@@ -125,6 +125,50 @@
         "padding_bottom": 28
       }
     },
+    "ll_richtext_with_accordion_T6BLmV": {
+      "type": "ll-richtext-with-accordion",
+      "blocks": {
+        "accordion_row_mRdbFE": {
+          "type": "accordion_row",
+          "settings": {
+            "heading": "Product Description",
+            "content": "<p>Add details about your product.</p>",
+            "open_by_default": false
+          }
+        },
+        "accordion_row_fBGLT8": {
+          "type": "accordion_row",
+          "settings": {
+            "heading": "Product Description",
+            "content": "<p>Add details about your product.</p>",
+            "open_by_default": false
+          }
+        },
+        "accordion_row_x6EmHH": {
+          "type": "accordion_row",
+          "settings": {
+            "heading": "Product Description",
+            "content": "<p>Add details about your product.</p>",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "accordion_row_mRdbFE",
+        "accordion_row_fBGLT8",
+        "accordion_row_x6EmHH"
+      ],
+      "name": "LL Rich text + accordion",
+      "settings": {
+        "section_bg_color": "rgba(0,0,0,0)",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "heading": "No Scoop. No Shaker. Just Results.",
+        "body": "<p>Built for people who want creatine without the hassle.</p><p>Each stick delivers 5g of creatine monohydrate for strength and recovery, plus electrolytes to keep you hydrated.</p><p>No shaker. No scooping. No mess. Just tear it open, and pour into water, in the gym, car, work, or on the go.</p>"
+      }
+    },
     "rich_text_QK3WKB": {
       "type": "rich-text",
       "blocks": {
@@ -609,6 +653,7 @@
   "order": [
     "main",
     "related-products",
+    "ll_richtext_with_accordion_T6BLmV",
     "rich_text_QK3WKB",
     "ll_founding_member_QkENPf",
     "custom_video_showcase_KRwkdH",
