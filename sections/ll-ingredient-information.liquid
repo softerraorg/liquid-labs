@@ -25,6 +25,22 @@
         line-height: 1.2;
         letter-spacing: -0.790909px;
     }
+
+    .ll-ingredient-information-heading-description {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 1.6;
+        margin: 0 0 24px 0;
+        opacity: 0.8;
+    }
+
+    .ll-ingredient-information-heading-description p {
+        margin: 0 0 0.75em;
+    }
+
+    .ll-ingredient-information-heading-description p:last-child {
+        margin-bottom: 0;
+    }
     
     /* Serving info */
     .ll-ingredient-information-serving-size, .ll-ingredient-information-servings-per {
@@ -215,6 +231,12 @@
         letter-spacing: -0.5px;
         margin: 0 0 7px 0;
       }
+
+      .ll-ingredient-information-heading-description {
+        font-size: 14px;
+        line-height: 1.5;
+        margin: 0 0 16px 0;
+      }
     
       .ll-ingredient-information-product-title {
         font-size: 24px;
@@ -292,6 +314,12 @@
     
             {%- if section.settings.heading != blank -%}
               <h2 class="ll-ingredient-information-heading">{{ section.settings.heading }}</h2>
+            {%- endif -%}
+
+            {%- if section.settings.heading_description != blank -%}
+              <div class="ll-ingredient-information-heading-description rte">
+                {{ section.settings.heading_description }}
+              </div>
             {%- endif -%}
     
             {%- if section.settings.serving_size != blank -%}
@@ -464,6 +492,12 @@
           "id": "heading",
           "label": "Heading",
           "default": "Ingredient Information"
+        },
+        {
+          "type": "richtext",
+          "id": "heading_description",
+          "label": "Heading description",
+          "info": "Optional rich text shown directly below the heading."
         },
         {
           "type": "text",
