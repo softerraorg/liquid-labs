@@ -524,6 +524,10 @@ details-modal.header__search,
     .template-product .product__info-wrapper {
         padding-left: 0 !important;
     }
+    .template-product .product-form__submit { 
+    padding: 9px 17px;
+    min-height: auto;
+}
     
     /* Product Page CSS */
     /* Product Page CSS */
