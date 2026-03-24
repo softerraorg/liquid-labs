@@ -156,6 +156,10 @@
         "logo_width": {
           "label": "Width"
         },
+          "logo_width_mobile": {
+          "label": "Mobile width",
+          "info": "Max logo width on screens under 750px. Desktop uses “Width” above."
+        },
         "favicon": {
           "label": "Favicon",
           "info": "Displayed at 32 x 32px"
