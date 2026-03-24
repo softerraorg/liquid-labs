@@ -33,11 +33,21 @@
 
   #ll-follow-updates-{{ section.id }} .ll-follow-updates-item {
     display: grid;
-    grid-template-columns: 7rem minmax(20px, 1.25rem) 1fr;
+    grid-template-columns: auto 1fr;
+    column-gap: 1rem;
     align-items: start;
     margin: 0;
     padding: 0 0 16px;
     overflow: visible;
+  }
+
+  #ll-follow-updates-{{ section.id }} .ll-follow-updates-left {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0;
+    flex-shrink: 0;
+    max-width: 100%;
   }
 
   #ll-follow-updates-{{ section.id }} .ll-follow-updates-item:last-child {
@@ -46,24 +56,30 @@
 
   #ll-follow-updates-{{ section.id }} .ll-follow-updates-date {
     margin: 0;
+    padding: 0;
     font-size: 16px;
     line-height: 130%;
     color: #000000 !important;
     text-align: left;
     letter-spacing: -0.816832px;
+    flex-shrink: 0;
+    width: max-content;
+    max-width: 100%;
   }
 
   #ll-follow-updates-{{ section.id }} .ll-follow-updates-track {
     position: relative;
     box-sizing: border-box;
-    width: 100%;
-    min-width: 20px;
+    flex-shrink: 0;
+    width: 11px;
+    min-width: 11px;
     align-self: stretch;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 0.5rem;
+    padding-top: 0;
+    margin-left: 0;
     overflow: visible;
   }
 
@@ -83,14 +99,12 @@
 
   #ll-follow-updates-{{ section.id }} .ll-follow-updates-line {
     position: absolute;
-    top: calc(0.5rem + 5.5px);
+    top: 5.5px;
     left: 50%;
     margin-left: -0.5px;
     width: 1px;
     bottom: -2rem;
     pointer-events: none;
-    bottom: auto;
-  height: 48px;
   }
 
   #ll-follow-updates-{{ section.id }} .ll-follow-updates-line-svg {
@@ -105,10 +119,11 @@
   }
 
   #ll-follow-updates-{{ section.id }} .ll-follow-updates-card {
-   background-color: #ffffff;
+    background-color: #ffffff;
     border-radius: 14.703px;
     padding: 24px 24px 20px 24px;
-        margin-left: 18px;
+    margin-left: 0;
+    min-width: 0;
   }
 
   #ll-follow-updates-{{ section.id }} .ll-follow-updates-card-title {
@@ -144,7 +159,7 @@
     }
 
     #ll-follow-updates-{{ section.id }} .ll-follow-updates-item {
-      grid-template-columns: 4.5rem minmax(16px, 1rem) 1fr;
+      grid-template-columns: auto 1fr;
       column-gap: 0.75rem;
       padding-bottom: 1.5rem;
     }
@@ -174,8 +189,9 @@
       <ul class="ll-follow-updates-list" role="list">
         {% for block in section.blocks %}
           <li class="ll-follow-updates-item" {{ block.shopify_attributes }}>
-            <p class="ll-follow-updates-date">{{ block.settings.date | escape }}</p>
-            <div class="ll-follow-updates-track">
+            <div class="ll-follow-updates-left">
+              <p class="ll-follow-updates-date">{{ block.settings.date | escape }}</p>
+              <div class="ll-follow-updates-track">
               <span class="ll-follow-updates-line" aria-hidden="true">
                 <svg
                   class="ll-follow-updates-line-svg"
@@ -203,6 +219,7 @@
                   <circle cx="5.5" cy="5.5" r="5.5" fill="#141413"/>
                 </svg>
               </span>
+              </div>
             </div>
             <article class="ll-follow-updates-card">
               {% if block.settings.title != blank %}
