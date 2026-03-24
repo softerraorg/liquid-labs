@@ -560,6 +560,7 @@
         "paragraph_UjXwbQ",
         "email_form_kpq3nw"
       ],
+      "disabled": true,
       "name": "t:sections.newsletter.presets.name",
       "settings": {
         "color_scheme": "scheme-1",
@@ -657,10 +658,10 @@
     "rich_text_QK3WKB",
     "ll_founding_member_QkENPf",
     "custom_video_showcase_KRwkdH",
-    "ll_updates_slider_G7DH4f",
     "ll_ingredient_information_JwjbJX",
     "ll_founding_member_GjJNji",
     "newsletter_z7MVp6",
+    "ll_updates_slider_G7DH4f",
     "collapsible_content_ATRQY4",
     "1773941114ad84e9e0"
   ]
