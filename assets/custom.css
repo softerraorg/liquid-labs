@@ -20,15 +20,15 @@ span,
 div {
     font-family: "Inter", sans-serif !important;
     color: #fff !important;
-}
+} 
 
-.gradient {
+/* .gradient {
     background: radial-gradient(circle at center, #302D3A 0%, #191720 100%), url("https://cdn.shopify.com/s/files/1/0812/5323/6954/files/bg.webp?v=1773264135");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-blend-mode: soft-light;
-}
+} */
 
 
 /* Header Css */
