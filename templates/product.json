@@ -83,6 +83,7 @@
       "settings": {
         "enable_sticky_info": true,
         "hide_slider_buttons_mobile": true,
+        "show_title_at_top": false,
         "color_scheme": "scheme-1",
         "media_size": "medium",
         "constrain_to_viewport": true,
