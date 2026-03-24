@@ -1,5 +1,4 @@
-{{ 'section-ll-richtext-with-accordion.css' | asset_url | stylesheet_tag }}
-
+ 
 {%- style -%}
   #shopify-section-{{ section.id }} .LL-Richtxt-wit-Accor-root {
     background-color: {{ section.settings.section_bg_color }};
@@ -32,10 +31,11 @@
     letter-spacing: -0.777771px;
     color: #000000;
 }
-.LL-Richtxt-wit-Accor-col.LL-Richtxt-wit-Accor-col--accordion { 
-    padding: 40px; 
+.LL-Richtxt-wit-Accor-col.LL-Richtxt-wit-Accor-col--accordion {
+    padding: 40px;
     background: #FFFFFF;
     border-radius: 8px;
+    width: 100%;
 }
 .LL-Richtxt-wit-Accor-accor-summary {
     display: flex;
