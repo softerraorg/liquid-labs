@@ -96,6 +96,11 @@ details-modal.header__search,
  .productFaqs .collapsible-content__heading {
     margin-bottom: 4rem;
 }
+ .productFaqs .grid { 
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 28px 52px;
+}
 .productFaqs .collapsible-content-wrapper-narrow {
     max-width: 1100px;
 }
