@@ -58,6 +58,13 @@
             "show_gift_card_recipient": true
           }
         },
+        "text_QPGWwV": {
+          "type": "text",
+          "settings": {
+            "text": "⏰ 20% OFF PRESALE ENDS SOON",
+            "text_style": "body"
+          }
+        },
         "share": {
           "type": "share",
           "disabled": true,
@@ -75,6 +82,7 @@
         "price",
         "quantity_selector",
         "buy_buttons",
+        "text_QPGWwV",
         "share"
       ],
       "custom_css": [
