@@ -113,7 +113,8 @@ details-modal.header__search,
 }
 .productFaqs .accordion__title {
     font-size: 20px;
-}
+    font-weight: 500;
+} 
 
 .productFaqs .accordion details[open] .accordion__content p {
     max-width: 90%;
