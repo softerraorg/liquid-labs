@@ -417,13 +417,14 @@ details-modal.header__search,
     border-radius: 20px !important;
     border: 1px solid #494949;
 }
-
+ 
 .productpage-imageDisclaimer {
     width: 100%;
     margin-bottom: 0;
     font-size: 15px;
     margin-top: 18px;
     line-height: 1.3;
+    font-weight:400;
     letter-spacing: -0.5px;
 }
 
