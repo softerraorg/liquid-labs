@@ -529,7 +529,7 @@ details-modal.header__search,
 /* ── Bundle Flavor Picker ── */
 .bundle-flavor-picker {
     margin-top: 20px;
-    padding: 20px 0;
+    /* padding: 20px 0; */
     border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
