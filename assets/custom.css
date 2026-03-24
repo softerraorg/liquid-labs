@@ -508,6 +508,12 @@ details-modal.header__search,
     .template-product #product-option-2 .bundle-price {
         font-size: 12px;
     } 
+    .template-product #product-option-2 label>span:first-of-type {
+     font-size: 9px; 
+}
+.template-product #product-option-2 .stick-count {
+     font-size: 7px;
+ }
 .productpage-imageDisclaimer {
     text-align: left;
     margin-top: 0;
