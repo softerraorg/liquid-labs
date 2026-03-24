@@ -64,7 +64,11 @@ details-modal.header__search,
 
 
 /* Product Page CSS */
-
+.product__title h1 {
+    line-height: 1.12;
+    font-size: 50px;
+    letter-spacing: -0.5px;
+}
 /* Video play button: centered; Image zoom icon: stays top-left corner */
 .product__modal-opener--video .product__media-icon,
 .product__modal-opener--external_video .product__media-icon {
