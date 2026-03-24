@@ -77,6 +77,17 @@
 </style>
 
 {%- style -%}
+  @media screen and (max-width: 749px) {
+    .header__heading-logo-wrapper {
+      max-width: {{ settings.logo_width_mobile }}px;
+    }
+
+    .header__heading-logo {
+      max-width: {{ settings.logo_width_mobile }}px;
+      width: 100%;
+      height: auto;
+    }
+  }
   .header {
     padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
   }
