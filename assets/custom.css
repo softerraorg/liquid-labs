@@ -598,7 +598,7 @@ details-modal.header__search,
     right: 14px;
     top: 50%;
     transform: translateY(-50%);
-    color: rgba(255, 255, 255, 0.6);
+    color:#000;
     pointer-events: none;
 }
 
