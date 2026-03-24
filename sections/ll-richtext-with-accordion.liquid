@@ -64,11 +64,21 @@
     letter-spacing: -0.777771px;
     color: #000000;
 }
+.LL-Richtxt-wit-Accor-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-direction: column;
+}
   @media screen and (min-width: 750px) {
     #shopify-section-{{ section.id }} .LL-Richtxt-wit-Accor-root {
       padding-top: {{ section.settings.padding_top_desktop }}px;
       padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
     }
+    .LL-Richtxt-wit-Accor-grid { 
+    flex-direction: row;
+}
   }
 {%- endstyle -%}
 
