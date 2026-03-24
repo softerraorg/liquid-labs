@@ -541,13 +541,13 @@
         "bg_image_desktop": "shopify://shop_images/Group_33_1.png",
         "bg_image_mobile": "shopify://shop_images/Frame_85.png",
         "bg_color": "rgba(0,0,0,0)",
-        "text_color": "#FFFFFF",
+        "text_color": "#ffffff",
         "heading": "Creatine backed by science",
         "subheading": "<p>One of the most studied supplements, proven to support strength, performance, and recovery by helping your body produce more energy during workouts.</p>",
         "padding_top_desktop": 100,
         "padding_bottom_desktop": 100,
-        "padding_top_mobile": 48,
-        "padding_bottom_mobile": 48
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
       }
     },
     "newsletter_z7MVp6": {
