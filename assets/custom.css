@@ -509,8 +509,12 @@ details-modal.header__search,
     font-size: 11px;
     margin-bottom: 14px;
 }
+
 .template-product .liquidLabs-productbenefits {
     margin: 16px 0 8px;
+}
+.template-product .liquidLabs-productbenefits span {
+     font-size: 14px;
 }
     .template-product .product__info-wrapper {
         padding-left: 0 !important;
