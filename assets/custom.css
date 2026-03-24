@@ -129,11 +129,7 @@ details-modal.header__search,
     text-underline-offset: 0;
 }
 
-.productFaqs .accordion details {
-    padding: 15px 20px;
-    border-bottom: 1px solid #DAD9D94D;
-    margin-bottom: 10px;
-}
+ 
 
 .productFaqs .accordion details[open] {
     background: #aac9ff;
