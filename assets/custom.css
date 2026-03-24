@@ -516,6 +516,7 @@ details-modal.header__search,
  }
  .template-product .bundle-flavor-picker__heading {
     font-size: 14px; 
+    margin:0 0 7px;
 }
 .productpage-imageDisclaimer {
     text-align: left;
