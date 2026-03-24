@@ -447,6 +447,7 @@
       "blocks": {
         "feature_DqRUHJ": {
           "type": "feature",
+          "disabled": true,
           "settings": {
             "position": "left",
             "flex_direction": "column",
@@ -465,6 +466,7 @@
         },
         "feature_yy9PLw": {
           "type": "feature",
+          "disabled": true,
           "settings": {
             "position": "right",
             "flex_direction": "column",
@@ -489,7 +491,6 @@
       "name": "LL Founding Member",
       "settings": {
         "heading": "Unlock Your Peak Performance",
-        "main_image": "shopify://shop_images/ChatGPT_Image_Mar_7_2026_10_32_00_PM_1.png",
         "image_max_width_desktop": 370,
         "image_max_width_mobile": 290,
         "button_text": "Pre-Order Now!",
