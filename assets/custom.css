@@ -367,7 +367,9 @@ details-modal.header__search,
     border-width: 0.8px 0.8px 1.6px 0.8px;
     background: linear-gradient(to right, #0e2a5a 5%, #1f5fff);
 }
-
+#product-option-2 input:checked + label * {
+  color: #fff;
+}
 
 .template-product .product-form__buttons {
     max-width: 100%;
