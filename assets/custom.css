@@ -65,7 +65,7 @@ details-modal.header__search,
 
 
 /* Product Page CSS */
-.product__title h1 {
+.template-product .product__title h1 {
     line-height: 1.12;
     font-size: 50px;
     letter-spacing: -0.5px;
@@ -481,7 +481,7 @@ details-modal.header__search,
 
 
 @media only screen and (max-width : 768px) {
-.product__title h1 {
+  .template-product .product__title h1 {
      font-size: 32px;
  }
     .template-product variant-selects #product-option-1.product-form__input {
