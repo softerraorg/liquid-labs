@@ -541,7 +541,9 @@ details-modal.header__search,
     padding: 9px 17px;
     min-height: auto;
 }
-    
+    .template-product .product__text.inline-richtext {
+     font-size: 14px; 
+}
     /* Product Page CSS */
     /* Product Page CSS */
 }
