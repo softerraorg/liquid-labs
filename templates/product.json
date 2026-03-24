@@ -353,39 +353,6 @@
         "autoplay_speed": 3000
       }
     },
-    "ll_updates_slider_G7DH4f": {
-      "type": "ll-updates-slider",
-      "blocks": {
-        "block_3zYdfE": {
-          "type": "block",
-          "settings": {
-            "update_heading": "Revision Flavors Came In!",
-            "update_description": "Final flavors locked in: Berry Blast & Sour Straws. First batch is now in production. Founder orders will ship once ready!",
-            "update_date": "March 19, 2026"
-          }
-        },
-        "block_mBL3a6": {
-          "type": "block",
-          "settings": {
-            "update_heading": "Samples Arrived!",
-            "update_description": "Taste tested first flavor batch, making some final revisions!",
-            "update_date": "March 2, 2026"
-          }
-        }
-      },
-      "block_order": [
-        "block_3zYdfE",
-        "block_mBL3a6"
-      ],
-      "name": "LL Follow Updates",
-      "settings": {
-        "heading": "Stay Updated on Your Order",
-        "padding-top-desktop": 60,
-        "padding-bottom-desktop": 60,
-        "padding-top-mobile": 30,
-        "padding-bottom-mobile": 30
-      }
-    },
     "ll_ingredient_information_JwjbJX": {
       "type": "ll-ingredient-information",
       "blocks": {
@@ -419,6 +386,7 @@
         },
         "accordion_VBJ9AL": {
           "type": "accordion",
+          "disabled": true,
           "settings": {
             "accordion_title": "Details",
             "accordion_content": "<p>Creatine is an amino acid found mainly in your muscles and brain. It is naturally produced in the body from other amino acids. Creatine is also found in foods such as meat, eggs, and fish. It plays an important role in the body’s production of cellular energy by helping create ATP, a molecule needed for intense exercise, as well as providing the energy to support heart function and power the brain.*</p>",
@@ -456,22 +424,22 @@
       "name": "LL Ingredient Information",
       "settings": {
         "heading": "What’s Inside Each Stick",
-        "serving_size_label": "Serving Size:",
-        "serving_size": "1 Stick",
-        "servings_per_label": "Servings Per Container:",
-        "servings_per_container": "15",
-        "table_col1_label": "Name",
-        "table_col2_label": "Amount",
-        "other_ingredients_label": "Other Ingredients:",
-        "other_ingredients": "Citric Acid Monohydrate, Malic Acid, Acesulfame Potassium, Sucralose, Silicon Dioxide, Natural & Artificial Flavors, Elderberry Extract (color).",
-        "product_title": "Creatine + Electrolyte Sticks",
-        "product_image": "shopify://shop_images/ChatGPT_Image_Mar_9_2026_08_54_21_PM_1_1.png",
-        "disclaimer": "Disclaimer: Images shown are generated mockups of the expected final product. Actual packaging and product appearance may vary slightly from what is displayed.",
+        "serving_size_label": "Each stick contains 5g of creatine monohydrate to support strength and performance, plus electrolytes to help with hydration and recovery, all in a smooth, easy to mix formula that actually tastes good.",
+        "serving_size": "",
+        "servings_per_label": "",
+        "servings_per_container": "",
+        "table_col1_label": "",
+        "table_col2_label": "",
+        "other_ingredients_label": "",
+        "other_ingredients": "",
+        "product_title": "",
+        "product_image": "shopify://shop_images/picture.styles_placeholder__i3I9x.png",
+        "disclaimer": "",
         "show_right_section": false,
         "padding_top_desktop": 60,
         "padding_bottom_desktop": 60,
-        "padding_top_mobile": 30,
-        "padding_bottom_mobile": 30
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
       }
     },
     "ll_founding_member_GjJNji": {
@@ -567,6 +535,39 @@
         "full_width": true,
         "padding_top": 40,
         "padding_bottom": 52
+      }
+    },
+    "ll_updates_slider_G7DH4f": {
+      "type": "ll-updates-slider",
+      "blocks": {
+        "block_3zYdfE": {
+          "type": "block",
+          "settings": {
+            "update_heading": "Revision Flavors Came In!",
+            "update_description": "Final flavors locked in: Berry Blast & Sour Straws. First batch is now in production. Founder orders will ship once ready!",
+            "update_date": "March 19, 2026"
+          }
+        },
+        "block_mBL3a6": {
+          "type": "block",
+          "settings": {
+            "update_heading": "Samples Arrived!",
+            "update_description": "Taste tested first flavor batch, making some final revisions!",
+            "update_date": "March 2, 2026"
+          }
+        }
+      },
+      "block_order": [
+        "block_3zYdfE",
+        "block_mBL3a6"
+      ],
+      "name": "LL Follow Updates",
+      "settings": {
+        "heading": "Stay Updated on Your Order",
+        "padding-top-desktop": 60,
+        "padding-bottom-desktop": 60,
+        "padding-top-mobile": 30,
+        "padding-bottom-mobile": 30
       }
     },
     "collapsible_content_ATRQY4": {
