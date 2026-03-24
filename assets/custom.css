@@ -151,6 +151,7 @@ details-modal.header__search,
 
 .productFaqs .accordion__content {
     padding: 0;
+    margin-top: 1.5rem;
 }
 
 .riskFree .rich-text__text {
