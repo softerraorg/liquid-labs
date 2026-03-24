@@ -34,11 +34,6 @@
             "text_style": "uppercase"
           }
         },
-        "title": {
-          "type": "title",
-          "disabled": true,
-          "settings": {}
-        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -76,7 +71,6 @@
         "description",
         "custom_liquid_b3q7k9",
         "vendor",
-        "title",
         "variant_picker",
         "price",
         "quantity_selector",
