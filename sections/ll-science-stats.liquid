@@ -14,7 +14,7 @@
 {%- style -%}
   #shopify-section-{{ section.id }} .ll-science-stats-section {
     background-color: {{ section.settings.bg_color }};
-    color: {{ section.settings.text_color }};
+    color: {{ section.settings.text_color }} !important; 
     padding-top: {{ section.settings.padding_top_mobile }}px;
     padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
     background-repeat: no-repeat;
@@ -97,7 +97,7 @@
     color: inherit;
 }
 
-  .ll-science-stats-subheading {
+  .ll-science-stats-subheading p{
 font-style: normal;
 font-weight: 400;
 font-size: 18px;
