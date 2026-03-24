@@ -52,7 +52,7 @@
         "track_color": "#caddff",
         "fill_color": "#aac9ff",
         "text_color": "#000000",
-        "font_size_desktop": 18,
+        "font_size_desktop": 20,
         "font_size_mobile": 13,
         "font_weight": 400
       }
