@@ -105,6 +105,9 @@ details-modal.header__search,
     padding: 18px 0;
     border-bottom: 1px solid #DAD9D94D;
  }
+ .productFaqs .accordion summary { 
+    padding: 0;
+}
 .productFaqs .collapsible-content-wrapper-narrow {
     max-width: 1100px;
 }
