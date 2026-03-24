@@ -73,11 +73,11 @@
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
     text-align: center;
-    background: radial-gradient(circle at center, #302d3a, #191720),
+    {% comment %} background: radial-gradient(circle at center, #302d3a, #191720),
                 url(/cdn/shop/files/bg.webp?v=1773264135);
     background-size: cover;
     background-position: center;
-    background-blend-mode: soft-light;
+    background-blend-mode: soft-light; {% endcomment %}
   }
   @media (max-width: 749px) {
     #liquid-l-section-{{ section.id }} {
