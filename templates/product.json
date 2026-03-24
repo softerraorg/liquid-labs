@@ -425,7 +425,8 @@
       "name": "LL Ingredient Information",
       "settings": {
         "heading": "What’s Inside Each Stick",
-        "serving_size_label": "Each stick contains 5g of creatine monohydrate to support strength and performance, plus electrolytes to help with hydration and recovery, all in a smooth, easy to mix formula that actually tastes good.",
+        "heading_description": "<p>Each stick contains 5g of creatine monohydrate to support strength and performance, plus electrolytes to help with hydration and recovery, all in a smooth, easy to mix formula that actually tastes good.</p>",
+        "serving_size_label": "",
         "serving_size": "",
         "servings_per_label": "",
         "servings_per_container": "",
