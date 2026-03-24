@@ -397,6 +397,7 @@ details-modal.header__search,
 
 .template-product .product-form__submit span {
     font-weight: bold;
+    color:#fff !important;
 }
 
 .template-product .product-form__submit:before,
