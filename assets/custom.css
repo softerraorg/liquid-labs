@@ -139,7 +139,7 @@ details-modal.header__search,
     border-radius: 20px;
     border:0;
 }
-.productFaqs .collapsible-content .accordion {
+.productFaqs.collapsible-content .accordion {
     margin-top: 0;
     border: 0;
 }
