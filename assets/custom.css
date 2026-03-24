@@ -504,9 +504,10 @@ details-modal.header__search,
         font-size: 16px;
     }
 .productpage-imageDisclaimer {
-     text-align: left;
+    text-align: left;
     margin-top: 0;
-     font-size: 11px;
+    font-size: 11px;
+    margin-bottom: 14px;
 }
     .product__info-wrapper {
         padding-left: 0 !important;
