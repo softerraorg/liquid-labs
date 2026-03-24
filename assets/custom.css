@@ -413,9 +413,12 @@ details-modal.header__search,
 }
 
 .productpage-imageDisclaimer {
-    width: 50%;
+    width: 100%;
     margin-bottom: 0;
-    font-size: 12px;
+    font-size: 15px;
+    margin-top: 18px;
+    line-height: 1.3;
+    letter-spacing: -0.5px;
 }
 
 .liquidLabs-productbenefits {
