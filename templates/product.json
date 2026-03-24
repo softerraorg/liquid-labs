@@ -162,9 +162,9 @@
       "settings": {
         "section_bg_color": "rgba(0,0,0,0)",
         "padding_top_desktop": 60,
-        "padding_bottom_desktop": 60,
+        "padding_bottom_desktop": 0,
         "padding_top_mobile": 40,
-        "padding_bottom_mobile": 40,
+        "padding_bottom_mobile": 0,
         "heading": "No Scoop. No Shaker. Just Results.",
         "body": "<p>Built for people who want creatine without the hassle.</p><p>Each stick delivers 5g of creatine monohydrate for strength and recovery, plus electrolytes to keep you hydrated.</p><p>No shaker. No scooping. No mess. Just tear it open, and pour into water, in the gym, car, work, or on the go.</p>"
       }
