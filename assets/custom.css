@@ -92,7 +92,7 @@ details-modal.header__search,
   top: 1.2rem;
   transform: none;
 }
-
+/* FAQ Accordion */
  .productFaqs .collapsible-content__heading {
     margin-bottom: 4rem;
 }
