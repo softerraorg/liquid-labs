@@ -160,7 +160,7 @@
       ],
       "name": "LL Rich text + accordion",
       "settings": {
-        "section_bg_color": "#000000",
+        "section_bg_color": "rgba(0,0,0,0)",
         "padding_top_desktop": 60,
         "padding_bottom_desktop": 0,
         "padding_top_mobile": 40,
