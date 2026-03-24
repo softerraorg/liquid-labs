@@ -225,6 +225,7 @@ details-modal.header__search,
     flex-direction: column;
     gap: 0px;
     width: calc(33% - 8px);
+    justify-content:space-between;
 }
 
 .template-product #product-option-2 label:after {
