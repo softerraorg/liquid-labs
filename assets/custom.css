@@ -501,12 +501,11 @@ details-modal.header__search,
     .template-product #product-option-2 .bundle-price {
         font-size: 16px;
     }
-    .productpage-imageDisclaimer {
-        width: 100% !important;
-        text-align: center;
-        margin-top: 0;
-        font-weight: 400;
-    }
+.productpage-imageDisclaimer {
+     text-align: left;
+    margin-top: 0;
+     font-size: 11px;
+}
     .product__info-wrapper {
         padding-left: 0 !important;
     }
