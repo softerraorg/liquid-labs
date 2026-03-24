@@ -77,7 +77,11 @@ details-modal.header__search,
 }
 .template-product .thumbnail[aria-current]:focus:not(:focus-visible) {
     outline: 0;
+        border: 0 !important;
     box-shadow: none!important;
+}
+.template-product .thumbnail { 
+    border: 0 !important;
 }
 .template-product .product__title h1 {
     line-height: 1.12;
