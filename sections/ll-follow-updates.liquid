@@ -67,6 +67,11 @@
     max-width: 100%;
   }
 
+  #ll-follow-updates-{{ section.id }} .ll-follow-updates-date-primary,
+  #ll-follow-updates-{{ section.id }} .ll-follow-updates-date-year {
+    display: block;
+  }
+
   #ll-follow-updates-{{ section.id }} .ll-follow-updates-track {
     position: relative;
     box-sizing: border-box;
@@ -190,7 +195,16 @@
         {% for block in section.blocks %}
           <li class="ll-follow-updates-item" {{ block.shopify_attributes }}>
             <div class="ll-follow-updates-left">
-              <p class="ll-follow-updates-date">{{ block.settings.date | escape }}</p>
+              {% if block.settings.date_month_day != blank or block.settings.date_year != blank %}
+                <p class="ll-follow-updates-date">
+                  {% if block.settings.date_month_day != blank %}
+                    <span class="ll-follow-updates-date-primary">{{ block.settings.date_month_day | escape }}</span>
+                  {% endif %}
+                  {% if block.settings.date_year != blank %}
+                    <span class="ll-follow-updates-date-year">{{ block.settings.date_year | escape }}</span>
+                  {% endif %}
+                </p>
+              {% endif %}
               <div class="ll-follow-updates-track">
               <span class="ll-follow-updates-line" aria-hidden="true">
                 <svg
@@ -311,10 +325,22 @@
       "name": "Update",
       "settings": [
         {
+          "type": "header",
+          "content": "Date"
+        },
+        {
           "type": "text",
-          "id": "date",
-          "label": "Date",
-          "default": "Mar 7 2026"
+          "id": "date_month_day",
+          "label": "Month & day",
+          "default": "Mar 7",
+          "info": "Shown on the first line (e.g. Mar 7)."
+        },
+        {
+          "type": "text",
+          "id": "date_year",
+          "label": "Year",
+          "default": "2026",
+          "info": "Shown on the line below the month & day."
         },
         {
           "type": "text",
@@ -338,7 +364,8 @@
         {
           "type": "update",
           "settings": {
-            "date": "Mar 7 2026",
+            "date_month_day": "Mar 7",
+            "date_year": "2026",
             "title": "Revisions are on the way!",
             "description": "<p>We're polishing a few things behind the scenes. Thanks for your patience.</p>"
           }
@@ -346,7 +373,8 @@
         {
           "type": "update",
           "settings": {
-            "date": "Feb 20 2026",
+            "date_month_day": "Feb 20",
+            "date_year": "2026",
             "title": "New arrivals this week",
             "description": "<p>Fresh styles are landing in the shop—check the collection for the latest drops.</p>"
           }
