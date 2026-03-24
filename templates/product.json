@@ -132,23 +132,23 @@
           "type": "accordion_row",
           "settings": {
             "heading": "Product Description",
-            "content": "<p>Add details about your product.</p>",
+            "content": "<p>A simple way to get your daily creatine and electrolytes without the mess. Each stick mixes easily into water for fast hydration and performance support. No scooping, no clumping, just grab a stick and go. Perfect for the gym, travel, or daily use.</p>",
             "open_by_default": false
           }
         },
         "accordion_row_fBGLT8": {
           "type": "accordion_row",
           "settings": {
-            "heading": "Product Description",
-            "content": "<p>Add details about your product.</p>",
+            "heading": "Ingredients",
+            "content": "<p>Creatine monohydrate, sodium, potassium, magnesium, citric acid monohydrate, malic acid, acesulfame potassium, sucralose, silicon dioxide, natural and artificial flavors, and elderberry extract (for color).</p>",
             "open_by_default": false
           }
         },
         "accordion_row_x6EmHH": {
           "type": "accordion_row",
           "settings": {
-            "heading": "Product Description",
-            "content": "<p>Add details about your product.</p>",
+            "heading": "How To Use",
+            "content": "<p>Pour one stick into a water bottle or glass. Add 8 to 16 oz of water. Shake or stir until fully mixed and drink. Use up to twice a day.</p>",
             "open_by_default": false
           }
         }
@@ -556,7 +556,17 @@
         "update_mEdwER": {
           "type": "update",
           "settings": {
-            "date": "Mar 7 2026",
+            "date_month_day": "Mar 19",
+            "date_year": "2026",
+            "title": "Revision Flavors Came In!",
+            "description": "<p>Final flavors locked in: Berry Blast & Sour Straws. First batch is now in production. Founder orders will ship once ready!</p>"
+          }
+        },
+        "update_VxB3mz": {
+          "type": "update",
+          "settings": {
+            "date_month_day": "Mar 7",
+            "date_year": "2026",
             "title": "Revisions are on the way!",
             "description": "<p>We’re excited to announce our revision round of samples is on the way! If the flavor is as good as we hope we will be placing a complete first batch order within 30 days!</p>"
           }
@@ -564,14 +574,16 @@
         "update_WyQ3TB": {
           "type": "update",
           "settings": {
-            "date": "Mar 7 2026",
-            "title": "Revisions are on the way!",
-            "description": "<p>We’re excited to announce our revision round of samples is on the way! If the flavor is as good as we hope we will be placing a complete first batch order within 30 days!</p>"
+            "date_month_day": "Mar 2",
+            "date_year": "2026",
+            "title": "Samples Arrived!",
+            "description": "<p></p><p>Taste tested first flavor batch, making some final revisions!</p>"
           }
         }
       },
       "block_order": [
         "update_mEdwER",
+        "update_VxB3mz",
         "update_WyQ3TB"
       ],
       "name": "Follow our updates",
