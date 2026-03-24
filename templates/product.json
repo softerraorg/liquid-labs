@@ -550,6 +550,40 @@
         "padding_bottom_mobile": 50
       }
     },
+    "ll_follow_updates_9T6xQb": {
+      "type": "ll-follow-updates",
+      "blocks": {
+        "update_mEdwER": {
+          "type": "update",
+          "settings": {
+            "date": "Mar 7 2026",
+            "title": "Revisions are on the way!",
+            "description": "<p>We're polishing a few things behind the scenes. Thanks for your patience.</p>"
+          }
+        },
+        "update_WyQ3TB": {
+          "type": "update",
+          "settings": {
+            "date": "Feb 20 2026",
+            "title": "New arrivals this week",
+            "description": "<p>Fresh styles are landing in the shop—check the collection for the latest drops.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "update_mEdwER",
+        "update_WyQ3TB"
+      ],
+      "name": "Follow our updates",
+      "settings": {
+        "heading": "Follow our updates",
+        "background_color": "#eef1f5",
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32
+      }
+    },
     "newsletter_z7MVp6": {
       "type": "newsletter",
       "blocks": {
@@ -711,6 +745,7 @@
     "ll_science_stats_whwmHt",
     "ll_ingredient_information_JwjbJX",
     "ll_founding_member_GjJNji",
+    "ll_follow_updates_9T6xQb",
     "newsletter_z7MVp6",
     "ll_updates_slider_G7DH4f",
     "collapsible_content_ATRQY4",
