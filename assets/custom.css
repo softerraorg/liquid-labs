@@ -566,9 +566,10 @@ details-modal.header__search,
     width: 100%;
     appearance: none;
     -webkit-appearance: none;
-    background-color: #0000002f; 
-    color: ##000;
-    border: 1px solid #0000002f; 
+box-shadow: 0 0 15px #3d8bffb3; 
+    border-color: #6cb2ff;
+    border-width: .8px .8px 1.6px .8px;
+    background: linear-gradient(to right, #0e2a5a 5%, #1f5fff);
     border-radius: 8px;
     padding: 12px 40px 12px 16px;
     font-size: 15px;
