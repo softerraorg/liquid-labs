@@ -292,6 +292,7 @@ details-modal.header__search,
 }
 .template-product .liquidLabs-productbenefits {
     margin: 24px 0;
+    margin-bottom: 12px;
 }
 .template-product .product-form__input {
     margin: 12px 0 !important;
