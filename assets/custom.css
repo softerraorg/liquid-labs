@@ -137,11 +137,10 @@ details-modal.header__search,
 .productFaqs .accordion details[open] {
     background: #aac9ff;
     border-radius: 20px;
+    border:0;
 }
 
-.productFaqs .accordion details[open] {
-    background: #AAC9FF;
-}
+ 
 
 .productFaqs .accordion details[open] .accordion__title,
 .productFaqs .accordion details[open] .accordion__content p {
