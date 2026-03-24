@@ -242,12 +242,13 @@ details-modal.header__search,
     position: absolute;
     top: 0;
     right: 0;
-    font-weight:700;
+   
 }
 .template-product #product-option-2 .bundle-price {
     font-size: 18px;
     line-height: 1.6;
     margin: 4px 0;
+     font-weight:700;
 }
 
 .template-product #product-option-2 .per-stick {
