@@ -93,7 +93,9 @@ details-modal.header__search,
   transform: none;
 }
 
- 
+ .productFaqs .collapsible-content__heading {
+    margin-bottom: 4rem;
+}
 .productFaqs .collapsible-content-wrapper-narrow {
     max-width: 1100px;
 }
