@@ -506,6 +506,50 @@
         "padding_bottom_mobile": 50
       }
     },
+    "ll_science_stats_whwmHt": {
+      "type": "ll-science-stats",
+      "blocks": {
+        "stat_8UaPhp": {
+          "type": "stat",
+          "settings": {
+            "stat_heading": "+15%",
+            "stat_subheading": "<p>Increase in strength and power output</p>"
+          }
+        },
+        "stat_R9QzBX": {
+          "type": "stat",
+          "settings": {
+            "stat_heading": "+2–5 lbs",
+            "stat_subheading": "<p>Typical lean mass gains in training studies</p>"
+          }
+        },
+        "stat_wteFaN": {
+          "type": "stat",
+          "settings": {
+            "stat_heading": "1000+",
+            "stat_subheading": "<p>Peer-reviewed studies on creatine supplementation</p>"
+          }
+        }
+      },
+      "block_order": [
+        "stat_8UaPhp",
+        "stat_R9QzBX",
+        "stat_wteFaN"
+      ],
+      "name": "LL Science stats",
+      "settings": {
+        "bg_image_desktop": "shopify://shop_images/Group_33_1.png",
+        "bg_image_mobile": "shopify://shop_images/Frame_85.png",
+        "bg_color": "rgba(0,0,0,0)",
+        "text_color": "#FFFFFF",
+        "heading": "Creatine backed by science",
+        "subheading": "<p>One of the most studied supplements, proven to support strength, performance, and recovery by helping your body produce more energy during workouts.</p>",
+        "padding_top_desktop": 100,
+        "padding_bottom_desktop": 100,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
     "newsletter_z7MVp6": {
       "type": "newsletter",
       "blocks": {
@@ -665,6 +709,7 @@
     "custom_video_showcase_KRwkdH",
     "ll_ingredient_information_JwjbJX",
     "ll_founding_member_GjJNji",
+    "ll_science_stats_whwmHt",
     "newsletter_z7MVp6",
     "ll_updates_slider_G7DH4f",
     "collapsible_content_ATRQY4",
