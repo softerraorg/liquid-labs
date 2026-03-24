@@ -514,6 +514,9 @@ details-modal.header__search,
 .template-product #product-option-2 .stick-count {
      font-size: 7px;
  }
+ .template-product .bundle-flavor-picker__heading {
+    font-size: 14px; 
+}
 .productpage-imageDisclaimer {
     text-align: left;
     margin-top: 0;
