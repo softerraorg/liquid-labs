@@ -243,9 +243,9 @@ details-modal.header__search,
     top: 0;
     right: 0;
 }
-
 .template-product #product-option-2 .bundle-price {
-    font-size: 20px;
+    font-size: 18px;
+    line-height: 1.6;
 }
 
 .template-product #product-option-2 .per-stick {
