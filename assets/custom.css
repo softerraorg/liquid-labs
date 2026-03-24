@@ -607,3 +607,10 @@ details-modal.header__search,
 /* section#shopify-section-template--21614786183386__main {
     display: none;
 } */
+
+/* New css */
+/* Hide stick count on specific pack options (values must match variant option names) */
+.template-product #product-option-2 input[value="Duo"] + label .stick-count,
+.template-product #product-option-2 input[value="Trio"] + label .stick-count {
+    display: none !important;
+}
