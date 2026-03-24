@@ -502,14 +502,17 @@ details-modal.header__search,
     }
     .template-product #product-option-2 .bundle-price {
         font-size: 16px;
-    }
+    } 
 .productpage-imageDisclaimer {
     text-align: left;
     margin-top: 0;
     font-size: 11px;
     margin-bottom: 14px;
 }
-    .product__info-wrapper {
+.template-product .liquidLabs-productbenefits {
+    margin: 16px 0 8px;
+}
+    .template-product .product__info-wrapper {
         padding-left: 0 !important;
     }
     /* Product Page CSS */
