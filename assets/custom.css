@@ -68,6 +68,9 @@ details-modal.header__search,
 .template-product .product-media-container { 
     border: 0 !important;
 }
+.template-product .product-media-container img { 
+    border: 0 !important;
+}
 .template-product .product__title h1 {
     line-height: 1.12;
     font-size: 50px;
