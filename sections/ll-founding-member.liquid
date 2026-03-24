@@ -221,54 +221,56 @@ border-radius: 40px;
       <h2 class="ll-fm-title">{{ section.settings.heading }}</h2>
     {%- endif -%}
 
-    <div class="ll-fm-layout">
+    {%- if section.settings.show_fm_layout -%}
+      <div class="ll-fm-layout">
 
-      {%- comment -%} ── PRODUCT IMAGE ── {%- endcomment -%}
-      <div class="ll-fm-product-wrap">
-        {%- if section.settings.main_image != blank -%}
-          {{ section.settings.main_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'll-fm-main-image', alt: section.settings.main_image.alt | escape }}
-        {%- endif -%}
-      </div>
-
-      {%- comment -%} ── FEATURE BLOCKS (absolutely positioned) ── {%- endcomment -%}
-      {%- for block in section.blocks -%}
-        <div class="ll-fm-item ll-fm-item-{{ block.settings.position }}" {{ block.shopify_attributes }}
-             style="
-               --flex-dir: {{ block.settings.flex_direction }};
-               --pos-top-desk: {{ block.settings.pos_top_desktop }}%;
-               --pos-left-desk: {{ block.settings.pos_left_desktop }}%;
-               --pos-top-mob: {{ block.settings.pos_top_mobile }}%;
-               --pos-left-mob: {{ block.settings.pos_left_mobile }}%;
-               --line-w-desk: {{ block.settings.line_width_desktop }}px;
-               --line-w-mob: {{ block.settings.line_width_mobile }}px;
-               --text-max-w: {{ block.settings.text_max_width_desktop }}px;
-               --text-max-w-mob: {{ block.settings.text_max_width_mobile }}px;
-             ">
-
-          {%- if block.settings.position == 'left' -%}
-            {%- if block.settings.text != blank -%}
-              <p class="ll-fm-text {% if block.settings.text_wrap %}ll-fm-text--wrap{% endif %}">{{ block.settings.text | newline_to_br }}</p>
-            {%- endif -%}
-            {%- if block.settings.line_image != blank -%}
-              <div class="ll-fm-line-wrap">
-                {{ block.settings.line_image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'll-fm-line', alt: block.settings.line_image.alt | escape }}
-              </div>
-            {%- endif -%}
-          {%- else -%}
-            {%- if block.settings.line_image != blank -%}
-              <div class="ll-fm-line-wrap">
-                {{ block.settings.line_image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'll-fm-line', alt: block.settings.line_image.alt | escape }}
-              </div>
-            {%- endif -%}
-            {%- if block.settings.text != blank -%}
-              <p class="ll-fm-text {% if block.settings.text_wrap %}ll-fm-text--wrap{% endif %}">{{ block.settings.text | newline_to_br }}</p>
-            {%- endif -%}
+        {%- comment -%} ── PRODUCT IMAGE ── {%- endcomment -%}
+        <div class="ll-fm-product-wrap">
+          {%- if section.settings.main_image != blank -%}
+            {{ section.settings.main_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'll-fm-main-image', alt: section.settings.main_image.alt | escape }}
           {%- endif -%}
-
         </div>
-      {%- endfor -%}
 
-    </div>
+        {%- comment -%} ── FEATURE BLOCKS (absolutely positioned) ── {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          <div class="ll-fm-item ll-fm-item-{{ block.settings.position }}" {{ block.shopify_attributes }}
+               style="
+                 --flex-dir: {{ block.settings.flex_direction }};
+                 --pos-top-desk: {{ block.settings.pos_top_desktop }}%;
+                 --pos-left-desk: {{ block.settings.pos_left_desktop }}%;
+                 --pos-top-mob: {{ block.settings.pos_top_mobile }}%;
+                 --pos-left-mob: {{ block.settings.pos_left_mobile }}%;
+                 --line-w-desk: {{ block.settings.line_width_desktop }}px;
+                 --line-w-mob: {{ block.settings.line_width_mobile }}px;
+                 --text-max-w: {{ block.settings.text_max_width_desktop }}px;
+                 --text-max-w-mob: {{ block.settings.text_max_width_mobile }}px;
+               ">
+
+            {%- if block.settings.position == 'left' -%}
+              {%- if block.settings.text != blank -%}
+                <p class="ll-fm-text {% if block.settings.text_wrap %}ll-fm-text--wrap{% endif %}">{{ block.settings.text | newline_to_br }}</p>
+              {%- endif -%}
+              {%- if block.settings.line_image != blank -%}
+                <div class="ll-fm-line-wrap">
+                  {{ block.settings.line_image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'll-fm-line', alt: block.settings.line_image.alt | escape }}
+                </div>
+              {%- endif -%}
+            {%- else -%}
+              {%- if block.settings.line_image != blank -%}
+                <div class="ll-fm-line-wrap">
+                  {{ block.settings.line_image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'll-fm-line', alt: block.settings.line_image.alt | escape }}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="ll-fm-text {% if block.settings.text_wrap %}ll-fm-text--wrap{% endif %}">{{ block.settings.text | newline_to_br }}</p>
+              {%- endif -%}
+            {%- endif -%}
+
+          </div>
+        {%- endfor -%}
+
+      </div>
+    {%- endif -%}
 
     {%- comment -%} ── BUTTON ── {%- endcomment -%}
     {%- if section.settings.button_text != blank and section.settings.button_link != blank -%}
@@ -308,6 +310,13 @@ document.addEventListener('DOMContentLoaded', function() {
       "type": "image_picker",
       "id": "main_image",
       "label": "Center Product Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_fm_layout",
+      "label": "Show product & feature layout",
+      "default": true,
+      "info": "Turn off to hide the center image and positioned feature blocks (.ll-fm-layout). Heading and button stay visible."
     },
     {
       "type": "header",
