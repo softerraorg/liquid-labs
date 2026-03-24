@@ -1,0 +1,189 @@
+{{ 'section-ll-richtext-with-accordion.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .LL-Richtxt-wit-Accor-root {
+    background-color: {{ section.settings.section_bg_color }};
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .LL-Richtxt-wit-Accor-root {
+      padding-top: {{ section.settings.padding_top_desktop }}px;
+      padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="LL-Richtxt-wit-Accor-root">
+  <div class="LL-Richtxt-wit-Accor-grid page-width">
+    <div class="LL-Richtxt-wit-Accor-col LL-Richtxt-wit-Accor-col--richtext">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="LL-Richtxt-wit-Accor-main-heading inline-richtext">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.body != blank -%}
+        <div class="LL-Richtxt-wit-Accor-body rte">{{ section.settings.body }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="LL-Richtxt-wit-Accor-col LL-Richtxt-wit-Accor-col--accordion">
+      {%- if section.blocks.size > 0 -%}
+        <div class="LL-Richtxt-wit-Accor-card">
+          {%- for block in section.blocks -%}
+            <details
+              class="LL-Richtxt-wit-Accor-accor-item"
+              id="LL-Richtxt-wit-Accor-Details-{{ block.id }}"
+              {% if block.settings.open_by_default %}
+                open
+              {% endif %}
+              {{ block.shopify_attributes }}
+            >
+              <summary class="LL-Richtxt-wit-Accor-accor-summary">
+                <span class="LL-Richtxt-wit-Accor-accor-header">{{ block.settings.heading }}</span>
+                <span class="LL-Richtxt-wit-Accor-accor-icon"></span>
+              </summary>
+              <div class="LL-Richtxt-wit-Accor-accor-content rte">{{ block.settings.content }}</div>
+            </details>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "LL Rich text + accordion",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section background color",
+      "default": "#F2F4F6"
+    },
+    {
+      "type": "header",
+      "content": "Padding — desktop"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Padding — mobile"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Left column"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "No Scoop. No Shaker. Just Results."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Text",
+      "default": "<p>Built for people who want creatine without the hassle.</p><p>Each stick delivers 5g of creatine monohydrate for strength and recovery, plus electrolytes to keep you hydrated.</p><p>No shaker. No scooping. No mess. Just tear it open, and pour into water, in the gym, car, work, or on the go.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "accordion_row",
+      "name": "Accordion row",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Title",
+          "default": "Product Description"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Add your answer here.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by default",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "LL Rich text + accordion",
+      "blocks": [
+        {
+          "type": "accordion_row",
+          "settings": {
+            "heading": "Product Description",
+            "content": "<p>Add details about your product.</p>"
+          }
+        },
+        {
+          "type": "accordion_row",
+          "settings": {
+            "heading": "Product Description",
+            "content": "<p>Add details about your product.</p>"
+          }
+        },
+        {
+          "type": "accordion_row",
+          "settings": {
+            "heading": "Product Description",
+            "content": "<p>Add details about your product.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
