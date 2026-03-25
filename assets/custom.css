@@ -98,16 +98,16 @@ details-modal.header__search,
   padding-left: 28px; /* space for icon */
 } 
 
-.template-product .product__description ul li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 6px;
-  width: 16px;
-  height: 16px;
-  background-image: url("https://cdn.shopify.com/s/files/1/0812/5323/6954/files/Star_15.svg?v=1774420210");
-  background-size: contain;
-  background-repeat: no-repeat;
+.template-product .product__description ul li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 17px;
+    height: 17px;
+    background-image: url(/cdn/shop/files/Star_15.svg?v=1774420210);
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 /* Video play button: centered; Image zoom icon: stays top-left corner */
 .product__modal-opener--video .product__media-icon,
