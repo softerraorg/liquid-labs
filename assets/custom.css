@@ -203,7 +203,7 @@ details-modal.header__search,
 .template-product #product-option-2 .stick-count {
     display: block;
     font-size: 12px;
-    margin-top: 2px;
+    margin-top: 3px;
 }
 
 .template-product #product-option-2 {
@@ -554,7 +554,7 @@ details-modal.header__search,
      font-size: 12px; 
 }
 .template-product #product-option-2 .stick-count {
-     font-size: 9px;
+     font-size: 10px;
  }
  .template-product .bundle-flavor-picker__heading {
     font-size: 14px; 
