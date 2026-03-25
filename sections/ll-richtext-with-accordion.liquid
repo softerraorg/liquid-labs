@@ -69,6 +69,17 @@
     gap: 40px;
     flex-direction: column;
 }
+.LL-icon-minus { 
+  display: none;
+ }
+details[open] .LL-icon-plus { 
+  display: none; 
+}
+details[open] .LL-icon-minus { 
+  display: inline;
+ } 
+
+
   @media screen and (min-width: 750px) {
     #shopify-section-{{ section.id }} .LL-Richtxt-wit-Accor-root {
       padding-top: {{ section.settings.padding_top_desktop }}px;
