@@ -127,10 +127,23 @@
             >
               <summary class="LL-Richtxt-wit-Accor-accor-summary">
                 <span class="LL-Richtxt-wit-Accor-accor-header">{{ block.settings.heading }}</span>
-                <span class="LL-Richtxt-wit-Accor-accor-icon"><svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {% comment %} <span class="LL-Richtxt-wit-Accor-accor-icon"><svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <circle cx="11" cy="13" r="11" fill="#F7F7F7"/>
 <path d="M10.3954 17.8139V8.82244H11.6099V17.8139H10.3954ZM6.50337 13.9219V12.7145H15.502V13.9219H6.50337Z" fill="black"/>
 </svg>
+</span> {% endcomment %}<span class="LL-Richtxt-wit-Accor-accor-icon">
+  <span class="LL-icon-plus">
+    <svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="11" cy="13" r="11" fill="#F7F7F7"/>
+      <path d="M10.3954 17.8139V8.82244H11.6099V17.8139H10.3954ZM6.50337 13.9219V12.7145H15.502V13.9219H6.50337Z" fill="black"/>
+    </svg>
+  </span>
+  <span class="LL-icon-minus">
+    <svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="11" cy="13" r="11" fill="#F7F7F7"/>
+      <path d="M14.0256 12.1676V13.3608H7.97443V12.1676H14.0256Z" fill="black"/>
+    </svg>
+  </span>
 </span>
               </summary>
               <div class="LL-Richtxt-wit-Accor-accor-content rte">{{ block.settings.content }}</div>
