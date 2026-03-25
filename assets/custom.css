@@ -551,10 +551,10 @@ details-modal.header__search,
         font-size: 12px;
     } 
     .template-product #product-option-2 label>span:first-of-type {
-     font-size: 9px; 
+     font-size: 12px; 
 }
 .template-product #product-option-2 .stick-count {
-     font-size: 7px;
+     font-size: 9px;
  }
  .template-product .bundle-flavor-picker__heading {
     font-size: 14px; 
