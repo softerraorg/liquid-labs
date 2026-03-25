@@ -88,6 +88,27 @@ details-modal.header__search,
     font-size: 50px;
     letter-spacing: -0.5px;
 }
+.template-product .product__description ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.template-product .product__description ul li {
+  position: relative;
+  padding-left: 28px; /* space for icon */
+} 
+
+.template-product .product__description ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 16px;
+  height: 16px;
+  background-image: url("https://cdn.shopify.com/s/files/1/0812/5323/6954/files/Star_15.svg?v=1774420210");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 /* Video play button: centered; Image zoom icon: stays top-left corner */
 .product__modal-opener--video .product__media-icon,
 .product__modal-opener--external_video .product__media-icon {
