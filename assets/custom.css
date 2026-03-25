@@ -393,7 +393,7 @@ details-modal.header__search,
         font-size: 54px;
         padding: 30px 0;
     }
-    .template-product .product__description strong {
+    .template-product .product__description strong,.template-product .product__description p,.template-product .product__description li {
         font-size: 20px;
     }
     .riskFree .rich-text__heading  {
