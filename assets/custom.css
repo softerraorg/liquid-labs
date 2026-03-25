@@ -88,6 +88,10 @@ details-modal.header__search,
     font-size: 50px;
     letter-spacing: -0.5px;
 }
+.template-product .product__description strong, .template-product .product__description p, .template-product .product__description li {
+    font-size: 16px;
+    letter-spacing: -0.55px;
+}
 .template-product .product__description ul {
   list-style: none;
   padding-left: 0;
