@@ -640,9 +640,7 @@ details-modal.header__search,
 }
 
 .bundle-flavor-select {
-    width: 100%;
-    appearance: none;
-    -webkit-appearance: none;
+    width: 100%; 
 /* box-shadow: 0 0 15px #3d8bffb3; 
     border-color: #6cb2ff;
     border-width: .8px .8px 1.6px .8px; */
